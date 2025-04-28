@@ -1,0 +1,86 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v3.00\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"70 C:\GNE.X\main.c
+[v _Irrigazione Irrigazione `(v  1 e 1 0 ]
+"89
+[v _Visualizza Visualizza `(v  1 e 1 0 ]
+"120
+[v _main main `(v  1 e 1 0 ]
+"166 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"228
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"290
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+"352
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"459
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"1346
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @129 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1478
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1540
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1602
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"3387
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"4110
+[v _RB1 RB1 `VEb  1 e 0 @49 ]
+"4113
+[v _RB2 RB2 `VEb  1 e 0 @50 ]
+"4116
+[v _RB3 RB3 `VEb  1 e 0 @51 ]
+"4119
+[v _RB4 RB4 `VEb  1 e 0 @52 ]
+"4191
+[v _RD2 RD2 `VEb  1 e 0 @66 ]
+"4194
+[v _RD3 RD3 `VEb  1 e 0 @67 ]
+"4197
+[v _RD4 RD4 `VEb  1 e 0 @68 ]
+"4206
+[v _RD7 RD7 `VEb  1 e 0 @71 ]
+"118 C:\GNE.X\main.c
+[v _stato stato `i  1 e 2 0 ]
+"120
+[v _main main `(v  1 e 1 0 ]
+{
+"217
+} 0
+"89
+[v _Visualizza Visualizza `(v  1 e 1 0 ]
+{
+"91
+[v Visualizza@lettera lettera `[5]i  1 a 10 0 ]
+"89
+[v Visualizza@display display `i  1 p 2 0 ]
+"90
+[v Visualizza@F1427 F1427 `[5]i  1 s 10 F1427 ]
+"116
+} 0
+"70
+[v _Irrigazione Irrigazione `(v  1 e 1 0 ]
+{
+[v Irrigazione@power power `i  1 p 2 0 ]
+[v Irrigazione@direzione direzione `i  1 p 2 2 ]
+[v Irrigazione@velocita velocita `i  1 p 2 4 ]
+[v Irrigazione@irrigazione irrigazione `i  1 p 2 6 ]
+"87
+} 0
