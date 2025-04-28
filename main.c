@@ -1,7 +1,5 @@
 // 1.0 da mplab
 
-
-
 #pragma config FOSC = INTRC_NOCLKOUT //XT        // Oscillator Selection Bits (XT Oscillator, Crystal/resonator connected between OSC1 and OSC2 pins)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
@@ -91,7 +89,8 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 
 void Visualizza (int display)
 {
-    int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000}; // O, F, E, n, c
+    PORTC =0b11111111;
+    /*int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000}; // O, F, E, n, c
     
     if(display == OFF )
     {
@@ -116,6 +115,7 @@ void Visualizza (int display)
         PORTC = lettera[2];     //visualizzo la lettera E
         PORTA = lettera[3];    //visualizzo la lettera n
     }
+     */
 }
   
 int stato=0;
@@ -157,13 +157,13 @@ void main(void)
                     PORTA=0b11111111;//Visualizza(ON); //visualizza on
                     PORTC=0b11111111;
                     stato=1; //vai al primo stato
-                    while(1);
                 }
                 
                 if (TEMP ==1) //se la temperatura è sopra i 30°C
                 { 
-                    stato=10; //vai allo stato 10
+                    //stato=10; //vai allo stato 10
                 }
+                break;
                 
             case 1: //irrigatore non si sa dove sta 
                 if(FC1==1) //se l'irrigatore non si trova a inizio corsa
@@ -177,13 +177,16 @@ void main(void)
                 
             case 2: //irrigatore sta tornando indietro
                 if(FC1==0)stato=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
+                break;
             
             case 3: //irrigatore sta a inizio corsa
                 Irrigazione(START, AVANTI, LENTO, ECCITATO);
                 stato=0;
+                break;
                 
             case 4: //irrigatore sta andando avanti alla minima velocità irrigando
                 if (FC2==0) stato=0;
+                break;
                 
             case 5: //irrigatore sta  a fine corsa
                 if (MODO==0) 
@@ -196,6 +199,7 @@ void main(void)
                     Irrigazione(START,DIETRO, LENTO, ECCITATO);
                     stato=7;
                 }
+                break;
                 
             case 6: //irrigatore sta tornando indietro alla massima velocità non irrigando
                 if (FC1==0)
@@ -203,6 +207,7 @@ void main(void)
                     //ferma motore;
                     stato=8;
                 }
+                break;
                 
             case 7: //irrigatore sta tornando indietro alla minima velocità irrigando
                 if (FC1==0)
@@ -210,8 +215,27 @@ void main(void)
                     //ferma motore;
                     stato=8;
                 }
+                break;
+                
             case 8: //irrigatore sta ad inizio corsa
                     stato=0;
+                    break;
+                    
+            case 10: //temperatura sopra i 30°C
+                FINESTRE    = 1;
+                __delay_ms(3000);
+                VENTILATORI = 1;
+                if (TEMP ==0) //se la temperatura è sotto i 27°C
+                { 
+                    stato=11; //vai allo stato 11
+                }
+                break;
+                
+            case 11: //temperatura sotto i 27°C
+                VENTILATORI = 0;
+                FINESTRE    = 0;
+                stato=0;
+                
                     
             
         }

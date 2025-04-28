@@ -2773,13 +2773,13 @@ void main(void)
                     PORTA=0b11111111;
                     PORTC=0b11111111;
                     stato=1;
-                    while(1);
                 }
 
                 if (RB4 ==1)
                 {
                     stato=10;
                 }
+                break;
 
             case 1:
                 if(RB3==1)
@@ -2793,13 +2793,16 @@ void main(void)
 
             case 2:
                 if(RB3==0)stato=3;
+                break;
 
             case 3:
                 Irrigazione(1, 1, 0, 1);
                 stato=0;
+                break;
 
             case 4:
                 if (RB2==0) stato=0;
+                break;
 
             case 5:
                 if (RB4==0)
@@ -2812,6 +2815,7 @@ void main(void)
                     Irrigazione(1,0, 0, 1);
                     stato=7;
                 }
+                break;
 
             case 6:
                 if (RB3==0)
@@ -2819,6 +2823,7 @@ void main(void)
 
                     stato=8;
                 }
+                break;
 
             case 7:
                 if (RB3==0)
@@ -2826,8 +2831,27 @@ void main(void)
 
                     stato=8;
                 }
+                break;
+
             case 8:
                     stato=0;
+                    break;
+
+            case 10:
+                RD5 = 1;
+                _delay((unsigned long)((3000)*(4000000/4000.0)));
+                RD6 = 1;
+                if (RB4 ==0)
+                {
+                    stato=11;
+                }
+                break;
+
+            case 11:
+                RD6 = 0;
+                RD5 = 0;
+                stato=0;
+
 
 
         }

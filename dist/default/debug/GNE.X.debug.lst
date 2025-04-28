@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V3.00 build 20241204225717 
-                                                                                               Mon Apr 28 20:36:26 2025
+                                                                                               Tue Apr 29 00:13:08 2025
 
 Microchip MPLAB XC8 C Compiler v3.00 (Free license) build 20241204225717 Og1 
      1                           	processor	16F887
@@ -228,960 +228,1018 @@ Microchip MPLAB XC8 C Compiler v3.00 (Free license) build 20241204225717 Og1
    214     018D                     EECON2          equ	397	;# 
    215                           
    216                           	psect	idataBANK0
-   217     0641                     __pidataBANK0:
+   217     0621                     __pidataBANK0:
    218                           
    219                           ;initializer for Visualizza@F1427
-   220     0641  347E               	retlw	126
-   221     0642  3400               	retlw	0
-   222     0643  34E2               	retlw	226
-   223     0644  3400               	retlw	0
-   224     0645  34F2               	retlw	242
-   225     0646  3400               	retlw	0
-   226     0647  34A8               	retlw	168
-   227     0648  3400               	retlw	0
-   228     0649  34B0               	retlw	176
-   229     064A  3400               	retlw	0
+   220     0621  347E               	retlw	126
+   221     0622  3400               	retlw	0
+   222     0623  34E2               	retlw	226
+   223     0624  3400               	retlw	0
+   224     0625  34F2               	retlw	242
+   225     0626  3400               	retlw	0
+   226     0627  34A8               	retlw	168
+   227     0628  3400               	retlw	0
+   228     0629  34B0               	retlw	176
+   229     062A  3400               	retlw	0
    230                           
    231                           	psect	nvCOMMON
-   232     0079                     __pnvCOMMON:
-   233     0079                     _stato:
-   234     0079                     	ds	2
+   232     007C                     __pnvCOMMON:
+   233     007C                     _stato:
+   234     007C                     	ds	2
    235     000B                     _INTCON         set	11
    236     0008                     _PORTD          set	8
    237     0006                     _PORTB          set	6
    238     0005                     _PORTA          set	5
    239     0007                     _PORTC          set	7
-   240     0032                     _RB2            set	50
-   241     0033                     _RB3            set	51
-   242     0034                     _RB4            set	52
-   243     0031                     _RB1            set	49
-   244     0047                     _RD7            set	71
-   245     0043                     _RD3            set	67
-   246     0042                     _RD2            set	66
-   247     0044                     _RD4            set	68
-   248     0081                     _OPTION_REG     set	129
-   249     0088                     _TRISD          set	136
-   250     0087                     _TRISC          set	135
-   251     0086                     _TRISB          set	134
-   252     0085                     _TRISA          set	133
-   253     0189                     _ANSELH         set	393
-   254     0188                     _ANSEL          set	392
-   255                           
-   256                           	psect	cinit
-   257     07EE                     start_initialization:	
-   258                           ; #config settings
-   259                           
-   260     07EE                     __initialization:
+   240     0046                     _RD6            set	70
+   241     0045                     _RD5            set	69
+   242     0032                     _RB2            set	50
+   243     0033                     _RB3            set	51
+   244     0034                     _RB4            set	52
+   245     0031                     _RB1            set	49
+   246     0047                     _RD7            set	71
+   247     0043                     _RD3            set	67
+   248     0042                     _RD2            set	66
+   249     0044                     _RD4            set	68
+   250     0081                     _OPTION_REG     set	129
+   251     0088                     _TRISD          set	136
+   252     0087                     _TRISC          set	135
+   253     0086                     _TRISB          set	134
+   254     0085                     _TRISA          set	133
+   255     0189                     _ANSELH         set	393
+   256     0188                     _ANSEL          set	392
+   257                           
+   258                           	psect	cinit
+   259     07EE                     start_initialization:	
+   260                           ; #config settings
    261                           
-   262                           ; Initialize objects allocated to BANK0
-   263     07EE  1383               	bcf	3,7	;select IRP bank0
-   264     07EF  302A               	movlw	low (__pdataBANK0+10)
-   265     07F0  00FD               	movwf	btemp+-1
-   266     07F1  3006               	movlw	high __pidataBANK0
-   267     07F2  00FE               	movwf	btemp
-   268     07F3  3041               	movlw	low __pidataBANK0
-   269     07F4  00FF               	movwf	btemp+1
-   270     07F5  3020               	movlw	low __pdataBANK0
-   271     07F6  0084               	movwf	4
-   272     07F7  120A  118A  264F  120A  118A  	fcall	init_ram0
-   273     07FC                     end_of_initialization:	
-   274                           ;End of C runtime variable initialization code
-   275                           
-   276     07FC                     __end_of__initialization:
-   277     07FC  0183               	clrf	3
-   278     07FD  120A  118A  2EEF   	ljmp	_main	;jump to C main() function
-   279                           
-   280                           	psect	dataBANK0
-   281     0020                     __pdataBANK0:
-   282     0020                     Visualizza@F1427:
-   283     0020                     	ds	10
-   284                           
-   285                           	psect	inittext
-   286     064B                     init_fetch0:	
-   287                           ;	Called with low address in FSR and high address in W
-   288                           
-   289     064B  087E               	movf	btemp,w
-   290     064C  008A               	movwf	10
-   291     064D  087F               	movf	btemp+1,w
-   292     064E  0082               	movwf	2
-   293     064F                     init_ram0:	
-   294                           ;Called with:
-   295                           ;	high address of idata address in btemp 
-   296                           ;	low address of idata address in btemp+1 
-   297                           ;	low address of data in FSR
-   298                           ;	high address + 1 of data in btemp-1
-   299                           
-   300     064F  120A  118A  264B  120A  118A  	fcall	init_fetch0
-   301     0654  0080               	movwf	0
-   302     0655  0A84               	incf	4,f
-   303     0656  0804               	movf	4,w
-   304     0657  067D               	xorwf	btemp+-1,w
-   305     0658  1903               	btfsc	3,2
-   306     0659  3400               	retlw	0
-   307     065A  0AFF               	incf	btemp+1,f
-   308     065B  1903               	btfsc	3,2
-   309     065C  0AFE               	incf	btemp,f
-   310     065D  2E4F               	goto	init_ram0
-   311                           
-   312                           	psect	cstackCOMMON
-   313     0071                     __pcstackCOMMON:
-   314     0071                     ?_Irrigazione:
-   315     0071                     ?_Visualizza:	
-   316                           ; 1 bytes @ 0x0
-   317                           
-   318     0071                     ?_main:	
-   319                           ; 1 bytes @ 0x0
-   320                           
-   321     0071                     Irrigazione@power:	
-   322                           ; 1 bytes @ 0x0
-   323                           
-   324     0071                     Visualizza@display:	
-   325                           ; 2 bytes @ 0x0
-   326                           
-   327                           
-   328                           ; 2 bytes @ 0x0
-   329     0071                     	ds	2
-   330     0073                     Irrigazione@direzione:
-   331     0073                     ??_Visualizza:	
-   332                           ; 2 bytes @ 0x2
-   333                           
-   334                           
-   335                           ; 1 bytes @ 0x2
-   336     0073                     	ds	2
-   337     0075                     Irrigazione@velocita:
-   338                           
-   339                           ; 2 bytes @ 0x4
-   340     0075                     	ds	2
-   341     0077                     Irrigazione@irrigazione:
-   342                           
-   343                           ; 2 bytes @ 0x6
-   344     0077                     	ds	2
-   345     0079                     ??_Irrigazione:
-   346     0079                     ??_main:	
-   347                           ; 1 bytes @ 0x8
-   348                           
-   349                           
-   350                           	psect	cstackBANK0
-   351     002A                     __pcstackBANK0:	
+   262     07EE                     __initialization:
+   263                           
+   264                           ; Initialize objects allocated to BANK0
+   265     07EE  1383               	bcf	3,7	;select IRP bank0
+   266     07EF  302A               	movlw	low (__pdataBANK0+10)
+   267     07F0  00FD               	movwf	btemp+-1
+   268     07F1  3006               	movlw	high __pidataBANK0
+   269     07F2  00FE               	movwf	btemp
+   270     07F3  3021               	movlw	low __pidataBANK0
+   271     07F4  00FF               	movwf	btemp+1
+   272     07F5  3020               	movlw	low __pdataBANK0
+   273     07F6  0084               	movwf	4
+   274     07F7  120A  118A  262F  120A  118A  	fcall	init_ram0
+   275     07FC                     end_of_initialization:	
+   276                           ;End of C runtime variable initialization code
+   277                           
+   278     07FC                     __end_of__initialization:
+   279     07FC  0183               	clrf	3
+   280     07FD  120A  118A  2ECF   	ljmp	_main	;jump to C main() function
+   281                           
+   282                           	psect	dataBANK0
+   283     0020                     __pdataBANK0:
+   284     0020                     Visualizza@F1427:
+   285     0020                     	ds	10
+   286                           
+   287                           	psect	inittext
+   288     062B                     init_fetch0:	
+   289                           ;	Called with low address in FSR and high address in W
+   290                           
+   291     062B  087E               	movf	btemp,w
+   292     062C  008A               	movwf	10
+   293     062D  087F               	movf	btemp+1,w
+   294     062E  0082               	movwf	2
+   295     062F                     init_ram0:	
+   296                           ;Called with:
+   297                           ;	high address of idata address in btemp 
+   298                           ;	low address of idata address in btemp+1 
+   299                           ;	low address of data in FSR
+   300                           ;	high address + 1 of data in btemp-1
+   301                           
+   302     062F  120A  118A  262B  120A  118A  	fcall	init_fetch0
+   303     0634  0080               	movwf	0
+   304     0635  0A84               	incf	4,f
+   305     0636  0804               	movf	4,w
+   306     0637  067D               	xorwf	btemp+-1,w
+   307     0638  1903               	btfsc	3,2
+   308     0639  3400               	retlw	0
+   309     063A  0AFF               	incf	btemp+1,f
+   310     063B  1903               	btfsc	3,2
+   311     063C  0AFE               	incf	btemp,f
+   312     063D  2E2F               	goto	init_ram0
+   313                           
+   314                           	psect	cstackCOMMON
+   315     0071                     __pcstackCOMMON:
+   316     0071                     ?_Irrigazione:
+   317     0071                     ?_Visualizza:	
+   318                           ; 1 bytes @ 0x0
+   319                           
+   320     0071                     ?_main:	
+   321                           ; 1 bytes @ 0x0
+   322                           
+   323     0071                     Irrigazione@power:	
+   324                           ; 1 bytes @ 0x0
+   325                           
+   326     0071                     Visualizza@display:	
+   327                           ; 2 bytes @ 0x0
+   328                           
+   329                           
+   330                           ; 2 bytes @ 0x0
+   331     0071                     	ds	2
+   332     0073                     Irrigazione@direzione:
+   333     0073                     ??_Visualizza:	
+   334                           ; 2 bytes @ 0x2
+   335                           
+   336                           
+   337                           ; 1 bytes @ 0x2
+   338     0073                     	ds	2
+   339     0075                     Irrigazione@velocita:
+   340                           
+   341                           ; 2 bytes @ 0x4
+   342     0075                     	ds	2
+   343     0077                     Irrigazione@irrigazione:
+   344                           
+   345                           ; 2 bytes @ 0x6
+   346     0077                     	ds	2
+   347     0079                     ??_Irrigazione:
+   348     0079                     ??_main:	
+   349                           ; 1 bytes @ 0x8
+   350                           
+   351                           
    352                           ; 1 bytes @ 0x8
-   353                           
-   354     002A                     Visualizza@lettera:
-   355                           
-   356                           ; 10 bytes @ 0x0
-   357     002A                     	ds	10
+   353     0079                     	ds	3
+   354                           
+   355                           	psect	cstackBANK0
+   356     002A                     __pcstackBANK0:
+   357     002A                     Visualizza@lettera:
    358                           
-   359                           	psect	maintext
-   360     06EF                     __pmaintext:	
-   361 ;;
-   362 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   363 ;;
-   364 ;; *************** function _main *****************
-   365 ;; Defined at:
-   366 ;;		line 121 in file "main.c"
-   367 ;; Parameters:    Size  Location     Type
-   368 ;;		None
-   369 ;; Auto vars:     Size  Location     Type
-   370 ;;		None
-   371 ;; Return value:  Size  Location     Type
-   372 ;;                  1    wreg      void 
-   373 ;; Registers used:
-   374 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
-   375 ;; Tracked objects:
-   376 ;;		On entry : B00/0
-   377 ;;		On exit  : 0/0
-   378 ;;		Unchanged: 0/0
-   379 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   380 ;;      Params:         0       0       0       0       0
-   381 ;;      Locals:         0       0       0       0       0
-   382 ;;      Temps:          0       0       0       0       0
-   383 ;;      Totals:         0       0       0       0       0
-   384 ;;Total ram usage:        0 bytes
-   385 ;; Hardware stack levels required when called: 1
-   386 ;; This function calls:
-   387 ;;		_Irrigazione
-   388 ;;		_Visualizza
-   389 ;; This function is called by:
-   390 ;;		Startup code after reset
-   391 ;; This function uses a non-reentrant model
-   392 ;;
-   393                           
-   394     06EF                     _main:	
-   395                           ;psect for function _main
+   359                           ; 10 bytes @ 0x0
+   360     002A                     	ds	10
+   361                           
+   362                           	psect	maintext
+   363     06CF                     __pmaintext:	
+   364 ;;
+   365 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   366 ;;
+   367 ;; *************** function _main *****************
+   368 ;; Defined at:
+   369 ;;		line 121 in file "main.c"
+   370 ;; Parameters:    Size  Location     Type
+   371 ;;		None
+   372 ;; Auto vars:     Size  Location     Type
+   373 ;;		None
+   374 ;; Return value:  Size  Location     Type
+   375 ;;                  1    wreg      void 
+   376 ;; Registers used:
+   377 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   378 ;; Tracked objects:
+   379 ;;		On entry : B00/0
+   380 ;;		On exit  : 0/0
+   381 ;;		Unchanged: 0/0
+   382 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   383 ;;      Params:         0       0       0       0       0
+   384 ;;      Locals:         0       0       0       0       0
+   385 ;;      Temps:          3       0       0       0       0
+   386 ;;      Totals:         3       0       0       0       0
+   387 ;;Total ram usage:        3 bytes
+   388 ;; Hardware stack levels required when called: 1
+   389 ;; This function calls:
+   390 ;;		_Irrigazione
+   391 ;;		_Visualizza
+   392 ;; This function is called by:
+   393 ;;		Startup code after reset
+   394 ;; This function uses a non-reentrant model
+   395 ;;
    396                           
-   397     06EF                     l832:	
-   398                           ;incstack = 0
-   399                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-   400                           
-   401                           
-   402                           ;main.c: 124:     PORTA = 0x00;
-   403     06EF  1283               	bcf	3,5	;RP0=0, select bank0
-   404     06F0  1303               	bcf	3,6	;RP1=0, select bank0
-   405     06F1  0185               	clrf	5	;volatile
-   406                           
-   407                           ;main.c: 125:     PORTB = 0x00;
-   408     06F2  0186               	clrf	6	;volatile
+   397     06CF                     _main:	
+   398                           ;psect for function _main
+   399                           
+   400     06CF                     l840:	
+   401                           ;incstack = 0
+   402                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   403                           
+   404                           
+   405                           ;main.c: 124:     PORTA = 0x00;
+   406     06CF  1283               	bcf	3,5	;RP0=0, select bank0
+   407     06D0  1303               	bcf	3,6	;RP1=0, select bank0
+   408     06D1  0185               	clrf	5	;volatile
    409                           
-   410                           ;main.c: 126:     PORTC = 0x00;
-   411     06F3  0187               	clrf	7	;volatile
+   410                           ;main.c: 125:     PORTB = 0x00;
+   411     06D2  0186               	clrf	6	;volatile
    412                           
-   413                           ;main.c: 127:     PORTD = 0x00;
-   414     06F4  0188               	clrf	8	;volatile
+   413                           ;main.c: 126:     PORTC = 0x00;
+   414     06D3  0187               	clrf	7	;volatile
    415                           
-   416                           ;main.c: 130:     TRISA = 0b00000000;
-   417     06F5  1683               	bsf	3,5	;RP0=1, select bank1
-   418     06F6  1303               	bcf	3,6	;RP1=0, select bank1
-   419     06F7  0185               	clrf	5	;volatile
-   420     06F8                     l834:
-   421                           
-   422                           ;main.c: 131:     TRISB = 0b11111111;
-   423     06F8  30FF               	movlw	255
-   424     06F9  0086               	movwf	6	;volatile
-   425                           
-   426                           ;main.c: 132:     TRISC = 0b00000000;
-   427     06FA  0187               	clrf	7	;volatile
+   416                           ;main.c: 127:     PORTD = 0x00;
+   417     06D4  0188               	clrf	8	;volatile
+   418                           
+   419                           ;main.c: 130:     TRISA = 0b00000000;
+   420     06D5  1683               	bsf	3,5	;RP0=1, select bank1
+   421     06D6  1303               	bcf	3,6	;RP1=0, select bank1
+   422     06D7  0185               	clrf	5	;volatile
+   423     06D8                     l842:
+   424                           
+   425                           ;main.c: 131:     TRISB = 0b11111111;
+   426     06D8  30FF               	movlw	255
+   427     06D9  0086               	movwf	6	;volatile
    428                           
-   429                           ;main.c: 133:     TRISD = 0b00000000;
-   430     06FB  0188               	clrf	8	;volatile
-   431     06FC                     l836:
-   432                           
-   433                           ;main.c: 136:     INTCON = 0b1011100;
-   434     06FC  305C               	movlw	92
-   435     06FD  008B               	movwf	11	;volatile
-   436                           
-   437                           ;main.c: 138:     ANSEL = 0x00;
-   438     06FE  1683               	bsf	3,5	;RP0=1, select bank3
-   439     06FF  1703               	bsf	3,6	;RP1=1, select bank3
-   440     0700  0188               	clrf	8	;volatile
-   441                           
-   442                           ;main.c: 139:     ANSELH = 0x00;
-   443     0701  0189               	clrf	9	;volatile
-   444     0702                     l838:
-   445                           
-   446                           ;main.c: 141:     OPTION_REG = 0b00000011;
-   447     0702  3003               	movlw	3
-   448     0703  1683               	bsf	3,5	;RP0=1, select bank1
-   449     0704  1303               	bcf	3,6	;RP1=0, select bank1
-   450     0705  0081               	movwf	1	;volatile
-   451     0706                     l67:	
-   452                           ;main.c: 146:     while (1)
-   453                           
-   454                           
-   455                           ;main.c: 147:     {;main.c: 148:           stato=0;
-   456     0706  01F9               	clrf	_stato
-   457     0707  01FA               	clrf	_stato+1
-   458                           
-   459                           ;main.c: 150:         switch(stato)
-   460     0708  2FC8               	goto	l886
-   461     0709                     l69:	
-   462                           ;main.c: 151:         {;main.c: 152:             case 0:
-   463                           
-   464                           
-   465                           ;main.c: 153:                 if(RB1 == 0)
-   466     0709  1283               	bcf	3,5	;RP0=0, select bank0
-   467     070A  1303               	bcf	3,6	;RP1=0, select bank0
-   468     070B  1886               	btfsc	6,1	;volatile
-   469     070C  2F0E               	goto	u371
-   470     070D  2F0F               	goto	u370
-   471     070E                     u371:
-   472     070E  2F18               	goto	l70
-   473     070F                     u370:
-   474     070F                     l840:
-   475                           
-   476                           ;main.c: 154:                 {;main.c: 155:                     PORTA=0b11111111;
-   477     070F  30FF               	movlw	255
-   478     0710  0085               	movwf	5	;volatile
-   479                           
-   480                           ;main.c: 156:                     PORTC=0b11111111;
-   481     0711  30FF               	movlw	255
-   482     0712  0087               	movwf	7	;volatile
-   483     0713                     l842:
-   484                           
-   485                           ;main.c: 157:                     stato=1;
-   486     0713  3001               	movlw	1
-   487     0714  00F9               	movwf	_stato
-   488     0715  3000               	movlw	0
-   489     0716  00FA               	movwf	_stato+1
-   490     0717                     l71:	
-   491                           ;main.c: 158:                     while(1);
-   492                           
-   493     0717                     l72:
-   494     0717  2F17               	goto	l71
-   495     0718                     l70:	
-   496                           ;main.c: 159:                 }
-   497                           
-   498                           
-   499                           ;main.c: 161:                 if (RB4 ==1)
-   500     0718  1E06               	btfss	6,4	;volatile
-   501     0719  2F1B               	goto	u381
-   502     071A  2F1C               	goto	u380
-   503     071B                     u381:
-   504     071B  2F20               	goto	l846
-   505     071C                     u380:
-   506     071C                     l844:
-   507                           
-   508                           ;main.c: 162:                 {;main.c: 163:                     stato=10;
-   509     071C  300A               	movlw	10
-   510     071D  00F9               	movwf	_stato
-   511     071E  3000               	movlw	0
-   512     071F  00FA               	movwf	_stato+1
-   513     0720                     l846:
-   514                           
-   515                           ;main.c: 167:                 if(RB3==1)
-   516     0720  1283               	bcf	3,5	;RP0=0, select bank0
-   517     0721  1303               	bcf	3,6	;RP1=0, select bank0
-   518     0722  1D86               	btfss	6,3	;volatile
-   519     0723  2F25               	goto	u391
-   520     0724  2F26               	goto	u390
-   521     0725                     u391:
-   522     0725  2F47               	goto	l76
-   523     0726                     u390:
-   524     0726                     l848:
-   525                           
-   526                           ;main.c: 168:                 {;main.c: 169:                     Visualizza(2);
-   527     0726  3002               	movlw	2
-   528     0727  00F1               	movwf	Visualizza@display
-   529     0728  3000               	movlw	0
-   530     0729  00F2               	movwf	Visualizza@display+1
-   531     072A  120A  118A  265E  120A  118A  	fcall	_Visualizza
-   532     072F                     l850:
-   533                           
-   534                           ;main.c: 170:                     Irrigazione(1, 0, 1, 0);
-   535     072F  3001               	movlw	1
-   536     0730  00F1               	movwf	Irrigazione@power
-   537     0731  3000               	movlw	0
-   538     0732  00F2               	movwf	Irrigazione@power+1
-   539     0733  3000               	movlw	0
-   540     0734  00F3               	movwf	Irrigazione@direzione
-   541     0735  00F4               	movwf	Irrigazione@direzione+1
-   542     0736  3001               	movlw	1
-   543     0737  00F5               	movwf	Irrigazione@velocita
-   544     0738  3000               	movlw	0
-   545     0739  00F6               	movwf	Irrigazione@velocita+1
-   546     073A  3000               	movlw	0
-   547     073B  00F7               	movwf	Irrigazione@irrigazione
-   548     073C  00F8               	movwf	Irrigazione@irrigazione+1
-   549     073D  120A  118A  26A6  120A  118A  	fcall	_Irrigazione
-   550     0742                     l852:
-   551                           
-   552                           ;main.c: 171:                     stato=2;
-   553     0742  3002               	movlw	2
-   554     0743  00F9               	movwf	_stato
-   555     0744  3000               	movlw	0
-   556     0745  00FA               	movwf	_stato+1
-   557                           
-   558                           ;main.c: 172:                 }
-   559     0746  2F06               	goto	l67
-   560     0747                     l76:	
-   561                           ;main.c: 173:                 else if(RB3==0)stato=3;
-   562                           
-   563     0747  1986               	btfsc	6,3	;volatile
-   564     0748  2F4A               	goto	u401
-   565     0749  2F4B               	goto	u400
-   566     074A                     u401:
-   567     074A  2FEA               	goto	l79
-   568     074B                     u400:
-   569     074B                     l854:
-   570     074B  3003               	movlw	3
-   571     074C  00F9               	movwf	_stato
-   572     074D  3000               	movlw	0
-   573     074E  00FA               	movwf	_stato+1
-   574     074F  2F06               	goto	l67
-   575     0750                     l80:	
-   576                           ;main.c: 176:             case 2:
+   429                           ;main.c: 132:     TRISC = 0b00000000;
+   430     06DA  0187               	clrf	7	;volatile
+   431                           
+   432                           ;main.c: 133:     TRISD = 0b00000000;
+   433     06DB  0188               	clrf	8	;volatile
+   434     06DC                     l844:
+   435                           
+   436                           ;main.c: 136:     INTCON = 0b1011100;
+   437     06DC  305C               	movlw	92
+   438     06DD  008B               	movwf	11	;volatile
+   439                           
+   440                           ;main.c: 138:     ANSEL = 0x00;
+   441     06DE  1683               	bsf	3,5	;RP0=1, select bank3
+   442     06DF  1703               	bsf	3,6	;RP1=1, select bank3
+   443     06E0  0188               	clrf	8	;volatile
+   444                           
+   445                           ;main.c: 139:     ANSELH = 0x00;
+   446     06E1  0189               	clrf	9	;volatile
+   447     06E2                     l846:
+   448                           
+   449                           ;main.c: 141:     OPTION_REG = 0b00000011;
+   450     06E2  3003               	movlw	3
+   451     06E3  1683               	bsf	3,5	;RP0=1, select bank1
+   452     06E4  1303               	bcf	3,6	;RP1=0, select bank1
+   453     06E5  0081               	movwf	1	;volatile
+   454     06E6                     l73:	
+   455                           ;main.c: 146:     while (1)
+   456                           
+   457                           
+   458                           ;main.c: 147:     {;main.c: 148:           stato=0;
+   459     06E6  01FC               	clrf	_stato
+   460     06E7  01FD               	clrf	_stato+1
+   461                           
+   462                           ;main.c: 150:         switch(stato)
+   463     06E8  2FC2               	goto	l896
+   464     06E9                     l75:	
+   465                           ;main.c: 151:         {;main.c: 152:             case 0:
+   466                           
+   467                           
+   468                           ;main.c: 153:                 if(RB1 == 0)
+   469     06E9  1283               	bcf	3,5	;RP0=0, select bank0
+   470     06EA  1303               	bcf	3,6	;RP1=0, select bank0
+   471     06EB  1886               	btfsc	6,1	;volatile
+   472     06EC  2EEE               	goto	u381
+   473     06ED  2EEF               	goto	u380
+   474     06EE                     u381:
+   475     06EE  2EF7               	goto	l852
+   476     06EF                     u380:
+   477     06EF                     l848:
+   478                           
+   479                           ;main.c: 154:                 {;main.c: 155:                     PORTA=0b11111111;
+   480     06EF  30FF               	movlw	255
+   481     06F0  0085               	movwf	5	;volatile
+   482                           
+   483                           ;main.c: 156:                     PORTC=0b11111111;
+   484     06F1  30FF               	movlw	255
+   485     06F2  0087               	movwf	7	;volatile
+   486     06F3                     l850:
+   487                           
+   488                           ;main.c: 157:                     stato=1;
+   489     06F3  3001               	movlw	1
+   490     06F4  00FC               	movwf	_stato
+   491     06F5  3000               	movlw	0
+   492     06F6  00FD               	movwf	_stato+1
+   493     06F7                     l852:
+   494                           
+   495                           ;main.c: 160:                 if (RB4 ==1)
+   496     06F7  1E06               	btfss	6,4	;volatile
+   497     06F8  2EFA               	goto	u391
+   498     06F9  2EFB               	goto	u390
+   499     06FA                     u391:
+   500     06FA  2EE6               	goto	l73
+   501     06FB                     u390:
+   502     06FB                     l854:
+   503                           
+   504                           ;main.c: 161:                 {;main.c: 162:                     stato=10;
+   505     06FB  300A               	movlw	10
+   506     06FC  00FC               	movwf	_stato
+   507     06FD  3000               	movlw	0
+   508     06FE  00FD               	movwf	_stato+1
+   509     06FF  2EE6               	goto	l73
+   510     0700                     l79:	
+   511                           ;main.c: 166:             case 1:
+   512                           
+   513                           
+   514                           ;main.c: 167:                 if(RB3==1)
+   515     0700  1283               	bcf	3,5	;RP0=0, select bank0
+   516     0701  1303               	bcf	3,6	;RP1=0, select bank0
+   517     0702  1D86               	btfss	6,3	;volatile
+   518     0703  2F05               	goto	u401
+   519     0704  2F06               	goto	u400
+   520     0705                     u401:
+   521     0705  2F27               	goto	l80
+   522     0706                     u400:
+   523     0706                     l856:
+   524                           
+   525                           ;main.c: 168:                 {;main.c: 169:                     Visualizza(2);
+   526     0706  3002               	movlw	2
+   527     0707  00F1               	movwf	Visualizza@display
+   528     0708  3000               	movlw	0
+   529     0709  00F2               	movwf	Visualizza@display+1
+   530     070A  120A  118A  263E  120A  118A  	fcall	_Visualizza
+   531     070F                     l858:
+   532                           
+   533                           ;main.c: 170:                     Irrigazione(1, 0, 1, 0);
+   534     070F  3001               	movlw	1
+   535     0710  00F1               	movwf	Irrigazione@power
+   536     0711  3000               	movlw	0
+   537     0712  00F2               	movwf	Irrigazione@power+1
+   538     0713  3000               	movlw	0
+   539     0714  00F3               	movwf	Irrigazione@direzione
+   540     0715  00F4               	movwf	Irrigazione@direzione+1
+   541     0716  3001               	movlw	1
+   542     0717  00F5               	movwf	Irrigazione@velocita
+   543     0718  3000               	movlw	0
+   544     0719  00F6               	movwf	Irrigazione@velocita+1
+   545     071A  3000               	movlw	0
+   546     071B  00F7               	movwf	Irrigazione@irrigazione
+   547     071C  00F8               	movwf	Irrigazione@irrigazione+1
+   548     071D  120A  118A  2686  120A  118A  	fcall	_Irrigazione
+   549     0722                     l860:
+   550                           
+   551                           ;main.c: 171:                     stato=2;
+   552     0722  3002               	movlw	2
+   553     0723  00FC               	movwf	_stato
+   554     0724  3000               	movlw	0
+   555     0725  00FD               	movwf	_stato+1
+   556                           
+   557                           ;main.c: 172:                 }
+   558     0726  2EE6               	goto	l73
+   559     0727                     l80:	
+   560                           ;main.c: 173:                 else if(RB3==0)stato=3;
+   561                           
+   562     0727  1986               	btfsc	6,3	;volatile
+   563     0728  2F2A               	goto	u411
+   564     0729  2F2B               	goto	u410
+   565     072A                     u411:
+   566     072A  2FEA               	goto	l78
+   567     072B                     u410:
+   568     072B                     l862:
+   569     072B  3003               	movlw	3
+   570     072C  00FC               	movwf	_stato
+   571     072D  3000               	movlw	0
+   572     072E  00FD               	movwf	_stato+1
+   573     072F  2EE6               	goto	l73
+   574     0730                     l83:	
+   575                           ;main.c: 176:             case 2:
+   576                           
    577                           
-   578                           
-   579                           ;main.c: 177:                 if(RB3==0)stato=3;
-   580     0750  1283               	bcf	3,5	;RP0=0, select bank0
-   581     0751  1303               	bcf	3,6	;RP1=0, select bank0
-   582     0752  1986               	btfsc	6,3	;volatile
-   583     0753  2F55               	goto	u411
-   584     0754  2F56               	goto	u410
-   585     0755                     u411:
-   586     0755  2F5A               	goto	l858
-   587     0756                     u410:
-   588     0756                     l856:
-   589     0756  3003               	movlw	3
-   590     0757  00F9               	movwf	_stato
-   591     0758  3000               	movlw	0
-   592     0759  00FA               	movwf	_stato+1
-   593     075A                     l858:
-   594                           
-   595                           ;main.c: 180:                 Irrigazione(1, 1, 0, 1);
-   596     075A  3001               	movlw	1
-   597     075B  00F1               	movwf	Irrigazione@power
-   598     075C  3000               	movlw	0
-   599     075D  00F2               	movwf	Irrigazione@power+1
-   600     075E  3001               	movlw	1
-   601     075F  00F3               	movwf	Irrigazione@direzione
-   602     0760  3000               	movlw	0
-   603     0761  00F4               	movwf	Irrigazione@direzione+1
-   604     0762  3000               	movlw	0
-   605     0763  00F5               	movwf	Irrigazione@velocita
-   606     0764  00F6               	movwf	Irrigazione@velocita+1
-   607     0765  3001               	movlw	1
-   608     0766  00F7               	movwf	Irrigazione@irrigazione
-   609     0767  3000               	movlw	0
-   610     0768  00F8               	movwf	Irrigazione@irrigazione+1
-   611     0769  120A  118A  26A6  120A  118A  	fcall	_Irrigazione
-   612     076E                     l860:
-   613                           
-   614                           ;main.c: 181:                 stato=0;
-   615     076E  01F9               	clrf	_stato
-   616     076F  01FA               	clrf	_stato+1
-   617     0770                     l862:
+   578                           ;main.c: 177:                 if(RB3==0)stato=3;
+   579     0730  1283               	bcf	3,5	;RP0=0, select bank0
+   580     0731  1303               	bcf	3,6	;RP1=0, select bank0
+   581     0732  1986               	btfsc	6,3	;volatile
+   582     0733  2F35               	goto	u421
+   583     0734  2F36               	goto	u420
+   584     0735                     u421:
+   585     0735  2EE6               	goto	l73
+   586     0736                     u420:
+   587     0736  2F2B               	goto	l862
+   588     0737                     l866:
+   589                           
+   590                           ;main.c: 181:                 Irrigazione(1, 1, 0, 1);
+   591     0737  3001               	movlw	1
+   592     0738  00F1               	movwf	Irrigazione@power
+   593     0739  3000               	movlw	0
+   594     073A  00F2               	movwf	Irrigazione@power+1
+   595     073B  3001               	movlw	1
+   596     073C  00F3               	movwf	Irrigazione@direzione
+   597     073D  3000               	movlw	0
+   598     073E  00F4               	movwf	Irrigazione@direzione+1
+   599     073F  3000               	movlw	0
+   600     0740  00F5               	movwf	Irrigazione@velocita
+   601     0741  00F6               	movwf	Irrigazione@velocita+1
+   602     0742  3001               	movlw	1
+   603     0743  00F7               	movwf	Irrigazione@irrigazione
+   604     0744  3000               	movlw	0
+   605     0745  00F8               	movwf	Irrigazione@irrigazione+1
+   606     0746  120A  118A  2686  120A  118A  	fcall	_Irrigazione
+   607     074B                     l868:
+   608                           
+   609                           ;main.c: 182:                 stato=0;
+   610     074B  01FC               	clrf	_stato
+   611     074C  01FD               	clrf	_stato+1
+   612                           
+   613                           ;main.c: 183:                 break;
+   614     074D  2EE6               	goto	l73
+   615     074E                     l86:	
+   616                           ;main.c: 185:             case 4:
+   617                           
    618                           
-   619                           ;main.c: 184:                 if (RB2==0) stato=0;
-   620     0770  1283               	bcf	3,5	;RP0=0, select bank0
-   621     0771  1303               	bcf	3,6	;RP1=0, select bank0
-   622     0772  1906               	btfsc	6,2	;volatile
-   623     0773  2F75               	goto	u421
-   624     0774  2F76               	goto	u420
-   625     0775                     u421:
-   626     0775  2F78               	goto	l866
-   627     0776                     u420:
-   628     0776                     l864:
-   629     0776  01F9               	clrf	_stato
-   630     0777  01FA               	clrf	_stato+1
-   631     0778                     l866:
+   619                           ;main.c: 186:                 if (RB2==0) stato=0;
+   620     074E  1283               	bcf	3,5	;RP0=0, select bank0
+   621     074F  1303               	bcf	3,6	;RP1=0, select bank0
+   622     0750  1906               	btfsc	6,2	;volatile
+   623     0751  2F53               	goto	u431
+   624     0752  2F54               	goto	u430
+   625     0753                     u431:
+   626     0753  2EE6               	goto	l73
+   627     0754                     u430:
+   628     0754  2F4B               	goto	l868
+   629     0755                     l88:	
+   630                           ;main.c: 189:             case 5:
+   631                           
    632                           
-   633                           ;main.c: 187:                 if (RB4==0)
-   634     0778  1283               	bcf	3,5	;RP0=0, select bank0
-   635     0779  1303               	bcf	3,6	;RP1=0, select bank0
-   636     077A  1A06               	btfsc	6,4	;volatile
-   637     077B  2F7D               	goto	u431
-   638     077C  2F7E               	goto	u430
-   639     077D                     u431:
-   640     077D  2F96               	goto	l86
-   641     077E                     u430:
-   642     077E                     l868:
+   633                           ;main.c: 190:                 if (RB4==0)
+   634     0755  1283               	bcf	3,5	;RP0=0, select bank0
+   635     0756  1303               	bcf	3,6	;RP1=0, select bank0
+   636     0757  1A06               	btfsc	6,4	;volatile
+   637     0758  2F5A               	goto	u441
+   638     0759  2F5B               	goto	u440
+   639     075A                     u441:
+   640     075A  2F73               	goto	l89
+   641     075B                     u440:
+   642     075B                     l872:
    643                           
-   644                           ;main.c: 188:                 {;main.c: 189:                     Irrigazione(1, 0, 1, 0)
+   644                           ;main.c: 191:                 {;main.c: 192:                     Irrigazione(1, 0, 1, 0)
       +                          ;
-   645     077E  3001               	movlw	1
-   646     077F  00F1               	movwf	Irrigazione@power
-   647     0780  3000               	movlw	0
-   648     0781  00F2               	movwf	Irrigazione@power+1
-   649     0782  3000               	movlw	0
-   650     0783  00F3               	movwf	Irrigazione@direzione
-   651     0784  00F4               	movwf	Irrigazione@direzione+1
-   652     0785  3001               	movlw	1
-   653     0786  00F5               	movwf	Irrigazione@velocita
-   654     0787  3000               	movlw	0
-   655     0788  00F6               	movwf	Irrigazione@velocita+1
-   656     0789  3000               	movlw	0
-   657     078A  00F7               	movwf	Irrigazione@irrigazione
-   658     078B  00F8               	movwf	Irrigazione@irrigazione+1
-   659     078C  120A  118A  26A6  120A  118A  	fcall	_Irrigazione
-   660     0791                     l870:
+   645     075B  3001               	movlw	1
+   646     075C  00F1               	movwf	Irrigazione@power
+   647     075D  3000               	movlw	0
+   648     075E  00F2               	movwf	Irrigazione@power+1
+   649     075F  3000               	movlw	0
+   650     0760  00F3               	movwf	Irrigazione@direzione
+   651     0761  00F4               	movwf	Irrigazione@direzione+1
+   652     0762  3001               	movlw	1
+   653     0763  00F5               	movwf	Irrigazione@velocita
+   654     0764  3000               	movlw	0
+   655     0765  00F6               	movwf	Irrigazione@velocita+1
+   656     0766  3000               	movlw	0
+   657     0767  00F7               	movwf	Irrigazione@irrigazione
+   658     0768  00F8               	movwf	Irrigazione@irrigazione+1
+   659     0769  120A  118A  2686  120A  118A  	fcall	_Irrigazione
+   660     076E                     l874:
    661                           
-   662                           ;main.c: 190:                     stato=6;
-   663     0791  3006               	movlw	6
-   664     0792  00F9               	movwf	_stato
-   665     0793  3000               	movlw	0
-   666     0794  00FA               	movwf	_stato+1
+   662                           ;main.c: 193:                     stato=6;
+   663     076E  3006               	movlw	6
+   664     076F  00FC               	movwf	_stato
+   665     0770  3000               	movlw	0
+   666     0771  00FD               	movwf	_stato+1
    667                           
-   668                           ;main.c: 191:                 }
-   669     0795  2FB1               	goto	l876
-   670     0796                     l86:	
-   671                           ;main.c: 192:                 else if (RB4==1)
+   668                           ;main.c: 194:                 }
+   669     0772  2EE6               	goto	l73
+   670     0773                     l89:	
+   671                           ;main.c: 195:                 else if (RB4==1)
    672                           
-   673     0796  1E06               	btfss	6,4	;volatile
-   674     0797  2F99               	goto	u441
-   675     0798  2F9A               	goto	u440
-   676     0799                     u441:
-   677     0799  2FB1               	goto	l876
-   678     079A                     u440:
-   679     079A                     l872:
+   673     0773  1E06               	btfss	6,4	;volatile
+   674     0774  2F76               	goto	u451
+   675     0775  2F77               	goto	u450
+   676     0776                     u451:
+   677     0776  2FEA               	goto	l78
+   678     0777                     u450:
+   679     0777                     l876:
    680                           
-   681                           ;main.c: 193:                 {;main.c: 194:                     Irrigazione(1,0, 0, 1);
-   682     079A  3001               	movlw	1
-   683     079B  00F1               	movwf	Irrigazione@power
-   684     079C  3000               	movlw	0
-   685     079D  00F2               	movwf	Irrigazione@power+1
-   686     079E  3000               	movlw	0
-   687     079F  00F3               	movwf	Irrigazione@direzione
-   688     07A0  00F4               	movwf	Irrigazione@direzione+1
-   689     07A1  3000               	movlw	0
-   690     07A2  00F5               	movwf	Irrigazione@velocita
-   691     07A3  00F6               	movwf	Irrigazione@velocita+1
-   692     07A4  3001               	movlw	1
-   693     07A5  00F7               	movwf	Irrigazione@irrigazione
-   694     07A6  3000               	movlw	0
-   695     07A7  00F8               	movwf	Irrigazione@irrigazione+1
-   696     07A8  120A  118A  26A6  120A  118A  	fcall	_Irrigazione
-   697     07AD                     l874:
+   681                           ;main.c: 196:                 {;main.c: 197:                     Irrigazione(1,0, 0, 1);
+   682     0777  3001               	movlw	1
+   683     0778  00F1               	movwf	Irrigazione@power
+   684     0779  3000               	movlw	0
+   685     077A  00F2               	movwf	Irrigazione@power+1
+   686     077B  3000               	movlw	0
+   687     077C  00F3               	movwf	Irrigazione@direzione
+   688     077D  00F4               	movwf	Irrigazione@direzione+1
+   689     077E  3000               	movlw	0
+   690     077F  00F5               	movwf	Irrigazione@velocita
+   691     0780  00F6               	movwf	Irrigazione@velocita+1
+   692     0781  3001               	movlw	1
+   693     0782  00F7               	movwf	Irrigazione@irrigazione
+   694     0783  3000               	movlw	0
+   695     0784  00F8               	movwf	Irrigazione@irrigazione+1
+   696     0785  120A  118A  2686  120A  118A  	fcall	_Irrigazione
+   697     078A                     l878:
    698                           
-   699                           ;main.c: 195:                     stato=7;
-   700     07AD  3007               	movlw	7
-   701     07AE  00F9               	movwf	_stato
-   702     07AF  3000               	movlw	0
-   703     07B0  00FA               	movwf	_stato+1
-   704     07B1                     l876:
-   705                           
-   706                           ;main.c: 199:                 if (RB3==0)
-   707     07B1  1283               	bcf	3,5	;RP0=0, select bank0
-   708     07B2  1303               	bcf	3,6	;RP1=0, select bank0
-   709     07B3  1986               	btfsc	6,3	;volatile
-   710     07B4  2FB6               	goto	u451
-   711     07B5  2FB7               	goto	u450
-   712     07B6                     u451:
-   713     07B6  2FBB               	goto	l880
-   714     07B7                     u450:
-   715     07B7                     l878:
-   716                           
-   717                           ;main.c: 200:                 {;main.c: 202:                     stato=8;
-   718     07B7  3008               	movlw	8
-   719     07B8  00F9               	movwf	_stato
-   720     07B9  3000               	movlw	0
-   721     07BA  00FA               	movwf	_stato+1
-   722     07BB                     l880:
-   723                           
-   724                           ;main.c: 206:                 if (RB3==0)
-   725     07BB  1283               	bcf	3,5	;RP0=0, select bank0
-   726     07BC  1303               	bcf	3,6	;RP1=0, select bank0
-   727     07BD  1986               	btfsc	6,3	;volatile
-   728     07BE  2FC0               	goto	u461
-   729     07BF  2FC1               	goto	u460
-   730     07C0                     u461:
-   731     07C0  2FC5               	goto	l884
-   732     07C1                     u460:
-   733     07C1                     l882:
-   734                           
-   735                           ;main.c: 207:                 {;main.c: 209:                     stato=8;
-   736     07C1  3008               	movlw	8
-   737     07C2  00F9               	movwf	_stato
-   738     07C3  3000               	movlw	0
-   739     07C4  00FA               	movwf	_stato+1
-   740     07C5                     l884:
-   741                           
-   742                           ;main.c: 212:                     stato=0;
-   743     07C5  01F9               	clrf	_stato
-   744     07C6  01FA               	clrf	_stato+1
-   745                           
-   746                           ;main.c: 215:         }
-   747     07C7  2F06               	goto	l67
-   748     07C8                     l886:
+   699                           ;main.c: 198:                     stato=7;
+   700     078A  3007               	movlw	7
+   701     078B  00FC               	movwf	_stato
+   702     078C  3000               	movlw	0
+   703     078D  00FD               	movwf	_stato+1
+   704     078E  2EE6               	goto	l73
+   705     078F                     l92:	
+   706                           ;main.c: 202:             case 6:
+   707                           
+   708                           
+   709                           ;main.c: 203:                 if (RB3==0)
+   710     078F  1283               	bcf	3,5	;RP0=0, select bank0
+   711     0790  1303               	bcf	3,6	;RP1=0, select bank0
+   712     0791  1986               	btfsc	6,3	;volatile
+   713     0792  2F94               	goto	u461
+   714     0793  2F95               	goto	u460
+   715     0794                     u461:
+   716     0794  2EE6               	goto	l73
+   717     0795                     u460:
+   718     0795                     l880:
+   719                           
+   720                           ;main.c: 204:                 {;main.c: 206:                     stato=8;
+   721     0795  3008               	movlw	8
+   722     0796  00FC               	movwf	_stato
+   723     0797  3000               	movlw	0
+   724     0798  00FD               	movwf	_stato+1
+   725     0799  2EE6               	goto	l73
+   726     079A                     l94:	
+   727                           ;main.c: 210:             case 7:
+   728                           
+   729                           
+   730                           ;main.c: 211:                 if (RB3==0)
+   731     079A  1283               	bcf	3,5	;RP0=0, select bank0
+   732     079B  1303               	bcf	3,6	;RP1=0, select bank0
+   733     079C  1986               	btfsc	6,3	;volatile
+   734     079D  2F9F               	goto	u471
+   735     079E  2FA0               	goto	u470
+   736     079F                     u471:
+   737     079F  2EE6               	goto	l73
+   738     07A0                     u470:
+   739     07A0  2F95               	goto	l880
+   740     07A1                     l97:	
+   741                           ;main.c: 222:             case 10:
+   742                           
+   743                           
+   744                           ;main.c: 223:                 RD5 = 1;
+   745     07A1  1283               	bcf	3,5	;RP0=0, select bank0
+   746     07A2  1303               	bcf	3,6	;RP1=0, select bank0
+   747     07A3  1688               	bsf	8,5	;volatile
+   748     07A4                     l886:
    749                           
-   750                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+   750                           ;main.c: 224:                 _delay((unsigned long)((3000)*(4000000/4000.0)));
+   751     07A4  3010               	movlw	16
+   752     07A5  00FB               	movwf	??_main+2
+   753     07A6  3039               	movlw	57
+   754     07A7  00FA               	movwf	??_main+1
+   755     07A8  300D               	movlw	13
+   756     07A9  00F9               	movwf	??_main
+   757     07AA                     u497:
+   758     07AA  0BF9               	decfsz	??_main,f
+   759     07AB  2FAA               	goto	u497
+   760     07AC  0BFA               	decfsz	??_main+1,f
+   761     07AD  2FAA               	goto	u497
+   762     07AE  0BFB               	decfsz	??_main+2,f
+   763     07AF  2FAA               	goto	u497
+   764     07B0  2FB1               	nop2
+   765     07B1                     l888:
+   766                           
+   767                           ;main.c: 225:                 RD6 = 1;
+   768     07B1  1283               	bcf	3,5	;RP0=0, select bank0
+   769     07B2  1303               	bcf	3,6	;RP1=0, select bank0
+   770     07B3  1708               	bsf	8,6	;volatile
+   771     07B4                     l890:
+   772                           
+   773                           ;main.c: 226:                 if (RB4 ==0)
+   774     07B4  1A06               	btfsc	6,4	;volatile
+   775     07B5  2FB7               	goto	u481
+   776     07B6  2FB8               	goto	u480
+   777     07B7                     u481:
+   778     07B7  2EE6               	goto	l73
+   779     07B8                     u480:
+   780     07B8                     l892:
+   781                           
+   782                           ;main.c: 227:                 {;main.c: 228:                     stato=11;
+   783     07B8  300B               	movlw	11
+   784     07B9  00FC               	movwf	_stato
+   785     07BA  3000               	movlw	0
+   786     07BB  00FD               	movwf	_stato+1
+   787     07BC  2EE6               	goto	l73
+   788     07BD                     l99:	
+   789                           ;main.c: 232:             case 11:
+   790                           
+   791                           
+   792                           ;main.c: 233:                 RD6 = 0;
+   793     07BD  1283               	bcf	3,5	;RP0=0, select bank0
+   794     07BE  1303               	bcf	3,6	;RP1=0, select bank0
+   795     07BF  1308               	bcf	8,6	;volatile
+   796                           
+   797                           ;main.c: 234:                 RD5 = 0;
+   798     07C0  1288               	bcf	8,5	;volatile
+   799     07C1  2F4B               	goto	l868
+   800     07C2                     l896:
+   801                           
+   802                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-   751                           ; Switch size 1, requested type "simple"
-   752                           ; Number of cases is 1, Range of values is 0 to 0
-   753                           ; switch strategies available:
-   754                           ; Name         Instructions Cycles
-   755                           ; simple_byte            4     3 (average)
-   756                           ; direct_byte           11     8 (fixed)
-   757                           ; jumptable            260     6 (fixed)
-   758                           ;	Chosen strategy is simple_byte
-   759     07C8  3000               	movlw	0
-   760     07C9  3A00               	xorlw	0	; case 0
-   761     07CA  1903               	skipnz
-   762     07CB  2FCD               	goto	l924
-   763     07CC  2F06               	goto	l67
-   764     07CD                     l924:
-   765                           
-   766                           ; Switch size 1, requested type "simple"
-   767                           ; Number of cases is 9, Range of values is 0 to 8
-   768                           ; switch strategies available:
-   769                           ; Name         Instructions Cycles
-   770                           ; simple_byte           28    15 (average)
-   771                           ; direct_byte           35     8 (fixed)
-   772                           ; jumptable            260     6 (fixed)
-   773                           ;	Chosen strategy is simple_byte
-   774     07CD  3000               	movlw	0
-   775     07CE  3A00               	xorlw	0	; case 0
-   776     07CF  1903               	skipnz
-   777     07D0  2F09               	goto	l69
-   778     07D1  3A01               	xorlw	1	; case 1
-   779     07D2  1903               	skipnz
-   780     07D3  2F20               	goto	l846
-   781     07D4  3A03               	xorlw	3	; case 2
-   782     07D5  1903               	skipnz
-   783     07D6  2F50               	goto	l80
-   784     07D7  3A01               	xorlw	1	; case 3
-   785     07D8  1903               	skipnz
-   786     07D9  2F5A               	goto	l858
-   787     07DA  3A07               	xorlw	7	; case 4
-   788     07DB  1903               	skipnz
-   789     07DC  2F70               	goto	l862
-   790     07DD  3A01               	xorlw	1	; case 5
-   791     07DE  1903               	skipnz
-   792     07DF  2F78               	goto	l866
-   793     07E0  3A03               	xorlw	3	; case 6
-   794     07E1  1903               	skipnz
-   795     07E2  2FB1               	goto	l876
-   796     07E3  3A01               	xorlw	1	; case 7
-   797     07E4  1903               	skipnz
-   798     07E5  2FBB               	goto	l880
-   799     07E6  3A0F               	xorlw	15	; case 8
-   800     07E7  1903               	skipnz
-   801     07E8  2FC5               	goto	l884
-   802     07E9  2F06               	goto	l67
-   803     07EA                     l79:
-   804     07EA  2F06               	goto	l67
-   805     07EB  120A  118A  2801   	ljmp	start
-   806     07EE                     __end_of_main:
-   807                           
-   808                           	psect	text1
-   809     065E                     __ptext1:	
-   810 ;; *************** function _Visualizza *****************
-   811 ;; Defined at:
-   812 ;;		line 90 in file "main.c"
-   813 ;; Parameters:    Size  Location     Type
-   814 ;;  display         2    0[COMMON] int 
-   815 ;; Auto vars:     Size  Location     Type
-   816 ;;  lettera        10    0[BANK0 ] int [5]
-   817 ;; Return value:  Size  Location     Type
-   818 ;;                  1    wreg      void 
-   819 ;; Registers used:
-   820 ;;		wreg, fsr0l, fsr0h, status,2, status,0
-   821 ;; Tracked objects:
-   822 ;;		On entry : 0/0
-   823 ;;		On exit  : 0/0
-   824 ;;		Unchanged: 0/0
-   825 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   826 ;;      Params:         2       0       0       0       0
-   827 ;;      Locals:         0      10       0       0       0
-   828 ;;      Temps:          4       0       0       0       0
-   829 ;;      Totals:         6      10       0       0       0
-   830 ;;Total ram usage:       16 bytes
-   831 ;; Hardware stack levels used: 1
-   832 ;; This function calls:
-   833 ;;		Nothing
-   834 ;; This function is called by:
-   835 ;;		_main
-   836 ;; This function uses a non-reentrant model
-   837 ;;
-   838                           
-   839     065E                     _Visualizza:	
-   840                           ;psect for function _Visualizza
-   841                           
-   842     065E                     l814:	
-   843                           ;incstack = 0
-   844                           ; Regs used in _Visualizza: [wreg-fsr0h+status,2+status,0]
-   845                           
-   846                           
-   847                           ;main.c: 90: void Visualizza (int display);main.c: 91: {;main.c: 92:     int lettera[5] 
-      +                          = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
-   848     065E  3020               	movlw	Visualizza@F1427& (0+255)
-   849     065F  0084               	movwf	4
-   850     0660  302A               	movlw	low Visualizza@lettera
-   851     0661  00F3               	movwf	??_Visualizza
-   852     0662  300A               	movlw	10
-   853     0663  00F4               	movwf	??_Visualizza+1
-   854     0664                     u320:
-   855     0664  1383               	bcf	3,7	;select IRP bank0
-   856     0665  0800               	movf	0,w
-   857     0666  00F5               	movwf	??_Visualizza+2
-   858     0667  0A04               	incf	4,w
-   859     0668  00F6               	movwf	??_Visualizza+3
-   860     0669  0873               	movf	??_Visualizza,w
-   861     066A  0084               	movwf	4
-   862     066B  0875               	movf	??_Visualizza+2,w
-   863     066C  0080               	movwf	0
-   864     066D  0A04               	incf	4,w
-   865     066E  00F3               	movwf	??_Visualizza
-   866     066F  0876               	movf	??_Visualizza+3,w
-   867     0670  0084               	movwf	4
-   868     0671  0BF4               	decfsz	??_Visualizza+1,f
-   869     0672  2E64               	goto	u320
-   870     0673                     l816:
-   871                           
-   872                           ;main.c: 94:     if(display == 1 )
-   873     0673  0371               	decf	Visualizza@display,w
-   874     0674  0472               	iorwf	Visualizza@display+1,w
-   875     0675  1D03               	btfss	3,2
-   876     0676  2E78               	goto	u331
-   877     0677  2E79               	goto	u330
-   878     0678                     u331:
-   879     0678  2E7F               	goto	l820
-   880     0679                     u330:
-   881     0679                     l818:
-   882                           
-   883                           ;main.c: 95:     {;main.c: 96:         PORTC = lettera[0];
-   884     0679  1283               	bcf	3,5	;RP0=0, select bank0
-   885     067A  1303               	bcf	3,6	;RP1=0, select bank0
-   886     067B  082A               	movf	Visualizza@lettera,w
-   887     067C  0087               	movwf	7	;volatile
-   888                           
-   889                           ;main.c: 97:         PORTA = lettera[1];
-   890     067D  082C               	movf	Visualizza@lettera+2,w
-   891     067E  0085               	movwf	5	;volatile
-   892     067F                     l820:
-   893                           
-   894                           ;main.c: 100:     if(display == 0 )
-   895     067F  0871               	movf	Visualizza@display,w
-   896     0680  0472               	iorwf	Visualizza@display+1,w
-   897     0681  1D03               	btfss	3,2
-   898     0682  2E84               	goto	u341
-   899     0683  2E85               	goto	u340
-   900     0684                     u341:
-   901     0684  2E8B               	goto	l824
-   902     0685                     u340:
-   903     0685                     l822:
+   803                           ; Switch size 1, requested type "simple"
+   804                           ; Number of cases is 1, Range of values is 0 to 0
+   805                           ; switch strategies available:
+   806                           ; Name         Instructions Cycles
+   807                           ; simple_byte            4     3 (average)
+   808                           ; direct_byte           11     8 (fixed)
+   809                           ; jumptable            260     6 (fixed)
+   810                           ;	Chosen strategy is simple_byte
+   811     07C2  3000               	movlw	0
+   812     07C3  3A00               	xorlw	0	; case 0
+   813     07C4  1903               	skipnz
+   814     07C5  2FC7               	goto	l934
+   815     07C6  2EE6               	goto	l73
+   816     07C7                     l934:
+   817                           
+   818                           ; Switch size 1, requested type "simple"
+   819                           ; Number of cases is 11, Range of values is 0 to 11
+   820                           ; switch strategies available:
+   821                           ; Name         Instructions Cycles
+   822                           ; simple_byte           34    18 (average)
+   823                           ; direct_byte           44     8 (fixed)
+   824                           ; jumptable            260     6 (fixed)
+   825                           ;	Chosen strategy is simple_byte
+   826     07C7  3000               	movlw	0
+   827     07C8  3A00               	xorlw	0	; case 0
+   828     07C9  1903               	skipnz
+   829     07CA  2EE9               	goto	l75
+   830     07CB  3A01               	xorlw	1	; case 1
+   831     07CC  1903               	skipnz
+   832     07CD  2F00               	goto	l79
+   833     07CE  3A03               	xorlw	3	; case 2
+   834     07CF  1903               	skipnz
+   835     07D0  2F30               	goto	l83
+   836     07D1  3A01               	xorlw	1	; case 3
+   837     07D2  1903               	skipnz
+   838     07D3  2F37               	goto	l866
+   839     07D4  3A07               	xorlw	7	; case 4
+   840     07D5  1903               	skipnz
+   841     07D6  2F4E               	goto	l86
+   842     07D7  3A01               	xorlw	1	; case 5
+   843     07D8  1903               	skipnz
+   844     07D9  2F55               	goto	l88
+   845     07DA  3A03               	xorlw	3	; case 6
+   846     07DB  1903               	skipnz
+   847     07DC  2F8F               	goto	l92
+   848     07DD  3A01               	xorlw	1	; case 7
+   849     07DE  1903               	skipnz
+   850     07DF  2F9A               	goto	l94
+   851     07E0  3A0F               	xorlw	15	; case 8
+   852     07E1  1903               	skipnz
+   853     07E2  2F4B               	goto	l868
+   854     07E3  3A02               	xorlw	2	; case 10
+   855     07E4  1903               	skipnz
+   856     07E5  2FA1               	goto	l97
+   857     07E6  3A01               	xorlw	1	; case 11
+   858     07E7  1903               	skipnz
+   859     07E8  2FBD               	goto	l99
+   860     07E9  2EE6               	goto	l73
+   861     07EA                     l78:
+   862     07EA  2EE6               	goto	l73
+   863     07EB  120A  118A  2801   	ljmp	start
+   864     07EE                     __end_of_main:
+   865                           
+   866                           	psect	text1
+   867     063E                     __ptext1:	
+   868 ;; *************** function _Visualizza *****************
+   869 ;; Defined at:
+   870 ;;		line 90 in file "main.c"
+   871 ;; Parameters:    Size  Location     Type
+   872 ;;  display         2    0[COMMON] int 
+   873 ;; Auto vars:     Size  Location     Type
+   874 ;;  lettera        10    0[BANK0 ] int [5]
+   875 ;; Return value:  Size  Location     Type
+   876 ;;                  1    wreg      void 
+   877 ;; Registers used:
+   878 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   879 ;; Tracked objects:
+   880 ;;		On entry : 0/0
+   881 ;;		On exit  : 0/0
+   882 ;;		Unchanged: 0/0
+   883 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   884 ;;      Params:         2       0       0       0       0
+   885 ;;      Locals:         0      10       0       0       0
+   886 ;;      Temps:          4       0       0       0       0
+   887 ;;      Totals:         6      10       0       0       0
+   888 ;;Total ram usage:       16 bytes
+   889 ;; Hardware stack levels used: 1
+   890 ;; This function calls:
+   891 ;;		Nothing
+   892 ;; This function is called by:
+   893 ;;		_main
+   894 ;; This function uses a non-reentrant model
+   895 ;;
+   896                           
+   897     063E                     _Visualizza:	
+   898                           ;psect for function _Visualizza
+   899                           
+   900     063E                     l822:	
+   901                           ;incstack = 0
+   902                           ; Regs used in _Visualizza: [wreg-fsr0h+status,2+status,0]
+   903                           
    904                           
-   905                           ;main.c: 101:     {;main.c: 102:         PORTC = lettera[0];
-   906     0685  1283               	bcf	3,5	;RP0=0, select bank0
-   907     0686  1303               	bcf	3,6	;RP1=0, select bank0
-   908     0687  082A               	movf	Visualizza@lettera,w
-   909     0688  0087               	movwf	7	;volatile
-   910                           
-   911                           ;main.c: 103:         PORTA = lettera[3];
-   912     0689  0830               	movf	Visualizza@lettera+6,w
-   913     068A  0085               	movwf	5	;volatile
-   914     068B                     l824:
-   915                           
-   916                           ;main.c: 106:     if(display == 2 )
-   917     068B  3002               	movlw	2
-   918     068C  0671               	xorwf	Visualizza@display,w
-   919     068D  0472               	iorwf	Visualizza@display+1,w
-   920     068E  1D03               	btfss	3,2
-   921     068F  2E91               	goto	u351
-   922     0690  2E92               	goto	u350
-   923     0691                     u351:
-   924     0691  2E98               	goto	l828
-   925     0692                     u350:
-   926     0692                     l826:
-   927                           
-   928                           ;main.c: 107:     {;main.c: 108:         PORTC = lettera[1];
-   929     0692  1283               	bcf	3,5	;RP0=0, select bank0
-   930     0693  1303               	bcf	3,6	;RP1=0, select bank0
-   931     0694  082C               	movf	Visualizza@lettera+2,w
-   932     0695  0087               	movwf	7	;volatile
-   933                           
-   934                           ;main.c: 109:         PORTA = lettera[4];
-   935     0696  0832               	movf	Visualizza@lettera+8,w
-   936     0697  0085               	movwf	5	;volatile
-   937     0698                     l828:
-   938                           
-   939                           ;main.c: 112:     if(display == 3 )
-   940     0698  3003               	movlw	3
-   941     0699  0671               	xorwf	Visualizza@display,w
-   942     069A  0472               	iorwf	Visualizza@display+1,w
-   943     069B  1D03               	btfss	3,2
-   944     069C  2E9E               	goto	u361
-   945     069D  2E9F               	goto	u360
-   946     069E                     u361:
-   947     069E  2EA5               	goto	l60
-   948     069F                     u360:
-   949     069F                     l830:
-   950                           
-   951                           ;main.c: 113:     {;main.c: 114:         PORTC = lettera[2];
-   952     069F  1283               	bcf	3,5	;RP0=0, select bank0
-   953     06A0  1303               	bcf	3,6	;RP1=0, select bank0
-   954     06A1  082E               	movf	Visualizza@lettera+4,w
-   955     06A2  0087               	movwf	7	;volatile
-   956                           
-   957                           ;main.c: 115:         PORTA = lettera[3];
-   958     06A3  0830               	movf	Visualizza@lettera+6,w
-   959     06A4  0085               	movwf	5	;volatile
-   960     06A5                     l60:
-   961     06A5  0008               	return
-   962     06A6                     __end_of_Visualizza:
-   963                           
-   964                           	psect	text2
-   965     06A6                     __ptext2:	
-   966 ;; *************** function _Irrigazione *****************
-   967 ;; Defined at:
-   968 ;;		line 71 in file "main.c"
-   969 ;; Parameters:    Size  Location     Type
-   970 ;;  power           2    0[COMMON] int 
-   971 ;;  direzione       2    2[COMMON] int 
-   972 ;;  velocita        2    4[COMMON] int 
-   973 ;;  irrigazione     2    6[COMMON] int 
-   974 ;; Auto vars:     Size  Location     Type
-   975 ;;		None
-   976 ;; Return value:  Size  Location     Type
-   977 ;;                  1    wreg      void 
-   978 ;; Registers used:
-   979 ;;		wreg, status,2, status,0
-   980 ;; Tracked objects:
-   981 ;;		On entry : 0/0
-   982 ;;		On exit  : 0/0
-   983 ;;		Unchanged: 0/0
-   984 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   985 ;;      Params:         8       0       0       0       0
-   986 ;;      Locals:         0       0       0       0       0
-   987 ;;      Temps:          0       0       0       0       0
-   988 ;;      Totals:         8       0       0       0       0
-   989 ;;Total ram usage:        8 bytes
-   990 ;; Hardware stack levels used: 1
-   991 ;; This function calls:
-   992 ;;		Nothing
-   993 ;; This function is called by:
-   994 ;;		_main
-   995 ;; This function uses a non-reentrant model
-   996 ;;
-   997                           
-   998     06A6                     _Irrigazione:	
-   999                           ;psect for function _Irrigazione
-  1000                           
-  1001     06A6                     l782:	
-  1002                           ;incstack = 0
-  1003                           ; Regs used in _Irrigazione: [wreg+status,2+status,0]
-  1004                           
-  1005                           
-  1006                           ;main.c: 71: void Irrigazione(int power, int direzione, int velocita, int irrigazione);m
+   905                           ;main.c: 90: void Visualizza (int display);main.c: 91: {;main.c: 92:     int lettera[5] 
+      +                          = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
+   906     063E  3020               	movlw	Visualizza@F1427& (0+255)
+   907     063F  0084               	movwf	4
+   908     0640  302A               	movlw	low Visualizza@lettera
+   909     0641  00F3               	movwf	??_Visualizza
+   910     0642  300A               	movlw	10
+   911     0643  00F4               	movwf	??_Visualizza+1
+   912     0644                     u330:
+   913     0644  1383               	bcf	3,7	;select IRP bank0
+   914     0645  0800               	movf	0,w
+   915     0646  00F5               	movwf	??_Visualizza+2
+   916     0647  0A04               	incf	4,w
+   917     0648  00F6               	movwf	??_Visualizza+3
+   918     0649  0873               	movf	??_Visualizza,w
+   919     064A  0084               	movwf	4
+   920     064B  0875               	movf	??_Visualizza+2,w
+   921     064C  0080               	movwf	0
+   922     064D  0A04               	incf	4,w
+   923     064E  00F3               	movwf	??_Visualizza
+   924     064F  0876               	movf	??_Visualizza+3,w
+   925     0650  0084               	movwf	4
+   926     0651  0BF4               	decfsz	??_Visualizza+1,f
+   927     0652  2E44               	goto	u330
+   928     0653                     l824:
+   929                           
+   930                           ;main.c: 94:     if(display == 1 )
+   931     0653  0371               	decf	Visualizza@display,w
+   932     0654  0472               	iorwf	Visualizza@display+1,w
+   933     0655  1D03               	btfss	3,2
+   934     0656  2E58               	goto	u341
+   935     0657  2E59               	goto	u340
+   936     0658                     u341:
+   937     0658  2E5F               	goto	l828
+   938     0659                     u340:
+   939     0659                     l826:
+   940                           
+   941                           ;main.c: 95:     {;main.c: 96:         PORTC = lettera[0];
+   942     0659  1283               	bcf	3,5	;RP0=0, select bank0
+   943     065A  1303               	bcf	3,6	;RP1=0, select bank0
+   944     065B  082A               	movf	Visualizza@lettera,w
+   945     065C  0087               	movwf	7	;volatile
+   946                           
+   947                           ;main.c: 97:         PORTA = lettera[1];
+   948     065D  082C               	movf	Visualizza@lettera+2,w
+   949     065E  0085               	movwf	5	;volatile
+   950     065F                     l828:
+   951                           
+   952                           ;main.c: 100:     if(display == 0 )
+   953     065F  0871               	movf	Visualizza@display,w
+   954     0660  0472               	iorwf	Visualizza@display+1,w
+   955     0661  1D03               	btfss	3,2
+   956     0662  2E64               	goto	u351
+   957     0663  2E65               	goto	u350
+   958     0664                     u351:
+   959     0664  2E6B               	goto	l832
+   960     0665                     u350:
+   961     0665                     l830:
+   962                           
+   963                           ;main.c: 101:     {;main.c: 102:         PORTC = lettera[0];
+   964     0665  1283               	bcf	3,5	;RP0=0, select bank0
+   965     0666  1303               	bcf	3,6	;RP1=0, select bank0
+   966     0667  082A               	movf	Visualizza@lettera,w
+   967     0668  0087               	movwf	7	;volatile
+   968                           
+   969                           ;main.c: 103:         PORTA = lettera[3];
+   970     0669  0830               	movf	Visualizza@lettera+6,w
+   971     066A  0085               	movwf	5	;volatile
+   972     066B                     l832:
+   973                           
+   974                           ;main.c: 106:     if(display == 2 )
+   975     066B  3002               	movlw	2
+   976     066C  0671               	xorwf	Visualizza@display,w
+   977     066D  0472               	iorwf	Visualizza@display+1,w
+   978     066E  1D03               	btfss	3,2
+   979     066F  2E71               	goto	u361
+   980     0670  2E72               	goto	u360
+   981     0671                     u361:
+   982     0671  2E78               	goto	l836
+   983     0672                     u360:
+   984     0672                     l834:
+   985                           
+   986                           ;main.c: 107:     {;main.c: 108:         PORTC = lettera[1];
+   987     0672  1283               	bcf	3,5	;RP0=0, select bank0
+   988     0673  1303               	bcf	3,6	;RP1=0, select bank0
+   989     0674  082C               	movf	Visualizza@lettera+2,w
+   990     0675  0087               	movwf	7	;volatile
+   991                           
+   992                           ;main.c: 109:         PORTA = lettera[4];
+   993     0676  0832               	movf	Visualizza@lettera+8,w
+   994     0677  0085               	movwf	5	;volatile
+   995     0678                     l836:
+   996                           
+   997                           ;main.c: 112:     if(display == 3 )
+   998     0678  3003               	movlw	3
+   999     0679  0671               	xorwf	Visualizza@display,w
+  1000     067A  0472               	iorwf	Visualizza@display+1,w
+  1001     067B  1D03               	btfss	3,2
+  1002     067C  2E7E               	goto	u371
+  1003     067D  2E7F               	goto	u370
+  1004     067E                     u371:
+  1005     067E  2E85               	goto	l66
+  1006     067F                     u370:
+  1007     067F                     l838:
+  1008                           
+  1009                           ;main.c: 113:     {;main.c: 114:         PORTC = lettera[2];
+  1010     067F  1283               	bcf	3,5	;RP0=0, select bank0
+  1011     0680  1303               	bcf	3,6	;RP1=0, select bank0
+  1012     0681  082E               	movf	Visualizza@lettera+4,w
+  1013     0682  0087               	movwf	7	;volatile
+  1014                           
+  1015                           ;main.c: 115:         PORTA = lettera[3];
+  1016     0683  0830               	movf	Visualizza@lettera+6,w
+  1017     0684  0085               	movwf	5	;volatile
+  1018     0685                     l66:
+  1019     0685  0008               	return
+  1020     0686                     __end_of_Visualizza:
+  1021                           
+  1022                           	psect	text2
+  1023     0686                     __ptext2:	
+  1024 ;; *************** function _Irrigazione *****************
+  1025 ;; Defined at:
+  1026 ;;		line 71 in file "main.c"
+  1027 ;; Parameters:    Size  Location     Type
+  1028 ;;  power           2    0[COMMON] int 
+  1029 ;;  direzione       2    2[COMMON] int 
+  1030 ;;  velocita        2    4[COMMON] int 
+  1031 ;;  irrigazione     2    6[COMMON] int 
+  1032 ;; Auto vars:     Size  Location     Type
+  1033 ;;		None
+  1034 ;; Return value:  Size  Location     Type
+  1035 ;;                  1    wreg      void 
+  1036 ;; Registers used:
+  1037 ;;		wreg, status,2, status,0
+  1038 ;; Tracked objects:
+  1039 ;;		On entry : 0/0
+  1040 ;;		On exit  : 0/0
+  1041 ;;		Unchanged: 0/0
+  1042 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1043 ;;      Params:         8       0       0       0       0
+  1044 ;;      Locals:         0       0       0       0       0
+  1045 ;;      Temps:          0       0       0       0       0
+  1046 ;;      Totals:         8       0       0       0       0
+  1047 ;;Total ram usage:        8 bytes
+  1048 ;; Hardware stack levels used: 1
+  1049 ;; This function calls:
+  1050 ;;		Nothing
+  1051 ;; This function is called by:
+  1052 ;;		_main
+  1053 ;; This function uses a non-reentrant model
+  1054 ;;
+  1055                           
+  1056     0686                     _Irrigazione:	
+  1057                           ;psect for function _Irrigazione
+  1058                           
+  1059     0686                     l790:	
+  1060                           ;incstack = 0
+  1061                           ; Regs used in _Irrigazione: [wreg+status,2+status,0]
+  1062                           
+  1063                           
+  1064                           ;main.c: 71: void Irrigazione(int power, int direzione, int velocita, int irrigazione);m
       +                          ain.c: 72: {;main.c: 74:     if(power == 1) RD4 = 1;
-  1007     06A6  0371               	decf	Irrigazione@power,w
-  1008     06A7  0472               	iorwf	Irrigazione@power+1,w
-  1009     06A8  1D03               	btfss	3,2
-  1010     06A9  2EAB               	goto	u241
-  1011     06AA  2EAC               	goto	u240
-  1012     06AB                     u241:
-  1013     06AB  2EAF               	goto	l786
-  1014     06AC                     u240:
-  1015     06AC                     l784:
-  1016     06AC  1283               	bcf	3,5	;RP0=0, select bank0
-  1017     06AD  1303               	bcf	3,6	;RP1=0, select bank0
-  1018     06AE  1608               	bsf	8,4	;volatile
-  1019     06AF                     l786:
-  1020                           
-  1021                           ;main.c: 75:     if(power == 0) RD4 = 0;
-  1022     06AF  0871               	movf	Irrigazione@power,w
-  1023     06B0  0472               	iorwf	Irrigazione@power+1,w
-  1024     06B1  1D03               	btfss	3,2
-  1025     06B2  2EB4               	goto	u251
-  1026     06B3  2EB5               	goto	u250
-  1027     06B4                     u251:
-  1028     06B4  2EB8               	goto	l790
-  1029     06B5                     u250:
-  1030     06B5                     l788:
-  1031     06B5  1283               	bcf	3,5	;RP0=0, select bank0
-  1032     06B6  1303               	bcf	3,6	;RP1=0, select bank0
-  1033     06B7  1208               	bcf	8,4	;volatile
-  1034     06B8                     l790:
-  1035                           
-  1036                           ;main.c: 78:     if(direzione == 1) RD2 = 1;
-  1037     06B8  0373               	decf	Irrigazione@direzione,w
-  1038     06B9  0474               	iorwf	Irrigazione@direzione+1,w
-  1039     06BA  1D03               	btfss	3,2
-  1040     06BB  2EBD               	goto	u261
-  1041     06BC  2EBE               	goto	u260
-  1042     06BD                     u261:
-  1043     06BD  2EC1               	goto	l794
-  1044     06BE                     u260:
-  1045     06BE                     l792:
-  1046     06BE  1283               	bcf	3,5	;RP0=0, select bank0
-  1047     06BF  1303               	bcf	3,6	;RP1=0, select bank0
-  1048     06C0  1508               	bsf	8,2	;volatile
-  1049     06C1                     l794:
-  1050                           
-  1051                           ;main.c: 79:     if(direzione == 0) RD2 = 0;
-  1052     06C1  0873               	movf	Irrigazione@direzione,w
-  1053     06C2  0474               	iorwf	Irrigazione@direzione+1,w
-  1054     06C3  1D03               	btfss	3,2
-  1055     06C4  2EC6               	goto	u271
-  1056     06C5  2EC7               	goto	u270
-  1057     06C6                     u271:
-  1058     06C6  2ECA               	goto	l798
-  1059     06C7                     u270:
-  1060     06C7                     l796:
-  1061     06C7  1283               	bcf	3,5	;RP0=0, select bank0
-  1062     06C8  1303               	bcf	3,6	;RP1=0, select bank0
-  1063     06C9  1108               	bcf	8,2	;volatile
-  1064     06CA                     l798:
-  1065                           
-  1066                           ;main.c: 82:     if(velocita == 0) RD3 = 0;
-  1067     06CA  0875               	movf	Irrigazione@velocita,w
-  1068     06CB  0476               	iorwf	Irrigazione@velocita+1,w
-  1069     06CC  1D03               	btfss	3,2
-  1070     06CD  2ECF               	goto	u281
-  1071     06CE  2ED0               	goto	u280
-  1072     06CF                     u281:
-  1073     06CF  2ED3               	goto	l802
-  1074     06D0                     u280:
-  1075     06D0                     l800:
-  1076     06D0  1283               	bcf	3,5	;RP0=0, select bank0
-  1077     06D1  1303               	bcf	3,6	;RP1=0, select bank0
-  1078     06D2  1188               	bcf	8,3	;volatile
-  1079     06D3                     l802:
-  1080                           
-  1081                           ;main.c: 83:     if(velocita == 1) RD3 = 1;
-  1082     06D3  0375               	decf	Irrigazione@velocita,w
-  1083     06D4  0476               	iorwf	Irrigazione@velocita+1,w
-  1084     06D5  1D03               	btfss	3,2
-  1085     06D6  2ED8               	goto	u291
-  1086     06D7  2ED9               	goto	u290
-  1087     06D8                     u291:
-  1088     06D8  2EDC               	goto	l806
-  1089     06D9                     u290:
-  1090     06D9                     l804:
-  1091     06D9  1283               	bcf	3,5	;RP0=0, select bank0
-  1092     06DA  1303               	bcf	3,6	;RP1=0, select bank0
-  1093     06DB  1588               	bsf	8,3	;volatile
-  1094     06DC                     l806:
-  1095                           
-  1096                           ;main.c: 86:     if(irrigazione == 1 ) RD7 = 1;
-  1097     06DC  0377               	decf	Irrigazione@irrigazione,w
-  1098     06DD  0478               	iorwf	Irrigazione@irrigazione+1,w
-  1099     06DE  1D03               	btfss	3,2
-  1100     06DF  2EE1               	goto	u301
-  1101     06E0  2EE2               	goto	u300
-  1102     06E1                     u301:
-  1103     06E1  2EE5               	goto	l810
-  1104     06E2                     u300:
-  1105     06E2                     l808:
-  1106     06E2  1283               	bcf	3,5	;RP0=0, select bank0
-  1107     06E3  1303               	bcf	3,6	;RP1=0, select bank0
-  1108     06E4  1788               	bsf	8,7	;volatile
-  1109     06E5                     l810:
-  1110                           
-  1111                           ;main.c: 87:     if(irrigazione == 0) RD7 = 0;
-  1112     06E5  0877               	movf	Irrigazione@irrigazione,w
-  1113     06E6  0478               	iorwf	Irrigazione@irrigazione+1,w
-  1114     06E7  1D03               	btfss	3,2
-  1115     06E8  2EEA               	goto	u311
-  1116     06E9  2EEB               	goto	u310
-  1117     06EA                     u311:
-  1118     06EA  2EEE               	goto	l51
-  1119     06EB                     u310:
-  1120     06EB                     l812:
-  1121     06EB  1283               	bcf	3,5	;RP0=0, select bank0
-  1122     06EC  1303               	bcf	3,6	;RP1=0, select bank0
-  1123     06ED  1388               	bcf	8,7	;volatile
-  1124     06EE                     l51:
-  1125     06EE  0008               	return
-  1126     06EF                     __end_of_Irrigazione:
-  1127     0002                     ___latbits      equ	2
-  1128     007E                     btemp           set	126	;btemp
-  1129     007E                     wtemp0          set	126
-  1130                           
-  1131                           	psect	config
-  1132                           
-  1133                           ;Config register CONFIG1 @ 0x2007
-  1134                           ;	Oscillator Selection bits
-  1135                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+  1065     0686  0371               	decf	Irrigazione@power,w
+  1066     0687  0472               	iorwf	Irrigazione@power+1,w
+  1067     0688  1D03               	btfss	3,2
+  1068     0689  2E8B               	goto	u251
+  1069     068A  2E8C               	goto	u250
+  1070     068B                     u251:
+  1071     068B  2E8F               	goto	l794
+  1072     068C                     u250:
+  1073     068C                     l792:
+  1074     068C  1283               	bcf	3,5	;RP0=0, select bank0
+  1075     068D  1303               	bcf	3,6	;RP1=0, select bank0
+  1076     068E  1608               	bsf	8,4	;volatile
+  1077     068F                     l794:
+  1078                           
+  1079                           ;main.c: 75:     if(power == 0) RD4 = 0;
+  1080     068F  0871               	movf	Irrigazione@power,w
+  1081     0690  0472               	iorwf	Irrigazione@power+1,w
+  1082     0691  1D03               	btfss	3,2
+  1083     0692  2E94               	goto	u261
+  1084     0693  2E95               	goto	u260
+  1085     0694                     u261:
+  1086     0694  2E98               	goto	l798
+  1087     0695                     u260:
+  1088     0695                     l796:
+  1089     0695  1283               	bcf	3,5	;RP0=0, select bank0
+  1090     0696  1303               	bcf	3,6	;RP1=0, select bank0
+  1091     0697  1208               	bcf	8,4	;volatile
+  1092     0698                     l798:
+  1093                           
+  1094                           ;main.c: 78:     if(direzione == 1) RD2 = 1;
+  1095     0698  0373               	decf	Irrigazione@direzione,w
+  1096     0699  0474               	iorwf	Irrigazione@direzione+1,w
+  1097     069A  1D03               	btfss	3,2
+  1098     069B  2E9D               	goto	u271
+  1099     069C  2E9E               	goto	u270
+  1100     069D                     u271:
+  1101     069D  2EA1               	goto	l802
+  1102     069E                     u270:
+  1103     069E                     l800:
+  1104     069E  1283               	bcf	3,5	;RP0=0, select bank0
+  1105     069F  1303               	bcf	3,6	;RP1=0, select bank0
+  1106     06A0  1508               	bsf	8,2	;volatile
+  1107     06A1                     l802:
+  1108                           
+  1109                           ;main.c: 79:     if(direzione == 0) RD2 = 0;
+  1110     06A1  0873               	movf	Irrigazione@direzione,w
+  1111     06A2  0474               	iorwf	Irrigazione@direzione+1,w
+  1112     06A3  1D03               	btfss	3,2
+  1113     06A4  2EA6               	goto	u281
+  1114     06A5  2EA7               	goto	u280
+  1115     06A6                     u281:
+  1116     06A6  2EAA               	goto	l806
+  1117     06A7                     u280:
+  1118     06A7                     l804:
+  1119     06A7  1283               	bcf	3,5	;RP0=0, select bank0
+  1120     06A8  1303               	bcf	3,6	;RP1=0, select bank0
+  1121     06A9  1108               	bcf	8,2	;volatile
+  1122     06AA                     l806:
+  1123                           
+  1124                           ;main.c: 82:     if(velocita == 0) RD3 = 0;
+  1125     06AA  0875               	movf	Irrigazione@velocita,w
+  1126     06AB  0476               	iorwf	Irrigazione@velocita+1,w
+  1127     06AC  1D03               	btfss	3,2
+  1128     06AD  2EAF               	goto	u291
+  1129     06AE  2EB0               	goto	u290
+  1130     06AF                     u291:
+  1131     06AF  2EB3               	goto	l810
+  1132     06B0                     u290:
+  1133     06B0                     l808:
+  1134     06B0  1283               	bcf	3,5	;RP0=0, select bank0
+  1135     06B1  1303               	bcf	3,6	;RP1=0, select bank0
+  1136     06B2  1188               	bcf	8,3	;volatile
+  1137     06B3                     l810:
+  1138                           
+  1139                           ;main.c: 83:     if(velocita == 1) RD3 = 1;
+  1140     06B3  0375               	decf	Irrigazione@velocita,w
+  1141     06B4  0476               	iorwf	Irrigazione@velocita+1,w
+  1142     06B5  1D03               	btfss	3,2
+  1143     06B6  2EB8               	goto	u301
+  1144     06B7  2EB9               	goto	u300
+  1145     06B8                     u301:
+  1146     06B8  2EBC               	goto	l814
+  1147     06B9                     u300:
+  1148     06B9                     l812:
+  1149     06B9  1283               	bcf	3,5	;RP0=0, select bank0
+  1150     06BA  1303               	bcf	3,6	;RP1=0, select bank0
+  1151     06BB  1588               	bsf	8,3	;volatile
+  1152     06BC                     l814:
+  1153                           
+  1154                           ;main.c: 86:     if(irrigazione == 1 ) RD7 = 1;
+  1155     06BC  0377               	decf	Irrigazione@irrigazione,w
+  1156     06BD  0478               	iorwf	Irrigazione@irrigazione+1,w
+  1157     06BE  1D03               	btfss	3,2
+  1158     06BF  2EC1               	goto	u311
+  1159     06C0  2EC2               	goto	u310
+  1160     06C1                     u311:
+  1161     06C1  2EC5               	goto	l818
+  1162     06C2                     u310:
+  1163     06C2                     l816:
+  1164     06C2  1283               	bcf	3,5	;RP0=0, select bank0
+  1165     06C3  1303               	bcf	3,6	;RP1=0, select bank0
+  1166     06C4  1788               	bsf	8,7	;volatile
+  1167     06C5                     l818:
+  1168                           
+  1169                           ;main.c: 87:     if(irrigazione == 0) RD7 = 0;
+  1170     06C5  0877               	movf	Irrigazione@irrigazione,w
+  1171     06C6  0478               	iorwf	Irrigazione@irrigazione+1,w
+  1172     06C7  1D03               	btfss	3,2
+  1173     06C8  2ECA               	goto	u321
+  1174     06C9  2ECB               	goto	u320
+  1175     06CA                     u321:
+  1176     06CA  2ECE               	goto	l57
+  1177     06CB                     u320:
+  1178     06CB                     l820:
+  1179     06CB  1283               	bcf	3,5	;RP0=0, select bank0
+  1180     06CC  1303               	bcf	3,6	;RP1=0, select bank0
+  1181     06CD  1388               	bcf	8,7	;volatile
+  1182     06CE                     l57:
+  1183     06CE  0008               	return
+  1184     06CF                     __end_of_Irrigazione:
+  1185     0002                     ___latbits      equ	2
+  1186     007E                     btemp           set	126	;btemp
+  1187     007E                     wtemp0          set	126
+  1188                           
+  1189                           	psect	config
+  1190                           
+  1191                           ;Config register CONFIG1 @ 0x2007
+  1192                           ;	Oscillator Selection bits
+  1193                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
       +                          unction on RA7/OSC1/CLKIN
-  1136                           ;	Watchdog Timer Enable bit
-  1137                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
-  1138                           ;	Power-up Timer Enable bit
-  1139                           ;	PWRTE = OFF, PWRT disabled
-  1140                           ;	RE3/MCLR pin function select bit
-  1141                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
-  1142                           ;	Code Protection bit
-  1143                           ;	CP = OFF, Program memory code protection is disabled
-  1144                           ;	Data Code Protection bit
-  1145                           ;	CPD = OFF, Data memory code protection is disabled
-  1146                           ;	Brown Out Reset Selection bits
-  1147                           ;	BOREN = OFF, BOR disabled
-  1148                           ;	Internal External Switchover bit
-  1149                           ;	IESO = OFF, Internal/External Switchover mode is disabled
-  1150                           ;	Fail-Safe Clock Monitor Enabled bit
-  1151                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
-  1152                           ;	Low Voltage Programming Enable bit
-  1153                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
-  1154                           ;	In-Circuit Debugger Mode bit
-  1155                           ;	DEBUG = 0x1, unprogrammed default
-  1156     2007                     	org	8199
-  1157     2007  20D4               	dw	8404
-  1158                           
-  1159                           ;Config register CONFIG2 @ 0x2008
-  1160                           ;	Brown-out Reset Selection bit
-  1161                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
-  1162                           ;	Flash Program Memory Self Write Enable bits
-  1163                           ;	WRT = OFF, Write protection off
-  1164     2008                     	org	8200
-  1165     2008  3FFF               	dw	16383
+  1194                           ;	Watchdog Timer Enable bit
+  1195                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  1196                           ;	Power-up Timer Enable bit
+  1197                           ;	PWRTE = OFF, PWRT disabled
+  1198                           ;	RE3/MCLR pin function select bit
+  1199                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
+  1200                           ;	Code Protection bit
+  1201                           ;	CP = OFF, Program memory code protection is disabled
+  1202                           ;	Data Code Protection bit
+  1203                           ;	CPD = OFF, Data memory code protection is disabled
+  1204                           ;	Brown Out Reset Selection bits
+  1205                           ;	BOREN = OFF, BOR disabled
+  1206                           ;	Internal External Switchover bit
+  1207                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  1208                           ;	Fail-Safe Clock Monitor Enabled bit
+  1209                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  1210                           ;	Low Voltage Programming Enable bit
+  1211                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
+  1212                           ;	In-Circuit Debugger Mode bit
+  1213                           ;	DEBUG = 0x1, unprogrammed default
+  1214     2007                     	org	8199
+  1215     2007  20D4               	dw	8404
+  1216                           
+  1217                           ;Config register CONFIG2 @ 0x2008
+  1218                           ;	Brown-out Reset Selection bit
+  1219                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  1220                           ;	Flash Program Memory Self Write Enable bits
+  1221                           ;	WRT = OFF, Write protection off
+  1222     2008                     	org	8200
+  1223     2008  3FFF               	dw	16383
 
 Data Sizes:
     Strings     0
@@ -1193,7 +1251,7 @@ Data Sizes:
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMMON           13      8      10
+    COMMON           13     11      13
     BANK0            80     10      20
     BANK1            80      0       0
     BANK3            85      0       0
@@ -1228,7 +1286,8 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 0     0      0     464
+ (0) _main                                                 3     3      0     464
+                                              8 COMMON     3     3      0
                         _Irrigazione
                          _Visualizza
  ---------------------------------------------------------------------------------
@@ -1258,70 +1317,72 @@ BANK1               80      0       0      0.0%
 BITBANK1            80      0       0      0.0%
 BANK0               80     10      20     25.0%
 BITBANK0            80      0       0      0.0%
-COMMON              13      8      10     76.9%
+COMMON              13     11      13    100.0%
 BITCOMMON           13      0       0      0.0%
-DATA                 0      0      30      0.0%
+DATA                 0      0      33      0.0%
 STACK                0      0       0      0.0%
 
 
 Microchip Technology PIC Macro Assembler V3.00 build 20241204225717 
-Symbol Table                                                                                   Mon Apr 28 20:36:26 2025
+Symbol Table                                                                                   Tue Apr 29 00:13:08 2025
 
-                      pc 0002                       l51 06EE                       l60 06A5  
-                     l70 0718                       l71 0717                       l80 0750  
-                     l72 0717                       l67 0706                       l76 0747  
-                     l69 0709                       l86 0796                       l79 07EA  
-                     fsr 0004                      l800 06D0                      l810 06E5  
-                    l802 06D3                      l812 06EB                      l804 06D9  
-                    l820 067F                      l806 06DC                      l830 069F  
-                    l822 0685                      l814 065E                      l808 06E2  
-                    l824 068B                      l816 0673                      l840 070F  
-                    l832 06EF                      l826 0692                      l818 0679  
-                    l850 072F                      l842 0713                      l834 06F8  
-                    l828 0698                      l924 07CD                      l860 076E  
-                    l852 0742                      l844 071C                      l836 06FC  
-                    l790 06B8                      l782 06A6                      l870 0791  
-                    l862 0770                      l854 074B                      l846 0720  
-                    l838 0702                      l792 06BE                      l784 06AC  
-                    l880 07BB                      l872 079A                      l864 0776  
-                    l856 0756                      l848 0726                      l794 06C1  
-                    l786 06AF                      l882 07C1                      l874 07AD  
-                    l866 0778                      l858 075A                      l796 06C7  
-                    l788 06B5                      l884 07C5                      l876 07B1  
-                    l868 077E                      l798 06CA                      l878 07B7  
-                    l886 07C8                      _RB1 0031                      _RB2 0032  
+                      pc 0002                       l80 0727                       l57 06CE  
+                     l73 06E6                       l66 0685                       l83 0730  
+                     l75 06E9                       l92 078F                       l94 079A  
+                     l86 074E                       l78 07EA                       l79 0700  
+                     l88 0755                       l97 07A1                       l89 0773  
+                     l99 07BD                       fsr 0004                      l800 069E  
+                    l810 06B3                      l802 06A1                      l820 06CB  
+                    l812 06B9                      l804 06A7                      l814 06BC  
+                    l806 06AA                      l830 0665                      l822 063E  
+                    l816 06C2                      l808 06B0                      l832 066B  
+                    l824 0653                      l840 06CF                      l818 06C5  
+                    l834 0672                      l826 0659                      l850 06F3  
+                    l842 06D8                      l836 0678                      l828 065F  
+                    l860 0722                      l852 06F7                      l844 06DC  
+                    l790 0686                      l838 067F                      l934 07C7  
+                    l862 072B                      l854 06FB                      l846 06E2  
+                    l792 068C                      l880 0795                      l872 075B  
+                    l856 0706                      l848 06EF                      l794 068F  
+                    l890 07B4                      l874 076E                      l866 0737  
+                    l858 070F                      l796 0695                      l892 07B8  
+                    l876 0777                      l868 074B                      l798 0698  
+                    l886 07A4                      l878 078A                      l888 07B1  
+                    l896 07C2                      _RB1 0031                      _RB2 0032  
                     _RB3 0033                      _RB4 0034                      _RD2 0042  
-                    _RD3 0043                      _RD4 0044                      _RD7 0047  
-                    u300 06E2                      u301 06E1                      u310 06EB  
-                    u311 06EA                      u240 06AC                      u320 0664  
-                    u400 074B                      u241 06AB                      u401 074A  
-                    u250 06B5                      u330 0679                      u410 0756  
-                    u251 06B4                      u331 0678                      u411 0755  
-                    u260 06BE                      u340 0685                      u420 0776  
-                    u261 06BD                      u341 0684                      u421 0775  
-                    u270 06C7                      u350 0692                      u430 077E  
-                    u271 06C6                      u351 0691                      u431 077D  
-                    u280 06D0                      u360 069F                      u440 079A  
-                    u281 06CF                      u361 069E                      u441 0799  
-                    u290 06D9                      u450 07B7                      u370 070F  
-                    u291 06D8                      u451 07B6                      u371 070E  
-                    u460 07C1                      u380 071C                      u461 07C0  
-                    u381 071B                      u390 0726                      u391 0725  
-                    fsr0 0004                      indf 0000         Irrigazione@power 0071  
-                   _main 06EF                     btemp 007E                     start 0001  
-                  ?_main 0071                    _ANSEL 0188                    _PORTA 0005  
-                  _PORTB 0006                    _PORTC 0007                    _PORTD 0008  
-                  _TRISA 0085                    _TRISB 0086                    _TRISC 0087  
-                  _TRISD 0088                    _stato 0079                    pclath 000A  
-                  status 0003                    wtemp0 007E          __initialization 07EE  
-           __end_of_main 07EE            ??_Irrigazione 0079                   ??_main 0079  
-                 _ANSELH 0189                   _INTCON 000B      __end_of_Irrigazione 06EF  
-__end_of__initialization 07FC               _Visualizza 065E           __pcstackCOMMON 0071  
-           __pidataBANK0 0641               __pnvCOMMON 0079               __pmaintext 06EF  
-            _Irrigazione 06A6      Irrigazione@velocita 0075              ?_Visualizza 0071  
-                __ptext1 065E                  __ptext2 06A6     end_of_initialization 07FC  
-        Visualizza@F1427 0020      start_initialization 07EE               init_fetch0 064B  
-           ?_Irrigazione 0071              __pdataBANK0 0020                ___latbits 0002  
-          __pcstackBANK0 002A             ??_Visualizza 0073     Irrigazione@direzione 0073  
-     __end_of_Visualizza 06A6   Irrigazione@irrigazione 0077                 init_ram0 064F  
-      Visualizza@display 0071        Visualizza@lettera 002A               _OPTION_REG 0081  
+                    _RD3 0043                      _RD4 0044                      _RD5 0045  
+                    _RD6 0046                      _RD7 0047                      u300 06B9  
+                    u301 06B8                      u310 06C2                      u311 06C1  
+                    u320 06CB                      u400 0706                      u321 06CA  
+                    u401 0705                      u250 068C                      u330 0644  
+                    u410 072B                      u251 068B                      u411 072A  
+                    u260 0695                      u340 0659                      u420 0736  
+                    u261 0694                      u341 0658                      u421 0735  
+                    u270 069E                      u350 0665                      u430 0754  
+                    u271 069D                      u351 0664                      u431 0753  
+                    u280 06A7                      u360 0672                      u440 075B  
+                    u281 06A6                      u361 0671                      u441 075A  
+                    u290 06B0                      u370 067F                      u450 0777  
+                    u291 06AF                      u371 067E                      u451 0776  
+                    u460 0795                      u380 06EF                      u461 0794  
+                    u381 06EE                      u470 07A0                      u390 06FB  
+                    u471 079F                      u391 06FA                      u480 07B8  
+                    u481 07B7                      u497 07AA                      fsr0 0004  
+                    indf 0000         Irrigazione@power 0071                     _main 06CF  
+                   btemp 007E                     start 0001                    ?_main 0071  
+                  _ANSEL 0188                    _PORTA 0005                    _PORTB 0006  
+                  _PORTC 0007                    _PORTD 0008                    _TRISA 0085  
+                  _TRISB 0086                    _TRISC 0087                    _TRISD 0088  
+                  _stato 007C                    pclath 000A                    status 0003  
+                  wtemp0 007E          __initialization 07EE             __end_of_main 07EE  
+          ??_Irrigazione 0079                   ??_main 0079                   _ANSELH 0189  
+                 _INTCON 000B      __end_of_Irrigazione 06CF  __end_of__initialization 07FC  
+             _Visualizza 063E           __pcstackCOMMON 0071             __pidataBANK0 0621  
+             __pnvCOMMON 007C               __pmaintext 06CF              _Irrigazione 0686  
+    Irrigazione@velocita 0075              ?_Visualizza 0071                  __ptext1 063E  
+                __ptext2 0686     end_of_initialization 07FC          Visualizza@F1427 0020  
+    start_initialization 07EE               init_fetch0 062B             ?_Irrigazione 0071  
+            __pdataBANK0 0020                ___latbits 0002            __pcstackBANK0 002A  
+           ??_Visualizza 0073     Irrigazione@direzione 0073       __end_of_Visualizza 0686  
+ Irrigazione@irrigazione 0077                 init_ram0 062F        Visualizza@display 0071  
+      Visualizza@lettera 002A               _OPTION_REG 0081  

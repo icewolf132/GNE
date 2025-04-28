@@ -14,10 +14,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "290
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 290: extern volatile unsigned char PORTC __attribute__((address(0x007)));
 [v _PORTC `Vuc ~T0 @X0 0 e@7 ]
+[p mainexit ]
 "166
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
 [v _PORTA `Vuc ~T0 @X0 0 e@5 ]
-[p mainexit ]
 "228
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
 [v _PORTB `Vuc ~T0 @X0 0 e@6 ]
@@ -60,6 +60,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4113
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 4113: extern volatile __bit RB2 __attribute__((address(0x32)));
 [v _RB2 `Vb ~T0 @X0 0 e@50 ]
+"4200
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 4200: extern volatile __bit RD5 __attribute__((address(0x45)));
+[v _RD5 `Vb ~T0 @X0 0 e@69 ]
+[v F164 `(v ~T0 @X0 1 tf1`ul ]
+"12 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include/builtins.h
+[v __delay `JF164 ~T0 @X0 0 e ]
+[p i __delay ]
+"4203 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 4203: extern volatile __bit RD6 __attribute__((address(0x46)));
+[v _RD6 `Vb ~T0 @X0 0 e@70 ]
 "3 main.c
 [p x FOSC  =  INTRC_NOCLKOUT  ]
 "4
@@ -318,384 +328,299 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"70 main.c
-[; ;main.c: 70: void Irrigazione(int power, int direzione, int velocita, int irrigazione)
+"71 main.c
+[; ;main.c: 71: void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 [v _Irrigazione `(v ~T0 @X0 1 ef4`i`i`i`i ]
-"71
-[; ;main.c: 71: {
+"72
+[; ;main.c: 72: {
 {
 [e :U _Irrigazione ]
-"70
-[; ;main.c: 70: void Irrigazione(int power, int direzione, int velocita, int irrigazione)
+"71
+[; ;main.c: 71: void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 [v _power `i ~T0 @X0 1 r1 ]
 [v _direzione `i ~T0 @X0 1 r2 ]
 [v _velocita `i ~T0 @X0 1 r3 ]
 [v _irrigazione `i ~T0 @X0 1 r4 ]
-"71
-[; ;main.c: 71: {
+"72
+[; ;main.c: 72: {
 [f ]
-"73
-[; ;main.c: 73:     if(power == 1) RD4 = 1;
+"74
+[; ;main.c: 74:     if(power == 1) RD4 = 1;
 [e $ ! == _power -> 1 `i 143  ]
 [e = _RD4 -> -> 1 `i `b ]
 [e :U 143 ]
-"74
-[; ;main.c: 74:     if(power == 0) RD4 = 0;
+"75
+[; ;main.c: 75:     if(power == 0) RD4 = 0;
 [e $ ! == _power -> 0 `i 144  ]
 [e = _RD4 -> -> 0 `i `b ]
 [e :U 144 ]
-"77
-[; ;main.c: 77:     if(direzione == 1) RD2 = 1;
+"78
+[; ;main.c: 78:     if(direzione == 1) RD2 = 1;
 [e $ ! == _direzione -> 1 `i 145  ]
 [e = _RD2 -> -> 1 `i `b ]
 [e :U 145 ]
-"78
-[; ;main.c: 78:     if(direzione == 0) RD2 = 0;
+"79
+[; ;main.c: 79:     if(direzione == 0) RD2 = 0;
 [e $ ! == _direzione -> 0 `i 146  ]
 [e = _RD2 -> -> 0 `i `b ]
 [e :U 146 ]
-"81
-[; ;main.c: 81:     if(velocita == 0) RD3 = 0;
+"82
+[; ;main.c: 82:     if(velocita == 0) RD3 = 0;
 [e $ ! == _velocita -> 0 `i 147  ]
 [e = _RD3 -> -> 0 `i `b ]
 [e :U 147 ]
-"82
-[; ;main.c: 82:     if(velocita == 1) RD3 = 1;
+"83
+[; ;main.c: 83:     if(velocita == 1) RD3 = 1;
 [e $ ! == _velocita -> 1 `i 148  ]
 [e = _RD3 -> -> 1 `i `b ]
 [e :U 148 ]
-"85
-[; ;main.c: 85:     if(irrigazione == 1 ) RD7 = 1;
+"86
+[; ;main.c: 86:     if(irrigazione == 1 ) RD7 = 1;
 [e $ ! == _irrigazione -> 1 `i 149  ]
 [e = _RD7 -> -> 1 `i `b ]
 [e :U 149 ]
-"86
-[; ;main.c: 86:     if(irrigazione == 0) RD7 = 0;
+"87
+[; ;main.c: 87:     if(irrigazione == 0) RD7 = 0;
 [e $ ! == _irrigazione -> 0 `i 150  ]
 [e = _RD7 -> -> 0 `i `b ]
 [e :U 150 ]
-"87
-[; ;main.c: 87: }
+"88
+[; ;main.c: 88: }
 [e :UE 142 ]
 }
-"89
-[; ;main.c: 89: void Visualizza (int display)
-[v _Visualizza `(v ~T0 @X0 1 ef1`i ]
 "90
-[; ;main.c: 90: {
+[; ;main.c: 90: void Visualizza (int display)
+[v _Visualizza `(v ~T0 @X0 1 ef1`i ]
+"91
+[; ;main.c: 91: {
 {
 [e :U _Visualizza ]
-"89
-[; ;main.c: 89: void Visualizza (int display)
-[v _display `i ~T0 @X0 1 r1 ]
 "90
-[; ;main.c: 90: {
-[f ]
-[v F1427 `i ~T0 @X0 -> 5 `i s ]
-[i F1427
-:U ..
+[; ;main.c: 90: void Visualizza (int display)
+[v _display `i ~T0 @X0 1 r1 ]
 "91
-[; ;main.c: 91:     int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
--> 126 `i
--> 226 `i
--> 242 `i
--> 168 `i
--> 176 `i
-..
-]
-[v _lettera `i ~T0 @X0 -> 5 `i a ]
-[e = _lettera F1427 ]
-"93
-[; ;main.c: 93:     if(display == 1 )
-[e $ ! == _display -> 1 `i 152  ]
-"94
-[; ;main.c: 94:     {
-{
-"95
-[; ;main.c: 95:         PORTC = lettera[0];
-[e = _PORTC -> *U + &U _lettera * -> -> -> 0 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"96
-[; ;main.c: 96:         PORTA = lettera[1];
-[e = _PORTA -> *U + &U _lettera * -> -> -> 1 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"97
-[; ;main.c: 97:     }
-}
-[e :U 152 ]
-"99
-[; ;main.c: 99:     if(display == 0 )
-[e $ ! == _display -> 0 `i 153  ]
-"100
-[; ;main.c: 100:     {
-{
-"101
-[; ;main.c: 101:         PORTC = lettera[0];
-[e = _PORTC -> *U + &U _lettera * -> -> -> 0 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"102
-[; ;main.c: 102:         PORTA = lettera[3];
-[e = _PORTA -> *U + &U _lettera * -> -> -> 3 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"103
-[; ;main.c: 103:     }
-}
-[e :U 153 ]
-"105
-[; ;main.c: 105:     if(display == 2 )
-[e $ ! == _display -> 2 `i 154  ]
-"106
-[; ;main.c: 106:     {
-{
-"107
-[; ;main.c: 107:         PORTC = lettera[1];
-[e = _PORTC -> *U + &U _lettera * -> -> -> 1 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"108
-[; ;main.c: 108:         PORTA = lettera[4];
-[e = _PORTA -> *U + &U _lettera * -> -> -> 4 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"109
-[; ;main.c: 109:     }
-}
-[e :U 154 ]
-"111
-[; ;main.c: 111:     if(display == 3 )
-[e $ ! == _display -> 3 `i 155  ]
-"112
-[; ;main.c: 112:     {
-{
-"113
-[; ;main.c: 113:         PORTC = lettera[2];
-[e = _PORTC -> *U + &U _lettera * -> -> -> 2 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"114
-[; ;main.c: 114:         PORTA = lettera[3];
-[e = _PORTA -> *U + &U _lettera * -> -> -> 3 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
-"115
-[; ;main.c: 115:     }
-}
-[e :U 155 ]
-"116
-[; ;main.c: 116: }
+[; ;main.c: 91: {
+[f ]
+"92
+[; ;main.c: 92:     PORTC =0b11111111;
+[e = _PORTC -> -> 255 `i `uc ]
+"119
+[; ;main.c: 119: }
 [e :UE 151 ]
 }
-"118
-[; ;main.c: 118: int stato=0;
+"121
+[; ;main.c: 121: int stato=0;
 [v _stato `i ~T0 @X0 1 e ]
 [i _stato
 -> 0 `i
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"120
-[; ;main.c: 120: void main(void)
+"123
+[; ;main.c: 123: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"121
-[; ;main.c: 121: {
+"124
+[; ;main.c: 124: {
 {
 [e :U _main ]
 [f ]
-"123
-[; ;main.c: 123:     PORTA = 0x00;
-[e = _PORTA -> -> 0 `i `uc ]
-"124
-[; ;main.c: 124:     PORTB = 0x00;
-[e = _PORTB -> -> 0 `i `uc ]
-"125
-[; ;main.c: 125:     PORTC = 0x00;
-[e = _PORTC -> -> 0 `i `uc ]
 "126
-[; ;main.c: 126:     PORTD = 0x00;
-[e = _PORTD -> -> 0 `i `uc ]
+[; ;main.c: 126:     PORTA = 0x00;
+[e = _PORTA -> -> 0 `i `uc ]
+"127
+[; ;main.c: 127:     PORTB = 0x00;
+[e = _PORTB -> -> 0 `i `uc ]
+"128
+[; ;main.c: 128:     PORTC = 0x00;
+[e = _PORTC -> -> 0 `i `uc ]
 "129
-[; ;main.c: 129:     TRISA = 0b00000000;
-[e = _TRISA -> -> 0 `i `uc ]
-"130
-[; ;main.c: 130:     TRISB = 0b11111111;
-[e = _TRISB -> -> 255 `i `uc ]
-"131
-[; ;main.c: 131:     TRISC = 0b00000000;
-[e = _TRISC -> -> 0 `i `uc ]
+[; ;main.c: 129:     PORTD = 0x00;
+[e = _PORTD -> -> 0 `i `uc ]
 "132
-[; ;main.c: 132:     TRISD = 0b00000000;
-[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 132:     TRISA = 0b00000000;
+[e = _TRISA -> -> 0 `i `uc ]
+"133
+[; ;main.c: 133:     TRISB = 0b11111111;
+[e = _TRISB -> -> 255 `i `uc ]
+"134
+[; ;main.c: 134:     TRISC = 0b00000000;
+[e = _TRISC -> -> 0 `i `uc ]
 "135
-[; ;main.c: 135:     INTCON = 0b1011100;
-[e = _INTCON -> -> 92 `i `uc ]
-"137
-[; ;main.c: 137:     ANSEL = 0x00;
-[e = _ANSEL -> -> 0 `i `uc ]
+[; ;main.c: 135:     TRISD = 0b00000000;
+[e = _TRISD -> -> 0 `i `uc ]
 "138
-[; ;main.c: 138:     ANSELH = 0x00;
-[e = _ANSELH -> -> 0 `i `uc ]
+[; ;main.c: 138:     INTCON = 0b1011100;
+[e = _INTCON -> -> 92 `i `uc ]
 "140
-[; ;main.c: 140:     OPTION_REG = 0b00000011;
+[; ;main.c: 140:     ANSEL = 0x00;
+[e = _ANSEL -> -> 0 `i `uc ]
+"141
+[; ;main.c: 141:     ANSELH = 0x00;
+[e = _ANSELH -> -> 0 `i `uc ]
+"143
+[; ;main.c: 143:     OPTION_REG = 0b00000011;
 [e = _OPTION_REG -> -> 3 `i `uc ]
-"145
-[; ;main.c: 145:     while (1)
-[e :U 158 ]
-"146
-[; ;main.c: 146:     {
-{
-"147
-[; ;main.c: 147:           stato=0;
-[e = _stato -> 0 `i ]
+"148
+[; ;main.c: 148:     while (1)
+[e :U 154 ]
 "149
-[; ;main.c: 149:         switch(stato)
-[e $U 161  ]
-"150
-[; ;main.c: 150:         {
+[; ;main.c: 149:     {
 {
-"151
-[; ;main.c: 151:             case 0:
-[e :U 162 ]
+"150
+[; ;main.c: 150:           stato=0;
+[e = _stato -> 0 `i ]
 "152
-[; ;main.c: 152:                 if(RB1 == 0)
-[e $ ! == -> _RB1 `i -> 0 `i 163  ]
+[; ;main.c: 152:         switch(stato)
+[e $U 157  ]
 "153
-[; ;main.c: 153:                 {
+[; ;main.c: 153:         {
 {
 "154
-[; ;main.c: 154:                     PORTA=0b11111111;
-[e = _PORTA -> -> 255 `i `uc ]
+[; ;main.c: 154:             case 0:
+[e :U 158 ]
 "155
-[; ;main.c: 155:                     PORTC=0b11111111;
-[e = _PORTC -> -> 255 `i `uc ]
+[; ;main.c: 155:                 if(RB1 == 0)
+[e $ ! == -> _RB1 `i -> 0 `i 159  ]
 "156
-[; ;main.c: 156:                     stato=1;
-[e = _stato -> 1 `i ]
+[; ;main.c: 156:                 {
+{
 "157
-[; ;main.c: 157:                     while(1);
-[e :U 165 ]
-[e :U 164 ]
-[e $U 165  ]
-[e :U 166 ]
+[; ;main.c: 157:                     PORTA=0b11111111;
+[e = _PORTA -> -> 255 `i `uc ]
 "158
-[; ;main.c: 158:                 }
-}
-[e :U 163 ]
+[; ;main.c: 158:                     PORTC=0b11111111;
+[e = _PORTC -> -> 255 `i `uc ]
+"159
+[; ;main.c: 159:                     stato=1;
+[e = _stato -> 1 `i ]
 "160
-[; ;main.c: 160:                 if (RB4 ==1)
-[e $ ! == -> _RB4 `i -> 1 `i 167  ]
-"161
-[; ;main.c: 161:                 {
-{
+[; ;main.c: 160:                 }
+}
+[e :U 159 ]
 "162
-[; ;main.c: 162:                     stato=10;
-[e = _stato -> 10 `i ]
+[; ;main.c: 162:                 if (RB4 ==1)
+[e $ ! == -> _RB4 `i -> 1 `i 160  ]
 "163
-[; ;main.c: 163:                 }
-}
-[e :U 167 ]
+[; ;main.c: 163:                 {
+{
 "165
-[; ;main.c: 165:             case 1:
-[e :U 168 ]
+[; ;main.c: 165:                 }
+}
+[e :U 160 ]
 "166
-[; ;main.c: 166:                 if(RB3==1)
-[e $ ! == -> _RB3 `i -> 1 `i 169  ]
-"167
-[; ;main.c: 167:                 {
-{
+[; ;main.c: 166:                 break;
+[e $U 156  ]
 "168
-[; ;main.c: 168:                     Visualizza(2);
-[e ( _Visualizza (1 -> 2 `i ]
+[; ;main.c: 168:             case 1:
+[e :U 161 ]
 "169
-[; ;main.c: 169:                     Irrigazione(1, 0, 1, 0);
-[e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
+[; ;main.c: 169:                 if(RB3==1)
+[e $ ! == -> _RB3 `i -> 1 `i 162  ]
 "170
-[; ;main.c: 170:                     stato=2;
-[e = _stato -> 2 `i ]
+[; ;main.c: 170:                 {
+{
 "171
-[; ;main.c: 171:                 }
-}
-[e $U 170  ]
+[; ;main.c: 171:                     Visualizza(2);
+[e ( _Visualizza (1 -> 2 `i ]
 "172
-[; ;main.c: 172:                 else if(RB3==0)stato=3;
-[e :U 169 ]
-[e $ ! == -> _RB3 `i -> 0 `i 171  ]
-[e = _stato -> 3 `i ]
-[e :U 171 ]
-[e :U 170 ]
-"173
-[; ;main.c: 173:                 break;
-[e $U 160  ]
-"175
-[; ;main.c: 175:             case 2:
-[e :U 172 ]
-"176
-[; ;main.c: 176:                 if(RB3==0)stato=3;
-[e $ ! == -> _RB3 `i -> 0 `i 173  ]
-[e = _stato -> 3 `i ]
-[e :U 173 ]
-"178
-[; ;main.c: 178:             case 3:
-[e :U 174 ]
-"179
-[; ;main.c: 179:                 Irrigazione(1, 1, 0, 1);
-[e ( _Irrigazione (4 , , , -> 1 `i -> 1 `i -> 0 `i -> 1 `i ]
-"180
-[; ;main.c: 180:                 stato=0;
-[e = _stato -> 0 `i ]
-"182
-[; ;main.c: 182:             case 4:
-[e :U 175 ]
-"183
-[; ;main.c: 183:                 if (RB2==0) stato=0;
-[e $ ! == -> _RB2 `i -> 0 `i 176  ]
-[e = _stato -> 0 `i ]
-[e :U 176 ]
-"185
-[; ;main.c: 185:             case 5:
-[e :U 177 ]
-"186
-[; ;main.c: 186:                 if (RB4==0)
-[e $ ! == -> _RB4 `i -> 0 `i 178  ]
-"187
-[; ;main.c: 187:                 {
-{
-"188
-[; ;main.c: 188:                     Irrigazione(1, 0, 1, 0);
+[; ;main.c: 172:                     Irrigazione(1, 0, 1, 0);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
+"173
+[; ;main.c: 173:                     stato=2;
+[e = _stato -> 2 `i ]
+"174
+[; ;main.c: 174:                 }
+}
+[e $U 163  ]
+"175
+[; ;main.c: 175:                 else if(RB3==0)stato=3;
+[e :U 162 ]
+[e $ ! == -> _RB3 `i -> 0 `i 164  ]
+[e = _stato -> 3 `i ]
+[e :U 164 ]
+[e :U 163 ]
+"176
+[; ;main.c: 176:                 break;
+[e $U 156  ]
+"178
+[; ;main.c: 178:             case 2:
+[e :U 165 ]
+"179
+[; ;main.c: 179:                 if(RB3==0)stato=3;
+[e $ ! == -> _RB3 `i -> 0 `i 166  ]
+[e = _stato -> 3 `i ]
+[e :U 166 ]
+"180
+[; ;main.c: 180:                 break;
+[e $U 156  ]
+"182
+[; ;main.c: 182:             case 3:
+[e :U 167 ]
+"183
+[; ;main.c: 183:                 Irrigazione(1, 1, 0, 1);
+[e ( _Irrigazione (4 , , , -> 1 `i -> 1 `i -> 0 `i -> 1 `i ]
+"184
+[; ;main.c: 184:                 stato=0;
+[e = _stato -> 0 `i ]
+"185
+[; ;main.c: 185:                 break;
+[e $U 156  ]
+"187
+[; ;main.c: 187:             case 4:
+[e :U 168 ]
+"188
+[; ;main.c: 188:                 if (RB2==0) stato=0;
+[e $ ! == -> _RB2 `i -> 0 `i 169  ]
+[e = _stato -> 0 `i ]
+[e :U 169 ]
 "189
-[; ;main.c: 189:                     stato=6;
-[e = _stato -> 6 `i ]
-"190
-[; ;main.c: 190:                 }
-}
-[e $U 179  ]
+[; ;main.c: 189:                 break;
+[e $U 156  ]
 "191
-[; ;main.c: 191:                 else if (RB4==1)
-[e :U 178 ]
-[e $ ! == -> _RB4 `i -> 1 `i 180  ]
+[; ;main.c: 191:             case 5:
+[e :U 170 ]
 "192
-[; ;main.c: 192:                 {
-{
+[; ;main.c: 192:                 if (RB4==0)
+[e $ ! == -> _RB4 `i -> 0 `i 171  ]
 "193
-[; ;main.c: 193:                     Irrigazione(1,0, 0, 1);
-[e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 0 `i -> 1 `i ]
-"194
-[; ;main.c: 194:                     stato=7;
-[e = _stato -> 7 `i ]
-"195
-[; ;main.c: 195:                 }
-}
-[e :U 180 ]
-[e :U 179 ]
-"197
-[; ;main.c: 197:             case 6:
-[e :U 181 ]
-"198
-[; ;main.c: 198:                 if (RB3==0)
-[e $ ! == -> _RB3 `i -> 0 `i 182  ]
-"199
-[; ;main.c: 199:                 {
+[; ;main.c: 193:                 {
 {
-"201
-[; ;main.c: 201:                     stato=8;
-[e = _stato -> 8 `i ]
-"202
-[; ;main.c: 202:                 }
+"194
+[; ;main.c: 194:                     Irrigazione(1, 0, 1, 0);
+[e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
+"195
+[; ;main.c: 195:                     stato=6;
+[e = _stato -> 6 `i ]
+"196
+[; ;main.c: 196:                 }
 }
-[e :U 182 ]
+[e $U 172  ]
+"197
+[; ;main.c: 197:                 else if (RB4==1)
+[e :U 171 ]
+[e $ ! == -> _RB4 `i -> 1 `i 173  ]
+"198
+[; ;main.c: 198:                 {
+{
+"199
+[; ;main.c: 199:                     Irrigazione(1,0, 0, 1);
+[e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 0 `i -> 1 `i ]
+"200
+[; ;main.c: 200:                     stato=7;
+[e = _stato -> 7 `i ]
+"201
+[; ;main.c: 201:                 }
+}
+[e :U 173 ]
+[e :U 172 ]
+"202
+[; ;main.c: 202:                 break;
+[e $U 156  ]
 "204
-[; ;main.c: 204:             case 7:
-[e :U 183 ]
+[; ;main.c: 204:             case 6:
+[e :U 174 ]
 "205
 [; ;main.c: 205:                 if (RB3==0)
-[e $ ! == -> _RB3 `i -> 0 `i 184  ]
+[e $ ! == -> _RB3 `i -> 0 `i 175  ]
 "206
 [; ;main.c: 206:                 {
 {
@@ -705,36 +630,103 @@ Version 4.0 HI-TECH Software Intermediate Code
 "209
 [; ;main.c: 209:                 }
 }
-[e :U 184 ]
+[e :U 175 ]
 "210
-[; ;main.c: 210:             case 8:
-[e :U 185 ]
-"211
-[; ;main.c: 211:                     stato=0;
-[e = _stato -> 0 `i ]
+[; ;main.c: 210:                 break;
+[e $U 156  ]
+"212
+[; ;main.c: 212:             case 7:
+[e :U 176 ]
+"213
+[; ;main.c: 213:                 if (RB3==0)
+[e $ ! == -> _RB3 `i -> 0 `i 177  ]
 "214
-[; ;main.c: 214:         }
-}
-[e $U 160  ]
-[e :U 161 ]
-[e [\ _stato , $ -> 0 `i 162
- , $ -> 1 `i 168
- , $ -> 2 `i 172
- , $ -> 3 `i 174
- , $ -> 4 `i 175
- , $ -> 5 `i 177
- , $ -> 6 `i 181
- , $ -> 7 `i 183
- , $ -> 8 `i 185
- 160 ]
-[e :U 160 ]
-"215
-[; ;main.c: 215:     }
-}
-[e :U 157 ]
-[e $U 158  ]
-[e :U 159 ]
+[; ;main.c: 214:                 {
+{
+"216
+[; ;main.c: 216:                     stato=8;
+[e = _stato -> 8 `i ]
 "217
-[; ;main.c: 217: }
-[e :UE 156 ]
+[; ;main.c: 217:                 }
+}
+[e :U 177 ]
+"218
+[; ;main.c: 218:                 break;
+[e $U 156  ]
+"220
+[; ;main.c: 220:             case 8:
+[e :U 178 ]
+"221
+[; ;main.c: 221:                     stato=0;
+[e = _stato -> 0 `i ]
+"222
+[; ;main.c: 222:                     break;
+[e $U 156  ]
+"224
+[; ;main.c: 224:             case 10:
+[e :U 179 ]
+"225
+[; ;main.c: 225:                 RD5 = 1;
+[e = _RD5 -> -> 1 `i `b ]
+"226
+[; ;main.c: 226:                 _delay((unsigned long)((3000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"227
+[; ;main.c: 227:                 RD6 = 1;
+[e = _RD6 -> -> 1 `i `b ]
+"228
+[; ;main.c: 228:                 if (RB4 ==0)
+[e $ ! == -> _RB4 `i -> 0 `i 180  ]
+"229
+[; ;main.c: 229:                 {
+{
+"230
+[; ;main.c: 230:                     stato=11;
+[e = _stato -> 11 `i ]
+"231
+[; ;main.c: 231:                 }
+}
+[e :U 180 ]
+"232
+[; ;main.c: 232:                 break;
+[e $U 156  ]
+"234
+[; ;main.c: 234:             case 11:
+[e :U 181 ]
+"235
+[; ;main.c: 235:                 RD6 = 0;
+[e = _RD6 -> -> 0 `i `b ]
+"236
+[; ;main.c: 236:                 RD5 = 0;
+[e = _RD5 -> -> 0 `i `b ]
+"237
+[; ;main.c: 237:                 stato=0;
+[e = _stato -> 0 `i ]
+"241
+[; ;main.c: 241:         }
+}
+[e $U 156  ]
+[e :U 157 ]
+[e [\ _stato , $ -> 0 `i 158
+ , $ -> 1 `i 161
+ , $ -> 2 `i 165
+ , $ -> 3 `i 167
+ , $ -> 4 `i 168
+ , $ -> 5 `i 170
+ , $ -> 6 `i 174
+ , $ -> 7 `i 176
+ , $ -> 8 `i 178
+ , $ -> 10 `i 179
+ , $ -> 11 `i 181
+ 156 ]
+[e :U 156 ]
+"242
+[; ;main.c: 242:     }
+}
+[e :U 153 ]
+[e $U 154  ]
+[e :U 155 ]
+"244
+[; ;main.c: 244: }
+[e :UE 152 ]
 }

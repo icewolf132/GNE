@@ -2685,7 +2685,7 @@ extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include/xc.h" 2 3
 # 22 "main.c" 2
-# 70 "main.c"
+# 71 "main.c"
 void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 {
 
@@ -2707,31 +2707,8 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 
 void Visualizza (int display)
 {
-    int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
-
-    if(display == 1 )
-    {
-        PORTC = lettera[0];
-        PORTA = lettera[1];
-    }
-
-    if(display == 0 )
-    {
-        PORTC = lettera[0];
-        PORTA = lettera[3];
-    }
-
-    if(display == 2 )
-    {
-        PORTC = lettera[1];
-        PORTA = lettera[4];
-    }
-
-    if(display == 3 )
-    {
-        PORTC = lettera[2];
-        PORTA = lettera[3];
-    }
+    PORTC =0b11111111;
+# 119 "main.c"
 }
 
 int stato=0;
@@ -2773,13 +2750,13 @@ void main(void)
                     PORTA=0b11111111;
                     PORTC=0b11111111;
                     stato=1;
-                    while(1);
                 }
 
                 if (RB4 ==1)
                 {
-                    stato=10;
+
                 }
+                break;
 
             case 1:
                 if(RB3==1)
@@ -2793,13 +2770,16 @@ void main(void)
 
             case 2:
                 if(RB3==0)stato=3;
+                break;
 
             case 3:
                 Irrigazione(1, 1, 0, 1);
                 stato=0;
+                break;
 
             case 4:
                 if (RB2==0) stato=0;
+                break;
 
             case 5:
                 if (RB4==0)
@@ -2812,6 +2792,7 @@ void main(void)
                     Irrigazione(1,0, 0, 1);
                     stato=7;
                 }
+                break;
 
             case 6:
                 if (RB3==0)
@@ -2819,6 +2800,7 @@ void main(void)
 
                     stato=8;
                 }
+                break;
 
             case 7:
                 if (RB3==0)
@@ -2826,8 +2808,27 @@ void main(void)
 
                     stato=8;
                 }
+                break;
+
             case 8:
                     stato=0;
+                    break;
+
+            case 10:
+                RD5 = 1;
+                _delay((unsigned long)((3000)*(4000000/4000.0)));
+                RD6 = 1;
+                if (RB4 ==0)
+                {
+                    stato=11;
+                }
+                break;
+
+            case 11:
+                RD6 = 0;
+                RD5 = 0;
+                stato=0;
+
 
 
         }
