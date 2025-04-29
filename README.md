@@ -11,6 +11,7 @@ Per il circuito vedere il file: [circuito-gne.png](circuito-gne.png)
 ### DA AGGIUNGERE
 - circuito per la simulazione dell'encoder con 555
 - programma per la gestione dell'encoder
+- circuito per la gestione di temperatura
 
 ### PROBLEMI
 - circuito completamente non funzionante
