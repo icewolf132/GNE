@@ -1,6 +1,6 @@
 # GNE
 Progetto di esercitazione per la gara nazionale di elettronica.  
-Per la documentazione vedere il file:[Relazione_GNE.pdf](Relazione_GNE.pdf)
+Per la documentazione vedere il file: [Relazione_GNE.pdf](Relazione_GNE.pdf)
 
 ### ULTIME MODIFICHE
 - aggiunto i break allo switch
