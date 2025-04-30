@@ -1,5 +1,3 @@
-// 2.0 da mplab
-
 #pragma config FOSC = INTRC_NOCLKOUT //XT        // Oscillator Selection Bits (XT Oscillator, Crystal/resonator connected between OSC1 and OSC2 pins)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
