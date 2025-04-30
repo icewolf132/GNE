@@ -16,10 +16,9 @@
 [v i1_Irrigazione Irrigazione `(v  1 e 1 0 ]
 "90
 [v _Visualizza Visualizza `(v  1 e 1 0 ]
-[v i1_Visualizza Visualizza `(v  1 e 1 0 ]
 "123
 [v _main main `(v  1 e 1 0 ]
-"250
+"249
 [v _ISR ISR `II(v  1 e 1 0 ]
 "166 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -93,15 +92,15 @@
 "123
 [v _main main `(v  1 e 1 0 ]
 {
-"248
+"247
 } 0
 "90
 [v _Visualizza Visualizza `(v  1 e 1 0 ]
 {
 "93
-[v Visualizza@lettera lettera `[5]i  1 a 10 16 ]
+[v Visualizza@lettera lettera `[5]i  1 a 10 6 ]
 "90
-[v Visualizza@display display `i  1 p 2 10 ]
+[v Visualizza@display display `i  1 p 2 0 ]
 "92
 [v Visualizza@F1427 F1427 `[5]i  1 s 10 F1427 ]
 "119
@@ -109,25 +108,16 @@
 "71
 [v _Irrigazione Irrigazione `(v  1 e 1 0 ]
 {
-[v Irrigazione@power power `i  1 p 2 10 ]
-[v Irrigazione@direzione direzione `i  1 p 2 12 ]
-[v Irrigazione@velocita velocita `i  1 p 2 14 ]
-[v Irrigazione@irrigazione irrigazione `i  1 p 2 16 ]
+[v Irrigazione@power power `i  1 p 2 0 ]
+[v Irrigazione@direzione direzione `i  1 p 2 2 ]
+[v Irrigazione@velocita velocita `i  1 p 2 4 ]
+[v Irrigazione@irrigazione irrigazione `i  1 p 2 6 ]
 "88
 } 0
-"250
+"249
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"275
-} 0
-"90
-[v i1_Visualizza Visualizza `(v  1 e 1 0 ]
-{
-"93
-[v i1Visualizza@lettera lettera `[5]i  1 a 10 0 ]
-"90
-[v i1Visualizza@display display `i  1 p 2 0 ]
-"119
+"265
 } 0
 "71
 [v i1_Irrigazione Irrigazione `(v  1 e 1 0 ]

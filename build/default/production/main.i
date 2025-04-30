@@ -2725,7 +2725,7 @@ void Visualizza (int display)
     if(display == 2 )
     {
         PORTC =0b11111111;
-        PORTA = lettera[4];
+        PORTA =0b11111111;
     }
 
     if(display == 3 )
@@ -2752,7 +2752,6 @@ void main(void)
     TRISC = 0b00000000;
     TRISD = 0b00000000;
 
-
     INTCON = 0b1011100;
 
     ANSEL = 0x00;
@@ -2768,8 +2767,8 @@ void main(void)
         if (RB3 == 0 && RB2 == 0)
         {
             Visualizza(2);
-            Irrigazione(0, 1, 0, 0);
-            while (1);
+            Irrigazione(0, 0, 0, 0);
+            stato=0;
         }
 
         switch(stato)
@@ -2790,7 +2789,7 @@ void main(void)
             case 1:
                 if(RB3==1)
                 {
-                    Visualizza(2);
+
                     Irrigazione(1, 0, 1, 0);
                     stato=2;
                 }
@@ -2877,17 +2876,8 @@ void __attribute__((picinterrupt(("")))) ISR(void)
         if (RB0 == 0)
         {
             Irrigazione(1, 0, 1, 0);
-            while (RB3 == 1);
-            Irrigazione(0, 0, 1, 0);
             stato = 0;
         }
-        else
-        {
 
-            Visualizza(1);
-            while (RB1 != 0);
-            while (RB1 == 0);
-            Visualizza(0);
-        }
     }
 }

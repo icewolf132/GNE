@@ -107,7 +107,7 @@ void Visualizza (int display)
     if(display == FC )
     {
         PORTC =0b11111111;// lettera[1];    //visualizzo la lettera F   
-        PORTA = lettera[4];    //visualizzo la lettera c
+        PORTA =0b11111111;// lettera[4];    //visualizzo la lettera c
     }
     
     if(display == EN )
@@ -133,7 +133,6 @@ void main(void)
     TRISB = 0b11111111;             //Imposto i pin di PORTB
     TRISC = 0b00000000;             //Imposto i pin di PORTC 
     TRISD = 0b00000000;             //Imposto i pin di PORTD 
-    //TRISE = 0b00000000;             //Imposto i pin di PORTE 
     
     INTCON = 0b1011100;
 
@@ -151,7 +150,7 @@ void main(void)
         {
             Visualizza(FC);  // Allarme finecorsa
             Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Fermo tutto
-            while (1); // Blocco il sistema (oppure: stato=0)
+            stato=0;
         }
 
         switch(stato)
@@ -172,7 +171,6 @@ void main(void)
             case 1: //irrigatore non si sa dove sta 
                 if(FC1==1) //se l'irrigatore non si trova a inizio corsa
                 {
-                    Visualizza(FC); //visualizza fc
                     Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare il motore alla massima velocità indietro fino aquando
                     stato=2; //passa allo stato due
                 }
@@ -259,17 +257,8 @@ void __interrupt() ISR(void)
         if (RB0 == 0) // Se ancora premuto
         {
             Irrigazione(START, DIETRO, VELOCE, DISECCITATO); // Torna indietro
-            while (FC1 == 1); // Aspetta fine corsa
-            Irrigazione(STOP, DIETRO, VELOCE, DISECCITATO); // Ferma
             stato = 0;
         }
-        else
-        {
-            // Solo pausa, in attesa di nuovo START
-            Visualizza(OFF);
-            while (T_START != 0); // Aspetta rilascio
-            while (T_START == 0); // Aspetta nuova pressione
-            Visualizza(ON);
-        }
+        
     }
 }
