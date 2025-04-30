@@ -32,7 +32,7 @@
 #define    T_START      RB1 //pulsante di inizio irigamento
 #define    MODO         RB4 //interrutore di selezione di ritorno
 
-#define    TEMP         RB4 //input modulo di temperatura
+#define    TEMP         RB5 //input modulo di temperatura
 
 #define    T_STOP       RB0 //pulsante di stop per irrigazione con interrupt
 
@@ -90,7 +90,7 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 void Visualizza (int display)
 {
     PORTC =0b11111111;
-    /*int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000}; // O, F, E, n, c
+    int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000}; // O, F, E, n, c
     
     if(display == OFF )
     {
@@ -115,14 +115,14 @@ void Visualizza (int display)
         PORTC = lettera[2];     //visualizzo la lettera E
         PORTA = lettera[3];    //visualizzo la lettera n
     }
-     */
+     
 }
   
 int stato=0;
 
 void main(void) 
 {
-//    OSCCON |=0x60;       //Clock 4 Mhz
+    OSCCON |=0x60;       //Clock 4 Mhz
     PORTA = 0x00;   //7SEG 2
     PORTB = 0x00;   //IN
     PORTC = 0x00;   //7SEG 1
@@ -146,7 +146,17 @@ void main(void)
     
     
     while (1) //Ciclo infinito
-    {                       
+    {      
+        if (FC1 == 1 && FC2 == 1)
+        {
+            Visualizza(FC);  // Allarme finecorsa
+            Irrigazione(STOP, AVANTI, LENTO, DISECCITATO); // Fermo tutto
+            while (1); // Blocco il sistema (oppure: stato=0)
+        }
+
+        
+        
+        
           stato=0;
           
         switch(stato)
@@ -181,7 +191,7 @@ void main(void)
             
             case 3: //irrigatore sta a inizio corsa
                 Irrigazione(START, AVANTI, LENTO, ECCITATO);
-                stato=0;
+                stato=4;
                 break;
                 
             case 4: //irrigatore sta andando avanti alla minima velocità irrigando
@@ -243,18 +253,29 @@ void main(void)
 
 }
 
-
-/*void __interrupt ISR(void) // Interrupt Service Routine
+void __interrupt() ISR(void)
 {
-    if (INTCONbits.INTE && INTCONbits.INTF) // verifico che l'interrupt è stato causato dal pin esterno
+    if (INTCONbits.INTE && INTCONbits.INTF)
     {
-        Irrigazione(STOP,DIETRO, LENTO, ECCITATO); //   fermo l'irrigatore
-        __delay_ms(5000); //aspetto 5 secondi
-        if(RB0==1) //se il tasto è ancora premuto
+        INTCONbits.INTF = 0; // reset flag
+
+        Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Ferma tutto
+        __delay_ms(5000); // Aspetta 5 secondi
+
+        if (RB0 == 0) // Se ancora premuto
         {
-            Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare l'irrigatore alla massima velocità indietro 
+            Irrigazione(START, DIETRO, VELOCE, DISECCITATO); // Torna indietro
+            while (FC1 == 1); // Aspetta fine corsa
+            Irrigazione(STOP, DIETRO, VELOCE, DISECCITATO); // Ferma
+            stato = 0;
         }
-        stato=0;
+        else
+        {
+            // Solo pausa, in attesa di nuovo START
+            Visualizza(OFF);
+            while (T_START != 0); // Aspetta rilascio
+            while (T_START == 0); // Aspetta nuova pressione
+            Visualizza(ON);
+        }
     }
- } 
-*/
+}

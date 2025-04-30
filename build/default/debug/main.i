@@ -2707,6 +2707,7 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 
 void Visualizza (int display)
 {
+    PORTC =0b11111111;
     int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
 
     if(display == 1 )
@@ -2732,13 +2733,14 @@ void Visualizza (int display)
         PORTC = lettera[2];
         PORTA = lettera[3];
     }
+
 }
 
 int stato=0;
 
 void main(void)
 {
-
+    OSCCON |=0x60;
     PORTA = 0x00;
     PORTB = 0x00;
     PORTC = 0x00;
@@ -2763,6 +2765,16 @@ void main(void)
 
     while (1)
     {
+        if (RB3 == 1 && RB2 == 1)
+        {
+            Visualizza(2);
+            Irrigazione(0, 1, 0, 0);
+            while (1);
+        }
+
+
+
+
           stato=0;
 
         switch(stato)
@@ -2775,9 +2787,9 @@ void main(void)
                     stato=1;
                 }
 
-                if (RB4 ==1)
+                if (RB5 ==1)
                 {
-                    stato=10;
+
                 }
                 break;
 
@@ -2797,7 +2809,7 @@ void main(void)
 
             case 3:
                 Irrigazione(1, 1, 0, 1);
-                stato=0;
+                stato=4;
                 break;
 
             case 4:
@@ -2841,7 +2853,7 @@ void main(void)
                 RD5 = 1;
                 _delay((unsigned long)((3000)*(4000000/4000.0)));
                 RD6 = 1;
-                if (RB4 ==0)
+                if (RB5 ==0)
                 {
                     stato=11;
                 }
@@ -2857,4 +2869,31 @@ void main(void)
         }
     }
 
+}
+
+void __attribute__((picinterrupt(("")))) ISR(void)
+{
+    if (INTCONbits.INTE && INTCONbits.INTF)
+    {
+        INTCONbits.INTF = 0;
+
+        Irrigazione(0, 0, 0, 0);
+        _delay((unsigned long)((5000)*(4000000/4000.0)));
+
+        if (RB0 == 0)
+        {
+            Irrigazione(1, 0, 1, 0);
+            while (RB3 == 1);
+            Irrigazione(0, 0, 1, 0);
+            stato = 0;
+        }
+        else
+        {
+
+            Visualizza(1);
+            while (RB1 != 0);
+            while (RB1 == 0);
+            Visualizza(0);
+        }
+    }
 }
