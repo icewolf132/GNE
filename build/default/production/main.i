@@ -2724,7 +2724,7 @@ void Visualizza (int display)
 
     if(display == 2 )
     {
-        PORTC = lettera[1];
+        PORTC =0b11111111;
         PORTA = lettera[4];
     }
 
@@ -2736,7 +2736,7 @@ void Visualizza (int display)
 
 }
 
-int stato=0;
+    int stato=0;
 
 void main(void)
 {
@@ -2765,25 +2765,19 @@ void main(void)
 
     while (1)
     {
-        if (RB3 == 1 && RB2 == 1)
+        if (RB3 == 0 && RB2 == 0)
         {
             Visualizza(2);
             Irrigazione(0, 1, 0, 0);
             while (1);
         }
 
-
-
-
-          stato=0;
-
         switch(stato)
         {
             case 0:
                 if(RB1 == 0)
                 {
-                    PORTA=0b11111111;
-                    PORTC=0b11111111;
+                    Visualizza(0);
                     stato=1;
                 }
 
@@ -2813,7 +2807,7 @@ void main(void)
                 break;
 
             case 4:
-                if (RB2==0) stato=0;
+                if (RB2==0) stato=5;
                 break;
 
             case 5:
@@ -2832,7 +2826,7 @@ void main(void)
             case 6:
                 if (RB3==0)
                 {
-
+                    Irrigazione(0,0, 0, 0);
                     stato=8;
                 }
                 break;
@@ -2840,7 +2834,7 @@ void main(void)
             case 7:
                 if (RB3==0)
                 {
-
+                    Irrigazione(0,0, 0, 0);
                     stato=8;
                 }
                 break;

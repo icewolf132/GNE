@@ -106,7 +106,7 @@ void Visualizza (int display)
     
     if(display == FC )
     {
-        PORTC = lettera[1];    //visualizzo la lettera F   
+        PORTC =0b11111111;// lettera[1];    //visualizzo la lettera F   
         PORTA = lettera[4];    //visualizzo la lettera c
     }
     
@@ -118,7 +118,7 @@ void Visualizza (int display)
      
 }
   
-int stato=0;
+    int stato=0;
 
 void main(void) 
 {
@@ -147,25 +147,19 @@ void main(void)
     
     while (1) //Ciclo infinito
     {      
-        if (FC1 == 1 && FC2 == 1)
+        if (FC1 == 0 && FC2 == 0)
         {
             Visualizza(FC);  // Allarme finecorsa
-            Irrigazione(STOP, AVANTI, LENTO, DISECCITATO); // Fermo tutto
+            Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Fermo tutto
             while (1); // Blocco il sistema (oppure: stato=0)
         }
 
-        
-        
-        
-          stato=0;
-          
         switch(stato)
         {
             case 0: //non sto fecendo nulla 
                 if(T_START == 0) //nel caso il tasto start è premuto
                 {
-                    PORTA=0b11111111;//Visualizza(ON); //visualizza on
-                    PORTC=0b11111111;
+                    Visualizza(ON); //visualizza on
                     stato=1; //vai al primo stato
                 }
                 
@@ -178,7 +172,7 @@ void main(void)
             case 1: //irrigatore non si sa dove sta 
                 if(FC1==1) //se l'irrigatore non si trova a inizio corsa
                 {
-                    Visualizza(FC); //visualizza on
+                    Visualizza(FC); //visualizza fc
                     Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare il motore alla massima velocità indietro fino aquando
                     stato=2; //passa allo stato due
                 }
@@ -195,7 +189,7 @@ void main(void)
                 break;
                 
             case 4: //irrigatore sta andando avanti alla minima velocità irrigando
-                if (FC2==0) stato=0;
+                if (FC2==0) stato=5;
                 break;
                 
             case 5: //irrigatore sta  a fine corsa
@@ -214,7 +208,7 @@ void main(void)
             case 6: //irrigatore sta tornando indietro alla massima velocità non irrigando
                 if (FC1==0)
                 {  
-                    //ferma motore;
+                    Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
                     stato=8;
                 }
                 break;
@@ -222,7 +216,7 @@ void main(void)
             case 7: //irrigatore sta tornando indietro alla minima velocità irrigando
                 if (FC1==0)
                 {  
-                    //ferma motore;
+                    Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
                     stato=8;
                 }
                 break;

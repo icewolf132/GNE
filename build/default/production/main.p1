@@ -483,8 +483,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 108:     {
 {
 "109
-[; ;main.c: 109:         PORTC = lettera[1];
-[e = _PORTC -> *U + &U _lettera * -> -> -> 1 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
+[; ;main.c: 109:         PORTC =0b11111111;
+[e = _PORTC -> -> 255 `i `uc ]
 "110
 [; ;main.c: 110:         PORTA = lettera[4];
 [e = _PORTA -> *U + &U _lettera * -> -> -> 4 `i `ui `ux -> -> # *U &U _lettera `ui `ux `uc ]
@@ -513,7 +513,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 151 ]
 }
 "121
-[; ;main.c: 121: int stato=0;
+[; ;main.c: 121:     int stato=0;
 [v _stato `i ~T0 @X0 1 e ]
 [i _stato
 -> 0 `i
@@ -573,8 +573,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 149:     {
 {
 "150
-[; ;main.c: 150:         if (RB3 == 1 && RB2 == 1)
-[e $ ! && == -> _RB3 `i -> 1 `i == -> _RB2 `i -> 1 `i 160  ]
+[; ;main.c: 150:         if (RB3 == 0 && RB2 == 0)
+[e $ ! && == -> _RB3 `i -> 0 `i == -> _RB2 `i -> 0 `i 160  ]
 "151
 [; ;main.c: 151:         {
 {
@@ -594,245 +594,245 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 155:         }
 }
 [e :U 160 ]
-"160
-[; ;main.c: 160:           stato=0;
-[e = _stato -> 0 `i ]
-"162
-[; ;main.c: 162:         switch(stato)
+"157
+[; ;main.c: 157:         switch(stato)
 [e $U 165  ]
-"163
-[; ;main.c: 163:         {
+"158
+[; ;main.c: 158:         {
 {
-"164
-[; ;main.c: 164:             case 0:
+"159
+[; ;main.c: 159:             case 0:
 [e :U 166 ]
-"165
-[; ;main.c: 165:                 if(RB1 == 0)
+"160
+[; ;main.c: 160:                 if(RB1 == 0)
 [e $ ! == -> _RB1 `i -> 0 `i 167  ]
-"166
-[; ;main.c: 166:                 {
+"161
+[; ;main.c: 161:                 {
 {
-"167
-[; ;main.c: 167:                     PORTA=0b11111111;
-[e = _PORTA -> -> 255 `i `uc ]
-"168
-[; ;main.c: 168:                     PORTC=0b11111111;
-[e = _PORTC -> -> 255 `i `uc ]
-"169
-[; ;main.c: 169:                     stato=1;
+"162
+[; ;main.c: 162:                     Visualizza(0);
+[e ( _Visualizza (1 -> 0 `i ]
+"163
+[; ;main.c: 163:                     stato=1;
 [e = _stato -> 1 `i ]
-"170
-[; ;main.c: 170:                 }
+"164
+[; ;main.c: 164:                 }
 }
 [e :U 167 ]
-"172
-[; ;main.c: 172:                 if (RB5 ==1)
+"166
+[; ;main.c: 166:                 if (RB5 ==1)
 [e $ ! == -> _RB5 `i -> 1 `i 168  ]
-"173
-[; ;main.c: 173:                 {
+"167
+[; ;main.c: 167:                 {
 {
-"175
-[; ;main.c: 175:                 }
+"169
+[; ;main.c: 169:                 }
 }
 [e :U 168 ]
-"176
-[; ;main.c: 176:                 break;
+"170
+[; ;main.c: 170:                 break;
 [e $U 164  ]
-"178
-[; ;main.c: 178:             case 1:
+"172
+[; ;main.c: 172:             case 1:
 [e :U 169 ]
-"179
-[; ;main.c: 179:                 if(RB3==1)
+"173
+[; ;main.c: 173:                 if(RB3==1)
 [e $ ! == -> _RB3 `i -> 1 `i 170  ]
-"180
-[; ;main.c: 180:                 {
+"174
+[; ;main.c: 174:                 {
 {
-"181
-[; ;main.c: 181:                     Visualizza(2);
+"175
+[; ;main.c: 175:                     Visualizza(2);
 [e ( _Visualizza (1 -> 2 `i ]
-"182
-[; ;main.c: 182:                     Irrigazione(1, 0, 1, 0);
+"176
+[; ;main.c: 176:                     Irrigazione(1, 0, 1, 0);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
-"183
-[; ;main.c: 183:                     stato=2;
+"177
+[; ;main.c: 177:                     stato=2;
 [e = _stato -> 2 `i ]
-"184
-[; ;main.c: 184:                 }
+"178
+[; ;main.c: 178:                 }
 }
 [e $U 171  ]
-"185
-[; ;main.c: 185:                 else if(RB3==0)stato=3;
+"179
+[; ;main.c: 179:                 else if(RB3==0)stato=3;
 [e :U 170 ]
 [e $ ! == -> _RB3 `i -> 0 `i 172  ]
 [e = _stato -> 3 `i ]
 [e :U 172 ]
 [e :U 171 ]
-"186
-[; ;main.c: 186:                 break;
+"180
+[; ;main.c: 180:                 break;
 [e $U 164  ]
-"188
-[; ;main.c: 188:             case 2:
+"182
+[; ;main.c: 182:             case 2:
 [e :U 173 ]
-"189
-[; ;main.c: 189:                 if(RB3==0)stato=3;
+"183
+[; ;main.c: 183:                 if(RB3==0)stato=3;
 [e $ ! == -> _RB3 `i -> 0 `i 174  ]
 [e = _stato -> 3 `i ]
 [e :U 174 ]
-"190
-[; ;main.c: 190:                 break;
+"184
+[; ;main.c: 184:                 break;
 [e $U 164  ]
-"192
-[; ;main.c: 192:             case 3:
+"186
+[; ;main.c: 186:             case 3:
 [e :U 175 ]
-"193
-[; ;main.c: 193:                 Irrigazione(1, 1, 0, 1);
+"187
+[; ;main.c: 187:                 Irrigazione(1, 1, 0, 1);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 1 `i -> 0 `i -> 1 `i ]
-"194
-[; ;main.c: 194:                 stato=4;
+"188
+[; ;main.c: 188:                 stato=4;
 [e = _stato -> 4 `i ]
-"195
-[; ;main.c: 195:                 break;
+"189
+[; ;main.c: 189:                 break;
 [e $U 164  ]
-"197
-[; ;main.c: 197:             case 4:
+"191
+[; ;main.c: 191:             case 4:
 [e :U 176 ]
-"198
-[; ;main.c: 198:                 if (RB2==0) stato=0;
+"192
+[; ;main.c: 192:                 if (RB2==0) stato=5;
 [e $ ! == -> _RB2 `i -> 0 `i 177  ]
-[e = _stato -> 0 `i ]
+[e = _stato -> 5 `i ]
 [e :U 177 ]
-"199
-[; ;main.c: 199:                 break;
+"193
+[; ;main.c: 193:                 break;
 [e $U 164  ]
-"201
-[; ;main.c: 201:             case 5:
+"195
+[; ;main.c: 195:             case 5:
 [e :U 178 ]
-"202
-[; ;main.c: 202:                 if (RB4==0)
+"196
+[; ;main.c: 196:                 if (RB4==0)
 [e $ ! == -> _RB4 `i -> 0 `i 179  ]
-"203
-[; ;main.c: 203:                 {
+"197
+[; ;main.c: 197:                 {
 {
-"204
-[; ;main.c: 204:                     Irrigazione(1, 0, 1, 0);
+"198
+[; ;main.c: 198:                     Irrigazione(1, 0, 1, 0);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
-"205
-[; ;main.c: 205:                     stato=6;
+"199
+[; ;main.c: 199:                     stato=6;
 [e = _stato -> 6 `i ]
-"206
-[; ;main.c: 206:                 }
+"200
+[; ;main.c: 200:                 }
 }
 [e $U 180  ]
-"207
-[; ;main.c: 207:                 else if (RB4==1)
+"201
+[; ;main.c: 201:                 else if (RB4==1)
 [e :U 179 ]
 [e $ ! == -> _RB4 `i -> 1 `i 181  ]
-"208
-[; ;main.c: 208:                 {
+"202
+[; ;main.c: 202:                 {
 {
-"209
-[; ;main.c: 209:                     Irrigazione(1,0, 0, 1);
+"203
+[; ;main.c: 203:                     Irrigazione(1,0, 0, 1);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 0 `i -> 1 `i ]
-"210
-[; ;main.c: 210:                     stato=7;
+"204
+[; ;main.c: 204:                     stato=7;
 [e = _stato -> 7 `i ]
-"211
-[; ;main.c: 211:                 }
+"205
+[; ;main.c: 205:                 }
 }
 [e :U 181 ]
 [e :U 180 ]
-"212
-[; ;main.c: 212:                 break;
+"206
+[; ;main.c: 206:                 break;
 [e $U 164  ]
-"214
-[; ;main.c: 214:             case 6:
+"208
+[; ;main.c: 208:             case 6:
 [e :U 182 ]
-"215
-[; ;main.c: 215:                 if (RB3==0)
+"209
+[; ;main.c: 209:                 if (RB3==0)
 [e $ ! == -> _RB3 `i -> 0 `i 183  ]
-"216
-[; ;main.c: 216:                 {
+"210
+[; ;main.c: 210:                 {
 {
-"218
-[; ;main.c: 218:                     stato=8;
+"211
+[; ;main.c: 211:                     Irrigazione(0,0, 0, 0);
+[e ( _Irrigazione (4 , , , -> 0 `i -> 0 `i -> 0 `i -> 0 `i ]
+"212
+[; ;main.c: 212:                     stato=8;
 [e = _stato -> 8 `i ]
-"219
-[; ;main.c: 219:                 }
+"213
+[; ;main.c: 213:                 }
 }
 [e :U 183 ]
-"220
-[; ;main.c: 220:                 break;
+"214
+[; ;main.c: 214:                 break;
 [e $U 164  ]
-"222
-[; ;main.c: 222:             case 7:
+"216
+[; ;main.c: 216:             case 7:
 [e :U 184 ]
-"223
-[; ;main.c: 223:                 if (RB3==0)
+"217
+[; ;main.c: 217:                 if (RB3==0)
 [e $ ! == -> _RB3 `i -> 0 `i 185  ]
-"224
-[; ;main.c: 224:                 {
+"218
+[; ;main.c: 218:                 {
 {
-"226
-[; ;main.c: 226:                     stato=8;
+"219
+[; ;main.c: 219:                     Irrigazione(0,0, 0, 0);
+[e ( _Irrigazione (4 , , , -> 0 `i -> 0 `i -> 0 `i -> 0 `i ]
+"220
+[; ;main.c: 220:                     stato=8;
 [e = _stato -> 8 `i ]
-"227
-[; ;main.c: 227:                 }
+"221
+[; ;main.c: 221:                 }
 }
 [e :U 185 ]
-"228
-[; ;main.c: 228:                 break;
+"222
+[; ;main.c: 222:                 break;
 [e $U 164  ]
-"230
-[; ;main.c: 230:             case 8:
+"224
+[; ;main.c: 224:             case 8:
 [e :U 186 ]
-"231
-[; ;main.c: 231:                     stato=0;
+"225
+[; ;main.c: 225:                     stato=0;
 [e = _stato -> 0 `i ]
-"232
-[; ;main.c: 232:                     break;
+"226
+[; ;main.c: 226:                     break;
 [e $U 164  ]
-"234
-[; ;main.c: 234:             case 10:
+"228
+[; ;main.c: 228:             case 10:
 [e :U 187 ]
-"235
-[; ;main.c: 235:                 RD5 = 1;
+"229
+[; ;main.c: 229:                 RD5 = 1;
 [e = _RD5 -> -> 1 `i `b ]
-"236
-[; ;main.c: 236:                 _delay((unsigned long)((3000)*(4000000/4000.0)));
+"230
+[; ;main.c: 230:                 _delay((unsigned long)((3000)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"237
-[; ;main.c: 237:                 RD6 = 1;
+"231
+[; ;main.c: 231:                 RD6 = 1;
 [e = _RD6 -> -> 1 `i `b ]
-"238
-[; ;main.c: 238:                 if (RB5 ==0)
+"232
+[; ;main.c: 232:                 if (RB5 ==0)
 [e $ ! == -> _RB5 `i -> 0 `i 188  ]
-"239
-[; ;main.c: 239:                 {
+"233
+[; ;main.c: 233:                 {
 {
-"240
-[; ;main.c: 240:                     stato=11;
+"234
+[; ;main.c: 234:                     stato=11;
 [e = _stato -> 11 `i ]
-"241
-[; ;main.c: 241:                 }
+"235
+[; ;main.c: 235:                 }
 }
 [e :U 188 ]
-"242
-[; ;main.c: 242:                 break;
+"236
+[; ;main.c: 236:                 break;
 [e $U 164  ]
-"244
-[; ;main.c: 244:             case 11:
+"238
+[; ;main.c: 238:             case 11:
 [e :U 189 ]
-"245
-[; ;main.c: 245:                 RD6 = 0;
+"239
+[; ;main.c: 239:                 RD6 = 0;
 [e = _RD6 -> -> 0 `i `b ]
-"246
-[; ;main.c: 246:                 RD5 = 0;
+"240
+[; ;main.c: 240:                 RD5 = 0;
 [e = _RD5 -> -> 0 `i `b ]
-"247
-[; ;main.c: 247:                 stato=0;
+"241
+[; ;main.c: 241:                 stato=0;
 [e = _stato -> 0 `i ]
-"251
-[; ;main.c: 251:         }
+"245
+[; ;main.c: 245:         }
 }
 [e $U 164  ]
 [e :U 165 ]
@@ -849,101 +849,101 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 11 `i 189
  164 ]
 [e :U 164 ]
-"252
-[; ;main.c: 252:     }
+"246
+[; ;main.c: 246:     }
 }
 [e :U 157 ]
 [e $U 158  ]
 [e :U 159 ]
-"254
-[; ;main.c: 254: }
+"248
+[; ;main.c: 248: }
 [e :UE 156 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"256
-[; ;main.c: 256: void __attribute__((picinterrupt(("")))) ISR(void)
+"250
+[; ;main.c: 250: void __attribute__((picinterrupt(("")))) ISR(void)
 [v _ISR `(v ~T1 @X0 1 ef ]
-"257
-[; ;main.c: 257: {
+"251
+[; ;main.c: 251: {
 {
 [e :U _ISR ]
 [f ]
-"258
-[; ;main.c: 258:     if (INTCONbits.INTE && INTCONbits.INTF)
+"252
+[; ;main.c: 252:     if (INTCONbits.INTE && INTCONbits.INTF)
 [e $ ! && != -> . . _INTCONbits 0 4 `i -> 0 `i != -> . . _INTCONbits 0 1 `i -> 0 `i 191  ]
-"259
-[; ;main.c: 259:     {
+"253
+[; ;main.c: 253:     {
 {
-"260
-[; ;main.c: 260:         INTCONbits.INTF = 0;
+"254
+[; ;main.c: 254:         INTCONbits.INTF = 0;
 [e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"262
-[; ;main.c: 262:         Irrigazione(0, 0, 0, 0);
+"256
+[; ;main.c: 256:         Irrigazione(0, 0, 0, 0);
 [e ( _Irrigazione (4 , , , -> 0 `i -> 0 `i -> 0 `i -> 0 `i ]
-"263
-[; ;main.c: 263:         _delay((unsigned long)((5000)*(4000000/4000.0)));
+"257
+[; ;main.c: 257:         _delay((unsigned long)((5000)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 5000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"265
-[; ;main.c: 265:         if (RB0 == 0)
+"259
+[; ;main.c: 259:         if (RB0 == 0)
 [e $ ! == -> _RB0 `i -> 0 `i 192  ]
-"266
-[; ;main.c: 266:         {
+"260
+[; ;main.c: 260:         {
 {
-"267
-[; ;main.c: 267:             Irrigazione(1, 0, 1, 0);
+"261
+[; ;main.c: 261:             Irrigazione(1, 0, 1, 0);
 [e ( _Irrigazione (4 , , , -> 1 `i -> 0 `i -> 1 `i -> 0 `i ]
-"268
-[; ;main.c: 268:             while (RB3 == 1);
+"262
+[; ;main.c: 262:             while (RB3 == 1);
 [e $U 193  ]
 [e :U 194 ]
 [e :U 193 ]
 [e $ == -> _RB3 `i -> 1 `i 194  ]
 [e :U 195 ]
-"269
-[; ;main.c: 269:             Irrigazione(0, 0, 1, 0);
+"263
+[; ;main.c: 263:             Irrigazione(0, 0, 1, 0);
 [e ( _Irrigazione (4 , , , -> 0 `i -> 0 `i -> 1 `i -> 0 `i ]
-"270
-[; ;main.c: 270:             stato = 0;
+"264
+[; ;main.c: 264:             stato = 0;
 [e = _stato -> 0 `i ]
-"271
-[; ;main.c: 271:         }
+"265
+[; ;main.c: 265:         }
 }
 [e $U 196  ]
-"272
-[; ;main.c: 272:         else
+"266
+[; ;main.c: 266:         else
 [e :U 192 ]
-"273
-[; ;main.c: 273:         {
+"267
+[; ;main.c: 267:         {
 {
-"275
-[; ;main.c: 275:             Visualizza(1);
+"269
+[; ;main.c: 269:             Visualizza(1);
 [e ( _Visualizza (1 -> 1 `i ]
-"276
-[; ;main.c: 276:             while (RB1 != 0);
+"270
+[; ;main.c: 270:             while (RB1 != 0);
 [e $U 197  ]
 [e :U 198 ]
 [e :U 197 ]
 [e $ != -> _RB1 `i -> 0 `i 198  ]
 [e :U 199 ]
-"277
-[; ;main.c: 277:             while (RB1 == 0);
+"271
+[; ;main.c: 271:             while (RB1 == 0);
 [e $U 200  ]
 [e :U 201 ]
 [e :U 200 ]
 [e $ == -> _RB1 `i -> 0 `i 201  ]
 [e :U 202 ]
-"278
-[; ;main.c: 278:             Visualizza(0);
+"272
+[; ;main.c: 272:             Visualizza(0);
 [e ( _Visualizza (1 -> 0 `i ]
-"279
-[; ;main.c: 279:         }
+"273
+[; ;main.c: 273:         }
 }
 [e :U 196 ]
-"280
-[; ;main.c: 280:     }
+"274
+[; ;main.c: 274:     }
 }
 [e :U 191 ]
-"281
-[; ;main.c: 281: }
+"275
+[; ;main.c: 275: }
 [e :UE 190 ]
 }
