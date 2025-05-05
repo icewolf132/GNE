@@ -30,8 +30,8 @@
 #define    T_START      RB1 //pulsante di inizio irigamento
 #define    MODO         RB4 //interrutore di selezione di ritorno
 
-#define    V_sup        RB6 //input modulo di temperatura tensione di soglia superiore
-#define    V_inf        RB5 //input modulo di temperatura tensione di soglia inferiore
+#define    V_SUP        RB6 //input modulo di temperatura tensione di soglia superiore
+#define    V_INF        RB5 //input modulo di temperatura tensione di soglia inferiore
 
 #define    T_STOP       RB0 //pulsante di stop per irrigazione con interrupt
 
@@ -40,7 +40,7 @@
 
 //controllo motore
 #define    POWER_MOT    RD4 //ingresso inverter per accensione e spegnimento del motore
-#define    VEL_MOT      RD3 //ingresso inverter per impostare la velocità
+#define    VEL_MOT      RD3 //ingresso inverter per impostare la velocitÃ 
 #define    DIR_MOT      RD2 //ingresso inverter per impostare la direzione
 
  //tabella di input dell'inverter
@@ -51,7 +51,7 @@
 #define    LENTO        0
 #define    VELOCE       1
 
-//controllo relè
+//controllo relÃ¨
 #define    RELE_ACQUA      RD7
 #define    VENTILATORI     RD6
 #define    FINESTRE        RD5
@@ -77,11 +77,11 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
     if(direzione == AVANTI) DIR_MOT = AVANTI;
     if(direzione == DIETRO) DIR_MOT = DIETRO;
         
-    //controllo velocità motore
+    //controllo velocitÃ  motore
     if(velocita == LENTO) VEL_MOT = LENTO;
     if(velocita == VELOCE) VEL_MOT = VELOCE;
     
-    //controllo relè di irrigazione
+    //controllo relÃ¨ di irrigazione
     if(irrigazione == ECCITATO ) RELE_ACQUA = ECCITATO;
     if(irrigazione == DISECCITATO) RELE_ACQUA = DISECCITATO;
 }
@@ -133,7 +133,7 @@ void main(void)
     TRISC = 0b00000000;             //Imposto i pin di PORTC 
     TRISD = 0b00000000;             //Imposto i pin di PORTD 
     
-    INTCON = 0b1011100;
+    INTCON = 0b11011100;
 
     ANSEL = 0x00;                   //Imposto tutti i pin come ingressi digitali
     ANSELH = 0x00;                  //Imposto tutti i pin come ingressi digitali
@@ -155,13 +155,13 @@ void main(void)
         switch(stato)
         {
             case 0: //non sto fecendo nulla 
-                if(T_START == 0) //nel caso il tasto start è premuto
+                if(T_START == 0) //nel caso il tasto start Ã¨ premuto
                 {
                     Visualizza(ON); //visualizza on
                     stato=1; //vai al primo stato
                 }
                 
-                if (V_sup ==1) //se la temperatura è sopra i 30°C
+                if (V_SUP ==1) //se la temperatura Ã¨ sopra i 30Â°C
                 { 
                     //stato=10; //vai allo stato 10
                 }
@@ -170,7 +170,7 @@ void main(void)
             case 1: //irrigatore non si sa dove sta 
                 if(FC1==1) //se l'irrigatore non si trova a inizio corsa
                 {
-                    Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare il motore alla massima velocità indietro fino aquando
+                    Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare il motore alla massima velocitÃ  indietro fino aquando
                     stato=2; //passa allo stato due
                 }
                 else if(FC1==0)stato=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
@@ -185,7 +185,7 @@ void main(void)
                 stato=4;
                 break;
                 
-            case 4: //irrigatore sta andando avanti alla minima velocità irrigando
+            case 4: //irrigatore sta andando avanti alla minima velocitÃ  irrigando
                 if (FC2==0) stato=5;
                 break;
                 
@@ -202,7 +202,7 @@ void main(void)
                 }
                 break;
                 
-            case 6: //irrigatore sta tornando indietro alla massima velocità non irrigando
+            case 6: //irrigatore sta tornando indietro alla massima velocitÃ  non irrigando
                 if (FC1==0)
                 {  
                     Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
@@ -210,7 +210,7 @@ void main(void)
                 }
                 break;
                 
-            case 7: //irrigatore sta tornando indietro alla minima velocità irrigando
+            case 7: //irrigatore sta tornando indietro alla minima velocitÃ  irrigando
                 if (FC1==0)
                 {  
                     Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
@@ -222,17 +222,17 @@ void main(void)
                     stato=0;
                     break;
                     
-            case 10: //temperatura sopra i 30°C
+            case 10: //temperatura sopra i 30Â°C
                 FINESTRE    = 1;
                 __delay_ms(3000);
                 VENTILATORI = 1;
-                if (T_inf == 0) //se la temperatura è sotto i 27°C
+                if (V_INF == 0) //se la temperatura e'sotto i 27C
                 { 
                     stato=11; //vai allo stato 11
                 }
                 break;
                 
-            case 11: //temperatura sotto i 27°C
+            case 11: //temperatura sotto i 27Â°C
                 VENTILATORI = 0;
                 FINESTRE    = 0;
                 stato=0;
