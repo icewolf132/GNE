@@ -60,13 +60,17 @@
 #define    DISECCITATO     0
 
 //visualizzazioni display 7 segmenti 
-#define    ON   0
-#define    OFF  1
-#define    FC   2
-#define    EN   3 
+#define    ON    0
+#define    OFF   1
+#define    FC    2
+#define    EN    3 
+#define    NULLA 4 
 
-//char conta;
+//variabili globali
+int stato=0;
+int stop=0;
 
+//funzioni
 void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 {
     //controllo direzione del motore fino a finecorsa
@@ -89,7 +93,7 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 void Visualizza (int display)
 {
     PORTC =0b11111111;
-    int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000}; // O, F, E, n, c
+    unsigned int lettera[5] = {0b00111111, 0b01110001, 0b01111001, 0b01010100, 0b01011000}; // O, F, E, n, c
     
     if(display == OFF )
     {
@@ -105,8 +109,8 @@ void Visualizza (int display)
     
     if(display == FC )
     {
-        PORTC =0b11111111;// lettera[1];    //visualizzo la lettera F   
-        PORTA =0b11111111;// lettera[4];    //visualizzo la lettera c
+        PORTC =lettera[1];// lettera[1];    //visualizzo la lettera F   
+        PORTA =lettera[4];// lettera[4];    //visualizzo la lettera c
     }
     
     if(display == EN )
@@ -114,10 +118,32 @@ void Visualizza (int display)
         PORTC = lettera[2];     //visualizzo la lettera E
         PORTA = lettera[3];    //visualizzo la lettera n
     }
+    
+    if(display == NULLA )
+    {
+        PORTC = 0b00111111;     //visualizzo la lettera 0
+        PORTA = lettera[0];     //visualizzo la lettera 0
+    }
      
 }
-  
-    int stato=0;
+
+void Stop (void)
+{
+    Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Ferma tutto
+    Visualizza(OFF); //visualizza of
+    stop=1;
+    __delay_ms(5000); // Aspetta 5 secondi
+    if (RB0 == 0) // Se ancora premuto
+    {
+        while(FC1==1)
+        {
+            Irrigazione(START, DIETRO, VELOCE, DISECCITATO); // Torna indietro 
+        }
+        Irrigazione(STOP, DIETRO, LENTO, DISECCITATO);
+        stato = 0;
+    }
+    else stato = 0;
+}
 
 void main(void) 
 {
@@ -133,7 +159,7 @@ void main(void)
     TRISC = 0b00000000;             //Imposto i pin di PORTC 
     TRISD = 0b00000000;             //Imposto i pin di PORTD 
     
-    INTCON = 0b11011100;
+    INTCON = 0b10010000;
 
     ANSEL = 0x00;                   //Imposto tutti i pin come ingressi digitali
     ANSELH = 0x00;                  //Imposto tutti i pin come ingressi digitali
@@ -141,11 +167,15 @@ void main(void)
     OPTION_REG = 0b00000011;    //  pull-up PORTB,  Fosc/4,  PS=32
     //INTCON = 0b10100000;        // Impostazione Interrupt su TMR0  GIE=T0IE=1
     //TMR0 = 6;                   // Imposto Timer0 per un conteggio pari a 250
+   
     
+    Visualizza(NULLA); //visualizza of
+    Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Fermo tutto
+    stop =0;
     
     while (1) //Ciclo infinito
     {      
-        if (FC1 == 0 && FC2 == 0)
+         if (FC1 == 0 && FC2 == 0)
         {
             Visualizza(FC);  // Allarme finecorsa
             Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Fermo tutto
@@ -155,8 +185,11 @@ void main(void)
         switch(stato)
         {
             case 0: //non sto fecendo nulla 
+                if(stop==1)Visualizza(OFF);
+                Visualizza(NULLA);
                 if(T_START == 0) //nel caso il tasto start Ã¨ premuto
                 {
+                    stop=0;
                     Visualizza(ON); //visualizza on
                     stato=1; //vai al primo stato
                 }
@@ -219,8 +252,8 @@ void main(void)
                 break;
                 
             case 8: //irrigatore sta ad inizio corsa
-                    stato=0;
-                    break;
+                stato=0;
+                break;
                     
             case 10: //temperatura sopra i 30Â°C
                 FINESTRE    = 1;
@@ -232,16 +265,14 @@ void main(void)
                 }
                 break;
                 
-            case 11: //temperatura sotto i 27Â°C
+            case 11: //temperatura sotto i 27C
                 VENTILATORI = 0;
                 FINESTRE    = 0;
                 stato=0;
-                
-                    
-            
+                break;
+          
         }
     }
-
 }
 
 void __interrupt() ISR(void)
@@ -249,15 +280,8 @@ void __interrupt() ISR(void)
     if (INTCONbits.INTE && INTCONbits.INTF)
     {
         INTCONbits.INTF = 0; // reset flag
-
-        Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Ferma tutto
-        __delay_ms(5000); // Aspetta 5 secondi
-
-        if (RB0 == 0) // Se ancora premuto
-        {
-            Irrigazione(START, DIETRO, VELOCE, DISECCITATO); // Torna indietro
-            stato = 0;
-        }
+        Stop();
+    
         
     }
 }

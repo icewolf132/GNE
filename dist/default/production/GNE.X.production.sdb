@@ -11,14 +11,17 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"71 C:\Users\william\Documents\GNE-TUTTO\GNE.X\main.c
+"74 C:\Users\william\Documents\GNE-TUTTO\GNE.X\main.c
 [v _Irrigazione Irrigazione `(v  1 e 1 0 ]
 [v i1_Irrigazione Irrigazione `(v  1 e 1 0 ]
-"90
+"93
 [v _Visualizza Visualizza `(v  1 e 1 0 ]
-"123
+[v i1_Visualizza Visualizza `(v  1 e 1 0 ]
+"130
+[v _Stop Stop `(v  1 e 1 0 ]
+"148
 [v _main main `(v  1 e 1 0 ]
-"249
+"278
 [v _ISR ISR `II(v  1 e 1 0 ]
 "166 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc/pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -30,7 +33,7 @@
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "459
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
-[s S52 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S54 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -40,13 +43,13 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "482
-[s S61 . 1 `uc 1 . 1 0 :2:0 
+[s S63 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S66 . 1 `S52 1 . 1 0 `S61 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES66  1 e 1 @11 ]
+[u S68 . 1 `S54 1 . 1 0 `S63 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES68  1 e 1 @11 ]
 "1346
 [v _OPTION_REG OPTION_REG `VEuc  1 e 1 @129 ]
 "1416
@@ -75,6 +78,8 @@
 [v _RB4 RB4 `VEb  1 e 0 @52 ]
 "4122
 [v _RB5 RB5 `VEb  1 e 0 @53 ]
+"4125
+[v _RB6 RB6 `VEb  1 e 0 @54 ]
 "4191
 [v _RD2 RD2 `VEb  1 e 0 @66 ]
 "4194
@@ -87,44 +92,60 @@
 [v _RD6 RD6 `VEb  1 e 0 @70 ]
 "4206
 [v _RD7 RD7 `VEb  1 e 0 @71 ]
-"121 C:\Users\william\Documents\GNE-TUTTO\GNE.X\main.c
+"70 C:\Users\william\Documents\GNE-TUTTO\GNE.X\main.c
 [v _stato stato `i  1 e 2 0 ]
-"123
+"71
+[v _stop stop `i  1 e 2 0 ]
+"148
 [v _main main `(v  1 e 1 0 ]
 {
-"247
+"276
 } 0
-"90
+"93
 [v _Visualizza Visualizza `(v  1 e 1 0 ]
 {
+"96
+[v Visualizza@lettera lettera `[5]ui  1 a 10 16 ]
 "93
-[v Visualizza@lettera lettera `[5]i  1 a 10 6 ]
-"90
-[v Visualizza@display display `i  1 p 2 0 ]
-"92
-[v Visualizza@F1427 F1427 `[5]i  1 s 10 F1427 ]
-"119
+[v Visualizza@display display `i  1 p 2 10 ]
+"95
+[v Visualizza@F1429 F1429 `[5]ui  1 s 10 F1429 ]
+"128
 } 0
-"71
+"74
 [v _Irrigazione Irrigazione `(v  1 e 1 0 ]
 {
-[v Irrigazione@power power `i  1 p 2 0 ]
-[v Irrigazione@direzione direzione `i  1 p 2 2 ]
-[v Irrigazione@velocita velocita `i  1 p 2 4 ]
-[v Irrigazione@irrigazione irrigazione `i  1 p 2 6 ]
-"88
+[v Irrigazione@power power `i  1 p 2 10 ]
+[v Irrigazione@direzione direzione `i  1 p 2 12 ]
+[v Irrigazione@velocita velocita `i  1 p 2 14 ]
+[v Irrigazione@irrigazione irrigazione `i  1 p 2 16 ]
+"91
 } 0
-"249
+"278
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"265
+"287
 } 0
-"71
+"130
+[v _Stop Stop `(v  1 e 1 0 ]
+{
+"146
+} 0
+"93
+[v i1_Visualizza Visualizza `(v  1 e 1 0 ]
+{
+"96
+[v i1Visualizza@lettera lettera `[5]ui  1 a 10 0 ]
+"93
+[v i1Visualizza@display display `i  1 p 2 0 ]
+"128
+} 0
+"74
 [v i1_Irrigazione Irrigazione `(v  1 e 1 0 ]
 {
 [v i1Irrigazione@power power `i  1 p 2 0 ]
 [v i1Irrigazione@direzione direzione `i  1 p 2 2 ]
 [v i1Irrigazione@velocita velocita `i  1 p 2 4 ]
 [v i1Irrigazione@irrigazione irrigazione `i  1 p 2 6 ]
-"88
+"91
 } 0

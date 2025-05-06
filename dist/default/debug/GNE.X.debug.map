@@ -6,10 +6,10 @@ Linker command line:
   --edf=C:\Program Files\Microchip\xc8\v3.00\pic\dat\20241204225717_en.msgs \
   -cn -h+dist/default/debug\GNE.X.debug.sym \
   --cmf=dist/default/debug\GNE.X.debug.cmf -z -Q16F887 \
-  -oC:\Users\william\AppData\Local\Temp\xcAs1lk.\driver_tmp_3.o \
+  -oC:\Users\william\AppData\Local\Temp\xcAshk.\driver_tmp_3.o \
   --defsym=__MPLAB_BUILD=1 --fixupoverflow=error \
   -Mdist/default/debug/GNE.X.debug.map \
-  --md=C:\Users\william\AppData\Local\Temp\xcAs1lk.\driver_tmp_0.dat -E1 \
+  --md=C:\Users\william\AppData\Local\Temp\xcAshk.\driver_tmp_0.dat -E1 \
   -ver=XC8 Compiler -ACODE=00h-07FFhx3,01800h-01EFFh -ASTRCODE=00h-01EFFh \
   -ASTRING=00h-0FFhx31 -ACONST=00h-0FFhx31 -AENTRY=00h-0FFhx31 \
   -ACOMMON=071h-07Fh -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh \
@@ -22,7 +22,7 @@ Linker command line:
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry=04h,sivt,init,end_init -ppowerup=CODE \
   -pcinit=CODE -pfunctab=ENTRY -k \
-  C:\Users\william\AppData\Local\Temp\xcAs1lk.\driver_tmp_12.o \
+  C:\Users\william\AppData\Local\Temp\xcAshk.\driver_tmp_12.o \
   dist/default/debug\GNE.X.debug.o 
 
 Object code version is 3.11
@@ -32,7 +32,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\william\AppData\Local\Temp\xcAs1lk.\driver_tmp_12.o
+C:\Users\william\AppData\Local\Temp\xcAshk.\driver_tmp_12.o
                 end_init                             10       10        3        8       0
                 reset_vec                             0        0        4        0       0
                 config                             2007     2007        2        0       4
@@ -40,18 +40,19 @@ dist/default/debug\GNE.X.debug.o
                 cinit                               7EC      7EC       14      FD8       0
                 intentry                              4        4        C        8       0
                 config                             2007     2007        2        0       4
-                text5                               5EB      5EB       49      BD6       0
-                text4                               563      563       44      AC6       0
-                text3                               634      634       83      C68       0
-                text2                               528      528       3B      A50       0
-                text1                               5A7      5A7       44      B4E       0
-                maintext                            6B7      6B7      135      D6E       0
-                cstackBANK0                          20       20       23       20       1
-                cstackCOMMON                         71       71        8       71       1
-                inittext                            515      515       13      A2A       0
-                dataBANK0                            43       43        A       20       1
-                bssCOMMON                            79       79        2       71       1
-                idataBANK0                          50B      50B        A      A16       0
+                text6                               528      528       49      A50       0
+                text5                               571      571       4F      AE2       0
+                text4                               60F      60F       5B      C1E       0
+                text3                               4D4      4D4       19      9A8       0
+                text2                               4ED      4ED       3B      9DA       0
+                text1                               5C0      5C0       4F      B80       0
+                maintext                            66A      66A      182      CD4       0
+                cstackBANK0                          20       20       20       20       1
+                cstackCOMMON                         71       71        B       71       1
+                inittext                            4C1      4C1       13      982       0
+                dataBANK0                            40       40        A       20       1
+                bssCOMMON                            7C       7C        2       71       1
+                idataBANK0                          4B7      4B7        A      96E       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   CODE           
@@ -59,14 +60,15 @@ TOTAL           Name                               Link     Load   Length     Sp
                 cinit                               7EC      7EC       14         0
                 intentry                              4        4        C         0
                 reset_vec                             0        0        4         0
-                text5                               5EB      5EB       49         0
-                text4                               563      563       44         0
-                text3                               634      634       83         0
-                text2                               528      528       3B         0
-                text1                               5A7      5A7       44         0
-                maintext                            6B7      6B7      135         0
-                inittext                            515      515       13         0
-                idataBANK0                          50B      50B        A         0
+                text6                               528      528       49         0
+                text5                               571      571       4F         0
+                text4                               60F      60F       5B         0
+                text3                               4D4      4D4       19         0
+                text2                               4ED      4ED       3B         0
+                text1                               5C0      5C0       4F         0
+                maintext                            66A      66A      182         0
+                inittext                            4C1      4C1       13         0
+                idataBANK0                          4B7      4B7        A         0
 
         CLASS   STRCODE        
 
@@ -77,12 +79,12 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   ENTRY          
 
         CLASS   COMMON         
-                cstackCOMMON                         71       71        8         1
-                bssCOMMON                            79       79        2         1
+                cstackCOMMON                         71       71        B         1
+                bssCOMMON                            7C       7C        2         1
 
         CLASS   BANK0          
-                cstackBANK0                          20       20       23         1
-                dataBANK0                            43       43        A         1
+                cstackBANK0                          20       20       20         1
+                dataBANK0                            40       40        A         1
 
         CLASS   BANK1          
 
@@ -120,36 +122,36 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000004  000004         0       0  CODE        2
                 intentry                       000004  00000F  000013         8       0  CODE        2
-                cstackBANK0                    000020  00002D  00004D        20       1  BANK0       1
-                cstackCOMMON                   000071  00000A  00007B        71       1  COMMON      1
-                idataBANK0                     00050B  00000A  000515       A16       0  CODE        2
-                inittext                       000515  000013  000528       A2A       0  CODE        2
-                text2                          000528  00003B  000563       A50       0  CODE        2
-                text4                          000563  000044  0005A7       AC6       0  CODE        2
-                text1                          0005A7  000044  0005EB       B4E       0  CODE        2
-                text5                          0005EB  000049  000634       BD6       0  CODE        2
-                text3                          000634  000083  0006B7       C68       0  CODE        2
-                maintext                       0006B7  000135  0007EC       D6E       0  CODE        2
+                cstackBANK0                    000020  00002A  00004A        20       1  BANK0       1
+                cstackCOMMON                   000071  00000D  00007E        71       1  COMMON      1
+                idataBANK0                     0004B7  00000A  0004C1       96E       0  CODE        2
+                inittext                       0004C1  000013  0004D4       982       0  CODE        2
+                text3                          0004D4  000019  0004ED       9A8       0  CODE        2
+                text2                          0004ED  00003B  000528       9DA       0  CODE        2
+                text6                          000528  000049  000571       A50       0  CODE        2
+                text5                          000571  00004F  0005C0       AE2       0  CODE        2
+                text1                          0005C0  00004F  00060F       B80       0  CODE        2
+                text4                          00060F  00005B  00066A       C1E       0  CODE        2
+                maintext                       00066A  000182  0007EC       CD4       0  CODE        2
                 cinit                          0007EC  000014  000800       FD8       0  CODE        2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            004D-006F             23           1
+        BANK0            004A-006F             26           1
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01E4             55           1
-        CODE             0013-050A            4F8           2
+        CODE             0013-04B6            4A4           2
                          0800-1EFF            800
-        COMMON           007B-007D              3           1
-        CONST            0013-050A            100           2
+        CONST            0013-04B6            100           2
                          0800-1EFF            100
         EEDATA           2100-21FF            100           2
-        ENTRY            0013-050A            100           2
+        ENTRY            0013-04B6            100           2
                          0800-1EFF            100
         IDLOC            2000-2003              4           2
-        RAM              004D-006F             23           1
+        RAM              004A-006F             26           1
                          00A0-00EF             50
                          0110-016F             60
                          0190-01E4             55
@@ -157,26 +159,26 @@ UNUSED ADDRESS RANGES
         SFR1             0080-009F             20           1
         SFR2             0100-010F             10           1
         SFR3             0180-018F             10           1
-        STRCODE          0013-050A            4F8           2
+        STRCODE          0013-04B6            4A4           2
                          0800-1EFF           1700
-        STRING           0013-050A            100           2
+        STRING           0013-04B6            100           2
                          0800-1EFF            100
 
                                   Symbol Table
 
-Irrigazione@direzione     cstackBANK0  0032
-Irrigazione@irrigazione   cstackBANK0  0036
-Irrigazione@power         cstackBANK0  0030
-Irrigazione@velocita      cstackBANK0  0034
-Visualizza@F1427          dataBANK0    0043
-Visualizza@display        cstackBANK0  0030
-Visualizza@lettera        cstackBANK0  0036
+Irrigazione@direzione     cstackBANK0  002F
+Irrigazione@irrigazione   cstackBANK0  0033
+Irrigazione@power         cstackBANK0  002D
+Irrigazione@velocita      cstackBANK0  0031
+Visualizza@F1428          dataBANK0    0040
+Visualizza@display        cstackBANK0  002D
+Visualizza@lettera        cstackBANK0  0033
 _ANSEL                    (abs)        0188
 _ANSELH                   (abs)        0189
 _INTCON                   (abs)        000B
 _INTCONbits               (abs)        000B
-_ISR                      text3        0634
-_Irrigazione              text2        0528
+_ISR                      text3        04D4
+_Irrigazione              text2        04ED
 _OPTION_REG               (abs)        0081
 _OSCCON                   (abs)        008F
 _PORTA                    (abs)        0005
@@ -189,17 +191,19 @@ _RB2                      (abs)        0032
 _RB3                      (abs)        0033
 _RB4                      (abs)        0034
 _RB5                      (abs)        0035
+_RB6                      (abs)        0036
 _RD2                      (abs)        0042
 _RD3                      (abs)        0043
 _RD4                      (abs)        0044
 _RD5                      (abs)        0045
 _RD6                      (abs)        0046
 _RD7                      (abs)        0047
+_Stop                     text4        060F
 _TRISA                    (abs)        0085
 _TRISB                    (abs)        0086
 _TRISC                    (abs)        0087
 _TRISD                    (abs)        0088
-_Visualizza               text1        05A7
+_Visualizza               text1        05C0
 __H__absolute__           __absolute__ 0000
 __Habs1                   abs1         0000
 __Hbank0                  bank0        0000
@@ -233,7 +237,7 @@ __Hsfr2                   sfr2         0000
 __Hsfr3                   sfr3         0000
 __Hsivt                   sivt         0010
 __Hspace_0                (abs)        0800
-__Hspace_1                (abs)        007B
+__Hspace_1                (abs)        007E
 __Hspace_2                (abs)        0000
 __Hspace_3                (abs)        0000
 __Hspace_4                (abs)        4010
@@ -281,7 +285,7 @@ __Lstack                  stack        0000
 __Lstrings                strings      0000
 __Ltext                   text         0000
 __S0                      (abs)        0800
-__S1                      (abs)        007B
+__S1                      (abs)        007E
 __S3                      (abs)        0000
 ___heap_hi                (abs)        0000
 ___heap_lo                (abs)        0000
@@ -294,28 +298,30 @@ ___stack_hi               stack        0000
 ___stack_lo               stack        0000
 ___stackhi                (abs)        0000
 ___stacklo                (abs)        0000
-__end_of_ISR              text3        06B7
-__end_of_Irrigazione      text2        0563
-__end_of_Visualizza       text1        05EB
+__end_of_ISR              text3        04ED
+__end_of_Irrigazione      text2        0528
+__end_of_Stop             text4        066A
+__end_of_Visualizza       text1        060F
 __end_of__initialization  cinit        07FC
 __end_of_main             maintext     07EC
-__end_ofi1_Irrigazione    text5        0634
-__end_ofi1_Visualizza     text4        05A7
+__end_ofi1_Irrigazione    text6        0571
+__end_ofi1_Visualizza     text5        05C0
 __initialization          cinit        07EC
-__pbssCOMMON              bssCOMMON    0079
+__pbssCOMMON              bssCOMMON    007C
 __pcstackBANK0            cstackBANK0  0020
 __pcstackCOMMON           cstackCOMMON 0071
-__pdataBANK0              dataBANK0    0043
-__pidataBANK0             idataBANK0   050B
+__pdataBANK0              dataBANK0    0040
+__pidataBANK0             idataBANK0   04B7
 __pintentry               intentry     0004
-__pmaintext               maintext     06B7
-__ptext1                  text1        05A7
-__ptext2                  text2        0528
-__ptext3                  text3        0634
-__ptext4                  text4        0563
-__ptext5                  text5        05EB
-_main                     maintext     06B7
-_stato                    bssCOMMON    0079
+__pmaintext               maintext     066A
+__ptext1                  text1        05C0
+__ptext2                  text2        04ED
+__ptext3                  text3        04D4
+__ptext4                  text4        060F
+__ptext5                  text5        0571
+__ptext6                  text6        0528
+_main                     maintext     066A
+_stato                    bssCOMMON    007C
 btemp                     (abs)        007E
 end_of_initialization     cinit        07FC
 i1Irrigazione@direzione   cstackCOMMON 0073
@@ -324,10 +330,10 @@ i1Irrigazione@power       cstackCOMMON 0071
 i1Irrigazione@velocita    cstackCOMMON 0075
 i1Visualizza@display      cstackCOMMON 0071
 i1Visualizza@lettera      cstackBANK0  0020
-i1_Irrigazione            text5        05EB
-i1_Visualizza             text4        0563
-init_fetch0               inittext     0515
-init_ram0                 inittext     0519
+i1_Irrigazione            text6        0528
+i1_Visualizza             text5        0571
+init_fetch0               inittext     04C1
+init_ram0                 inittext     04C5
 interrupt_function        intentry     0004
 intlevel0                 functab      0000
 intlevel1                 functab      0000
@@ -346,17 +352,18 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 shared
-		i1_Visualizza  		CODE           	0563	0000	68
-		i1_Irrigazione 		CODE           	05EB	0000	73
+		i1_Visualizza  		CODE           	0571	0000	79
+		i1_Irrigazione 		CODE           	0528	0000	73
 		__initialization		CODE           	07EC	0000	16
 
-shared estimated size: 157
+shared estimated size: 168
 
 main.c
-		_ISR           		CODE           	0634	0000	131
-		_Irrigazione   		CODE           	0528	0000	59
-		_main          		CODE           	06B7	0000	309
-		_Visualizza    		CODE           	05A7	0000	68
+		_ISR           		CODE           	04D4	0000	25
+		_Irrigazione   		CODE           	04ED	0000	59
+		_main          		CODE           	066A	0000	386
+		_Visualizza    		CODE           	05C0	0000	79
+		_Stop          		CODE           	060F	0000	91
 
-main.c estimated size: 567
+main.c estimated size: 640
 

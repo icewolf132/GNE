@@ -7,8 +7,6 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-
-
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2684,8 +2682,12 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\\pic\\include/xc.h" 2 3
-# 22 "main.c" 2
-# 71 "main.c"
+# 20 "main.c" 2
+# 70 "main.c"
+int stato=0;
+int stop=0;
+
+
 void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 {
 
@@ -2708,7 +2710,7 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 void Visualizza (int display)
 {
     PORTC =0b11111111;
-    int lettera[5] = {0b01111110, 0b11100010, 0b11110010, 0b10101000, 0b10110000};
+    unsigned int lettera[5] = {0b00111111, 0b01110001, 0b01111001, 0b01010100, 0b01011000};
 
     if(display == 1 )
     {
@@ -2724,8 +2726,8 @@ void Visualizza (int display)
 
     if(display == 2 )
     {
-        PORTC =0b11111111;
-        PORTA =0b11111111;
+        PORTC =lettera[1];
+        PORTA =lettera[4];
     }
 
     if(display == 3 )
@@ -2734,9 +2736,31 @@ void Visualizza (int display)
         PORTA = lettera[3];
     }
 
+    if(display == 4 )
+    {
+        PORTC = 0b00111111;
+        PORTA = lettera[0];
+    }
+
 }
 
-    int stato=0;
+void Stop (void)
+{
+    Irrigazione(0, 0, 0, 0);
+    Visualizza(1);
+    stop=1;
+    _delay((unsigned long)((5000)*(4000000/4000.0)));
+    if (RB0 == 0)
+    {
+        while(RB3==1)
+        {
+            Irrigazione(1, 0, 1, 0);
+        }
+        Irrigazione(0, 0, 0, 0);
+        stato = 0;
+    }
+    else stato = 0;
+}
 
 void main(void)
 {
@@ -2752,7 +2776,7 @@ void main(void)
     TRISC = 0b00000000;
     TRISD = 0b00000000;
 
-    INTCON = 0b1011100;
+    INTCON = 0b10010000;
 
     ANSEL = 0x00;
     ANSELH = 0x00;
@@ -2762,9 +2786,13 @@ void main(void)
 
 
 
+    Visualizza(4);
+    Irrigazione(0, 0, 0, 0);
+    stop =0;
+
     while (1)
     {
-        if (RB3 == 0 && RB2 == 0)
+         if (RB3 == 0 && RB2 == 0)
         {
             Visualizza(2);
             Irrigazione(0, 0, 0, 0);
@@ -2774,13 +2802,16 @@ void main(void)
         switch(stato)
         {
             case 0:
+                if(stop==1)Visualizza(1);
+                Visualizza(4);
                 if(RB1 == 0)
                 {
+                    stop=0;
                     Visualizza(0);
                     stato=1;
                 }
 
-                if (RB5 ==1)
+                if (RB6 ==1)
                 {
 
                 }
@@ -2789,7 +2820,6 @@ void main(void)
             case 1:
                 if(RB3==1)
                 {
-
                     Irrigazione(1, 0, 1, 0);
                     stato=2;
                 }
@@ -2839,14 +2869,14 @@ void main(void)
                 break;
 
             case 8:
-                    stato=0;
-                    break;
+                stato=0;
+                break;
 
             case 10:
                 RD5 = 1;
                 _delay((unsigned long)((3000)*(4000000/4000.0)));
                 RD6 = 1;
-                if (RB5 ==0)
+                if (RB5 == 0)
                 {
                     stato=11;
                 }
@@ -2856,12 +2886,10 @@ void main(void)
                 RD6 = 0;
                 RD5 = 0;
                 stato=0;
-
-
+                break;
 
         }
     }
-
 }
 
 void __attribute__((picinterrupt(("")))) ISR(void)
@@ -2869,15 +2897,8 @@ void __attribute__((picinterrupt(("")))) ISR(void)
     if (INTCONbits.INTE && INTCONbits.INTF)
     {
         INTCONbits.INTF = 0;
+        Stop();
 
-        Irrigazione(0, 0, 0, 0);
-        _delay((unsigned long)((5000)*(4000000/4000.0)));
-
-        if (RB0 == 0)
-        {
-            Irrigazione(1, 0, 1, 0);
-            stato = 0;
-        }
 
     }
 }
