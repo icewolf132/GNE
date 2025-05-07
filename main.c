@@ -257,17 +257,24 @@ void main(void)
                     
             case 10: //temperatura sopra i 30Â°C
                 FINESTRE    = 1;
-                __delay_ms(3000);
-                VENTILATORI = 1;
-                if (V_INF == 0) //se la temperatura e'sotto i 27C
-                { 
-                    stato=11; //vai allo stato 11
-                }
+                stato=20;
                 break;
                 
-            case 11: //temperatura sotto i 27C
-                VENTILATORI = 0;
-                FINESTRE    = 0;
+            case 20: //temperatura sopra i 30Â°C
+                __delay_ms(3000);
+                VENTILATORI = 1;
+                stato=30;
+                break;
+                
+            case 30:
+                if (V_SUP == 0) //se la temperatura e'sotto i 27C
+                { 
+                    VENTILATORI = 0;
+                    FINESTRE    = 0;
+                    stato=40; //vai allo stato 11
+                }
+                
+            case 40: //temperatura sotto i 27C
                 stato=0;
                 break;
           
