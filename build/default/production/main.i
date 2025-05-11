@@ -2811,9 +2811,9 @@ void main(void)
                     stato=1;
                 }
 
-                if (RB6 ==1)
+                if (RB5 ==1)
                 {
-
+                    stato=10;
                 }
                 break;
 
@@ -2874,20 +2874,27 @@ void main(void)
 
             case 10:
                 RD5 = 1;
+                stato=20;
+                break;
+
+            case 20:
                 _delay((unsigned long)((3000)*(4000000/4000.0)));
                 RD6 = 1;
-                if (RB5 == 0)
+                if (RB6 == 1)
                 {
-                    stato=11;
+                    stato=30;
                 }
                 break;
 
-            case 11:
-                RD6 = 0;
-                RD5 = 0;
+            case 30:
+                    RD6 = 0;
+                    RD5 = 0;
+                    stato=40;
+
+
+            case 40:
                 stato=0;
                 break;
-
         }
     }
 }

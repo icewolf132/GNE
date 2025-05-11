@@ -194,9 +194,9 @@ void main(void)
                     stato=1; //vai al primo stato
                 }
                 
-                if (V_SUP ==1) //se la temperatura Ã¨ sopra i 30Â°C
+                if (V_INF ==1) //se la temperatura si trova sopra i 30C
                 { 
-                    //stato=10; //vai allo stato 10
+                    stato=10; //vai allo stato 10
                 }
                 break;
                 
@@ -255,29 +255,29 @@ void main(void)
                 stato=0;
                 break;
                     
-            case 10: //temperatura sopra i 30Â°C
-                FINESTRE    = 1;
+            case 10: //temperatura sopra i 30C, apro le finestre
+                FINESTRE    = 1; //apro le finestre
                 stato=20;
                 break;
                 
-            case 20: //temperatura sopra i 30Â°C
+            case 20: //finestre aperte, accendo i ventilatori
                 __delay_ms(3000);
-                VENTILATORI = 1;
-                stato=30;
+                VENTILATORI = 1; //accendo i ventilatori
+                if (V_SUP == 1) //se la temperatura e' sotto i 27C
+                { 
+                    stato=30; //vai allo stato 11
+                }
                 break;
                 
-            case 30:
-                if (V_SUP == 0) //se la temperatura e'sotto i 27C
-                { 
-                    VENTILATORI = 0;
-                    FINESTRE    = 0;
+            case 30: //temperatura sotto i 27C, spengo tutto
+                    VENTILATORI = 0; //spengo i ventilatori
+                    FINESTRE    = 0; //chiudo le finestre
                     stato=40; //vai allo stato 11
-                }
                 
-            case 40: //temperatura sotto i 27C
+                
+            case 40: //temperatura sotto i 27C ,tutto spento, torno allo stato iniziale
                 stato=0;
                 break;
-          
         }
     }
 }

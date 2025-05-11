@@ -2685,6 +2685,7 @@ extern __bank0 __bit __timeout;
 # 20 "main.c" 2
 # 70 "main.c"
 int stato=0;
+int stop=0;
 
 
 void Irrigazione(int power, int direzione, int velocita, int irrigazione)
@@ -2747,10 +2748,11 @@ void Stop (void)
 {
     Irrigazione(0, 0, 0, 0);
     Visualizza(1);
+    stop=1;
     _delay((unsigned long)((5000)*(4000000/4000.0)));
     if (RB0 == 0)
     {
-        while(RB3==0)
+        while(RB3==1)
         {
             Irrigazione(1, 0, 1, 0);
         }
@@ -2774,7 +2776,7 @@ void main(void)
     TRISC = 0b00000000;
     TRISD = 0b00000000;
 
-    INTCON = 0b11011100;
+    INTCON = 0b10010000;
 
     ANSEL = 0x00;
     ANSELH = 0x00;
@@ -2786,6 +2788,7 @@ void main(void)
 
     Visualizza(4);
     Irrigazione(0, 0, 0, 0);
+    stop =0;
 
     while (1)
     {
@@ -2799,14 +2802,16 @@ void main(void)
         switch(stato)
         {
             case 0:
+                if(stop==1)Visualizza(1);
                 Visualizza(4);
                 if(RB1 == 0)
                 {
+                    stop=0;
                     Visualizza(0);
                     stato=1;
                 }
 
-                if (RB6 ==1)
+                if (RB5 ==1)
                 {
 
                 }
@@ -2869,20 +2874,27 @@ void main(void)
 
             case 10:
                 RD5 = 1;
+                stato=20;
+                break;
+
+            case 20:
                 _delay((unsigned long)((3000)*(4000000/4000.0)));
                 RD6 = 1;
-                if (RB5 == 0)
+                if (RB6 == 1)
                 {
-                    stato=11;
+                    stato=30;
                 }
                 break;
 
-            case 11:
-                RD6 = 0;
-                RD5 = 0;
+            case 30:
+                    RD6 = 0;
+                    RD5 = 0;
+                    stato=40;
+
+
+            case 40:
                 stato=0;
                 break;
-
         }
     }
 }
