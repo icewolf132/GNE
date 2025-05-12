@@ -66,8 +66,14 @@
 #define    EN    3 
 #define    NULLA 4 
 
+
+/*
+ IL PROGRAMMA EFFETTIVO INIZIA DA QUI SOTTO
+ */
+
 //variabili globali
-int stato=0;
+int stato_irr=0;
+int stato_vent=0;
 int stop=0;
 
 //funzioni
@@ -92,7 +98,6 @@ void Irrigazione(int power, int direzione, int velocita, int irrigazione)
 
 void Visualizza (int display)
 {
-    PORTC =0b11111111;
     unsigned int lettera[5] = {0b00111111, 0b01110001, 0b01111001, 0b01010100, 0b01011000}; // O, F, E, n, c
     
     if(display == OFF )
@@ -140,9 +145,9 @@ void Stop (void)
             Irrigazione(START, DIETRO, VELOCE, DISECCITATO); // Torna indietro 
         }
         Irrigazione(STOP, DIETRO, LENTO, DISECCITATO);
-        stato = 0;
+        stato_irr = 0;
     }
-    else stato = 0;
+    else stato_irr = 0;
 }
 
 void main(void) 
@@ -179,24 +184,19 @@ void main(void)
         {
             Visualizza(FC);  // Allarme finecorsa
             Irrigazione(STOP, DIETRO, LENTO, DISECCITATO); // Fermo tutto
-            stato=0;
+            stato_irr=0;
         }
 
-        switch(stato)
+        switch(stato_irr)
         {
             case 0: //non sto fecendo nulla 
                 if(stop==1)Visualizza(OFF);
-                Visualizza(NULLA);
+                if(stop==0)Visualizza(NULLA);
                 if(T_START == 0) //nel caso il tasto start Ã¨ premuto
                 {
                     stop=0;
                     Visualizza(ON); //visualizza on
-                    stato=1; //vai al primo stato
-                }
-                
-                if (V_INF ==1) //se la temperatura si trova sopra i 30C
-                { 
-                    stato=10; //vai allo stato 10
+                    stato_irr=1; //vai al primo stato
                 }
                 break;
                 
@@ -204,34 +204,34 @@ void main(void)
                 if(FC1==1) //se l'irrigatore non si trova a inizio corsa
                 {
                     Irrigazione(START, DIETRO, VELOCE, DISECCITATO); //fai andare il motore alla massima velocitÃ  indietro fino aquando
-                    stato=2; //passa allo stato due
+                    stato_irr=2; //passa allo stato due
                 }
-                else if(FC1==0)stato=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
+                else if(FC1==0)stato_irr=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
                 break;
                 
             case 2: //irrigatore sta tornando indietro
-                if(FC1==0)stato=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
+                if(FC1==0)stato_irr=3; //se l'irrigatore si trova a inizio corsa vai allo stato 3
                 break;
             
             case 3: //irrigatore sta a inizio corsa
                 Irrigazione(START, AVANTI, LENTO, ECCITATO);
-                stato=4;
+                stato_irr=4;
                 break;
                 
             case 4: //irrigatore sta andando avanti alla minima velocitÃ  irrigando
-                if (FC2==0) stato=5;
+                if (FC2==0) stato_irr=5;
                 break;
                 
             case 5: //irrigatore sta  a fine corsa
                 if (MODO==0) 
                 { 
                     Irrigazione(START, DIETRO, VELOCE, DISECCITATO);
-                    stato=6;
+                    stato_irr=6;
                 }
                 else if (MODO==1) 
                 { 
                     Irrigazione(START,DIETRO, LENTO, ECCITATO);
-                    stato=7;
+                    stato_irr=7;
                 }
                 break;
                 
@@ -239,7 +239,7 @@ void main(void)
                 if (FC1==0)
                 {  
                     Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
-                    stato=8;
+                    stato_irr=8;
                 }
                 break;
                 
@@ -247,17 +247,27 @@ void main(void)
                 if (FC1==0)
                 {  
                     Irrigazione(STOP,DIETRO, LENTO, DISECCITATO);
-                    stato=8;
+                    stato_irr=8;
                 }
                 break;
                 
             case 8: //irrigatore sta ad inizio corsa
-                stato=0;
+                stato_irr=0;
                 break;
-                    
+        }
+        
+        switch(stato_vent)
+        {
+            case 0: //non sto fecendo nulla 
+                if (V_INF ==1) //se la temperatura si trova sopra i 30C
+                { 
+                    stato_vent=10; //vai allo stato 10
+                }
+                break;
+                
             case 10: //temperatura sopra i 30C, apro le finestre
                 FINESTRE    = 1; //apro le finestre
-                stato=20;
+                stato_vent=20;
                 break;
                 
             case 20: //finestre aperte, accendo i ventilatori
@@ -265,18 +275,18 @@ void main(void)
                 VENTILATORI = 1; //accendo i ventilatori
                 if (V_SUP == 1) //se la temperatura e' sotto i 27C
                 { 
-                    stato=30; //vai allo stato 11
+                    stato_vent=30; //vai allo stato 11
                 }
                 break;
                 
             case 30: //temperatura sotto i 27C, spengo tutto
                     VENTILATORI = 0; //spengo i ventilatori
                     FINESTRE    = 0; //chiudo le finestre
-                    stato=40; //vai allo stato 11
+                    stato_vent=40; //vai allo stato 11
                 
                 
             case 40: //temperatura sotto i 27C ,tutto spento, torno allo stato iniziale
-                stato=0;
+                stato_vent=0;
                 break;
         }
     }
@@ -288,7 +298,5 @@ void __interrupt() ISR(void)
     {
         INTCONbits.INTF = 0; // reset flag
         Stop();
-    
-        
     }
 }
